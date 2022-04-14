@@ -3,34 +3,32 @@ Tutorial CMake
 
 
 O CMake é uma ferramenta de construção multiplataforma, independente de linguagem, quem vem
-se tornando padrão, com grandes projetos usando-o para construir, testar e
-implantar suas bases de código. Neste tutorial você vai aprender como:
-
+se tornando padrão, emm grandes projeto, o qual é usando para construir, testar e
+implantar suas bases de código. Neste tutorial você vai aprender:
 
 - Escrever um sistema de compilação CMake para projetos C, C++ e Fortran produzindo
   bibliotecas e/ou executáveis.
 - Executar testes para seu código com CTest.
 - Certificar-se de que seu sistema de compilação funciona em diferentes plataformas.
 - Detectar e usar dependências externas em seu projeto.
-- Construir com segurança e eficácia projetos de linguagem mista (Python+C/C++,
+- Construir com segurança e eficácia projetos que usam linguagens mistas (Python+C/C++,
   Python+Fortran, Fortran+C/C++)
 
 .. prereq::
 
-   Antes de iniciar esse tutorial, certifique-se de ter acesso
-   a um computador com um compilador para sua linguagem de programação favorita 
+   Antes de iniciar esse tutorial, recomenda-se ter acesso
+   a um computador com compilador para sua linguagem de programação favorita 
    e uma versão recente do CMake.
 
+   Caso não tenha ainda esse ambiente instalado, recomendamos que você configure 
+   um ambiente de software isolado usando ``conda``. Para computadores com sistemas 
+   Windows, recomendamos usar o Subsistema para Linux (WSL). 
+   Instruções detalhadas podem ser encontradas na página :doc:`setup`.
 
-   Se você ainda não tem ess ambiente instalado, recomendamos que você configure 
-   um ambiente de software isolado usando ``conda``. Para computadores Windows, recomendamos usar o
-   Subsistema para Linux (WSL). Instruções detalhadas podem ser encontradas
-   na página :doc:`setup`.
-
-  
 .. toctree::
    :hidden:
    :maxdepth: 1
+   :caption: Pré-Requisitos
 
    setup
 
@@ -74,34 +72,31 @@ implantar suas bases de código. Neste tutorial você vai aprender como:
 
 .. _learner-personas:
 
-Para quem este curso é voltado?
----------------------------------
+Para quem este tutorial é voltado?
+-----------------------------------
 
-Este curso é voltado para estudantes  que ouviram falar do `CMake`_ e querem 
+Este curso é voltado para estudantes que ouviram falar do `CMake`_ e querem 
 aprender como usá-lo efetivamente em projetos que estão trabalhando.
 
 Este curso não pressupõe experiência anterior com `CMake`_. Você terá que estar
-familiarizado com as ferramentas comumente usadas para construir software
+familiarizado com algumas ferramentas comumente usadas para construir software
 na sua linguagem de escolha: C++, C, Fortran.
-Especificamente, esta lição pressupõe que os participantes tenham alguma experiência anterior
-ou algum conhecimento dos seguintes tópicos:
+Especificamente, este tutorial pressupõe que os participantes tenham alguma experiência 
+anterior ou ou algum conhecimento dos seguintes tópicos:
 
-- Compilar e vincular executáveis ​e bibliotecas.
+- Compilação e vinculação de executáveis e bibliotecas.
 - Diferenças entre bibliotecas compartilhadas e estáticas.
 - Testes automatizados
 
-Sobre o Curso
-----------------
 
-.. Instructors who wish to teach this lesson can refer to the :doc:`guide` for practical advice.
 
-Graphical and text conventions
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Convenções textuais e gráficas
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-We adopt a few conventions which help organize the material.
+Adotamos algumas convenções que ajudam a organizar o material.
 
-Function signatures
-   These are shown in a text block marked with a wrench emoji:
+Assinaturas de função
+   Eles são mostrados em um bloco de texto marcado com um emoji de chave inglesa:
 
    .. signature:: |cmake_minimum_required|
 
@@ -109,11 +104,11 @@ Function signatures
 
          cmake_minimum_required(VERSION <min>[...<max>] [FATAL_ERROR])
 
-   The signature can be hidden by clicking the toggle.
+   
 
-Command parameters
-   The description of the command parameters will appear in a separate text
-   box. It will be marked with a laptop emoji:
+Parâmetros de comando
+   A descrição dos parâmetros de comando aparecerá em uma caixa de 
+   texto separada. Ele será marcado com um emoji de laptop:
 
    .. parameters::
 
@@ -123,13 +118,13 @@ Command parameters
           Raise a fatal error if the version constraint is not satisfied. This
           option is ignored by CMake >=2.6
 
-   The description is hidden and will be shown by clicking the toggle.
+   
 
 Type-along
-   The text and code for these activities are in a separate text box, marked with
-   a keyboard emoji:
+   O texto e o código dessas atividades estão em uma caixa de texto separada, 
+   marcada com um emoji de teclado:
 
-   .. typealong:: Let's look at an example
+   .. typealong:: Vejamos um exemplo
 
       .. code-block:: cmake
 
@@ -137,21 +132,22 @@ Type-along
 
          project(Hello LANGUAGES CXX)
 
-   The content can be hidden by clicking the toggle.
+  
 
-Exercises
-   Each exercise is presented in a separate text box, marked with a hand emoji. Each box introduces the exercise and describes the objectives:
+Exercícios
+   Cada exercício é apresentado em uma caixa de texto separada, 
+   marcada com um emoji de mão. Cada caixa apresenta o exercício e descreve os objetivos:
 
-   .. exercise:: Exercise 10
+   .. exercise:: Exercício 10
 
-      We will use CMake to build a Fortran library.
+      Usaremos o CMake para construir uma biblioteca Fortran.
 
 
 
 Veja Também
 ------------
 
-Existem muitos fontes gratuitas on-line sobre o CMake:
+Existem muitas fontes gratuitas on-line sobre o CMake:
 
 - `Documentação CMake official
   <https://cmake.org/cmake/help/latest/command/cmake_minimum_required.html>`_.

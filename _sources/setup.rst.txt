@@ -54,7 +54,7 @@ Usando Binder
 
 `MyBinder <https://mybinder.org/>`_ oferece um ambiente de computação em nuvem personalizável gratuito. 
 Você pode fazer os exercícios do tutorial CMake na nuvem clicando no botão 
-"iniciar binder" na parte superior do arquivo README exibido em https://github.com/ENCCS/cmake-workshop.
+"launch binder" na parte superior do arquivo README exibido em https://github.com/ufjf-dcc-josecamata/cmake-tutorial.
 
 .. figure:: img/launch_binder_button.png
    :scale: 70%
@@ -84,8 +84,8 @@ Para abrir um terminal, clique em "New" e selecione Terminal.
    :alt: The notebook dashboard
    :align: center
 
-Voce pode navegar pelo conteúdo do tutorial com ``ls content``. Os códigos dos
-exercicios estão em ``content/code``.
+Voce pode navegar pelo conteúdo do tutorial com ``ls docs``. Os códigos dos
+exercicios estão em ``docs/source/code``.
 
 .. figure:: img/terminal_and_contents.png
    :scale: 50%

@@ -50,7 +50,8 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
+              <p class="caption" role="heading"><span class="caption-text">Pré-Requisitos</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="setup.html">Configurando seu sistema</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Atividades</span></p>
@@ -88,26 +89,26 @@
   <section id="tutorial-cmake">
 <h1>Tutorial CMake<a class="headerlink" href="#tutorial-cmake" title="Permalink to this headline"></a></h1>
 <p>O CMake é uma ferramenta de construção multiplataforma, independente de linguagem, quem vem
-se tornando padrão, com grandes projetos usando-o para construir, testar e
-implantar suas bases de código. Neste tutorial você vai aprender como:</p>
+se tornando padrão, emm grandes projeto, o qual é usando para construir, testar e
+implantar suas bases de código. Neste tutorial você vai aprender:</p>
 <ul class="simple">
 <li><p>Escrever um sistema de compilação CMake para projetos C, C++ e Fortran produzindo
 bibliotecas e/ou executáveis.</p></li>
 <li><p>Executar testes para seu código com CTest.</p></li>
 <li><p>Certificar-se de que seu sistema de compilação funciona em diferentes plataformas.</p></li>
 <li><p>Detectar e usar dependências externas em seu projeto.</p></li>
-<li><p>Construir com segurança e eficácia projetos de linguagem mista (Python+C/C++,
+<li><p>Construir com segurança e eficácia projetos que usam linguagens mistas (Python+C/C++,
 Python+Fortran, Fortran+C/C++)</p></li>
 </ul>
 <div class="admonition-prerequisites prerequisites admonition" id="prerequisites-0">
 <p class="admonition-title">Prerequisites</p>
-<p>Antes de iniciar esse tutorial, certifique-se de ter acesso
-a um computador com um compilador para sua linguagem de programação favorita
+<p>Antes de iniciar esse tutorial, recomenda-se ter acesso
+a um computador com compilador para sua linguagem de programação favorita
 e uma versão recente do CMake.</p>
-<p>Se você ainda não tem ess ambiente instalado, recomendamos que você configure
-um ambiente de software isolado usando <code class="docutils literal notranslate"><span class="pre">conda</span></code>. Para computadores Windows, recomendamos usar o
-Subsistema para Linux (WSL). Instruções detalhadas podem ser encontradas
-na página <a class="reference internal" href="setup.html"><span class="doc">Configurando seu sistema</span></a>.</p>
+<p>Caso não tenha ainda esse ambiente instalado, recomendamos que você configure
+um ambiente de software isolado usando <code class="docutils literal notranslate"><span class="pre">conda</span></code>. Para computadores com sistemas
+Windows, recomendamos usar o Subsistema para Linux (WSL).
+Instruções detalhadas podem ser encontradas na página <a class="reference internal" href="setup.html"><span class="doc">Configurando seu sistema</span></a>.</p>
 </div>
 <div class="toctree-wrapper compound">
 </div>
@@ -133,38 +134,34 @@ na página <a class="reference internal" href="setup.html"><span class="doc">Con
 </table>
 <div class="toctree-wrapper compound">
 </div>
-<section id="para-quem-este-curso-e-voltado">
-<span id="learner-personas"></span><h2>Para quem este curso é voltado?<a class="headerlink" href="#para-quem-este-curso-e-voltado" title="Permalink to this headline"></a></h2>
-<p>Este curso é voltado para estudantes  que ouviram falar do <a class="reference external" href="https://cmake.org/cmake/help/v3.19/">CMake</a> e querem
+<section id="para-quem-este-tutorial-e-voltado">
+<span id="learner-personas"></span><h2>Para quem este tutorial é voltado?<a class="headerlink" href="#para-quem-este-tutorial-e-voltado" title="Permalink to this headline"></a></h2>
+<p>Este curso é voltado para estudantes que ouviram falar do <a class="reference external" href="https://cmake.org/cmake/help/v3.19/">CMake</a> e querem
 aprender como usá-lo efetivamente em projetos que estão trabalhando.</p>
 <p>Este curso não pressupõe experiência anterior com <a class="reference external" href="https://cmake.org/cmake/help/v3.19/">CMake</a>. Você terá que estar
-familiarizado com as ferramentas comumente usadas para construir software
+familiarizado com algumas ferramentas comumente usadas para construir software
 na sua linguagem de escolha: C++, C, Fortran.
-Especificamente, esta lição pressupõe que os participantes tenham alguma experiência anterior
-ou algum conhecimento dos seguintes tópicos:</p>
+Especificamente, este tutorial pressupõe que os participantes tenham alguma experiência
+anterior ou ou algum conhecimento dos seguintes tópicos:</p>
 <ul class="simple">
-<li><p>Compilar e vincular executáveis ​e bibliotecas.</p></li>
+<li><p>Compilação e vinculação de executáveis e bibliotecas.</p></li>
 <li><p>Diferenças entre bibliotecas compartilhadas e estáticas.</p></li>
 <li><p>Testes automatizados</p></li>
 </ul>
-</section>
-<section id="sobre-o-curso">
-<h2>Sobre o Curso<a class="headerlink" href="#sobre-o-curso" title="Permalink to this headline"></a></h2>
-<section id="graphical-and-text-conventions">
-<h3>Graphical and text conventions<a class="headerlink" href="#graphical-and-text-conventions" title="Permalink to this headline"></a></h3>
-<p>We adopt a few conventions which help organize the material.</p>
+<section id="convencoes-textuais-e-graficas">
+<h3>Convenções textuais e gráficas<a class="headerlink" href="#convencoes-textuais-e-graficas" title="Permalink to this headline"></a></h3>
+<p>Adotamos algumas convenções que ajudam a organizar o material.</p>
 <dl>
-<dt>Function signatures</dt><dd><p>These are shown in a text block marked with a wrench emoji:</p>
+<dt>Assinaturas de função</dt><dd><p>Eles são mostrados em um bloco de texto marcado com um emoji de chave inglesa:</p>
 <div class="admonition-cmake-minimum-required signature toggle-shown dropdown admonition" id="signature-0">
 <p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/cmake_minimum_required.html"><span class="xref std std-term"><code class="docutils literal notranslate">cmake_minimum_required</code></span></a></p>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">&lt;min&gt;[...&lt;max&gt;]</span><span class="w"> </span><span class="s">[FATAL_ERROR]</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<p>The signature can be hidden by clicking the toggle.</p>
 </dd>
-<dt>Command parameters</dt><dd><p>The description of the command parameters will appear in a separate text
-box. It will be marked with a laptop emoji:</p>
+<dt>Parâmetros de comando</dt><dd><p>A descrição dos parâmetros de comando aparecerá em uma caixa de
+texto separada. Ele será marcado com um emoji de laptop:</p>
 <div class="admonition-parameters parameters dropdown admonition" id="parameters-0">
 <p class="admonition-title">Parameters</p>
 <dl class="simple">
@@ -175,24 +172,23 @@ option is ignored by CMake &gt;=2.6</p>
 </dd>
 </dl>
 </div>
-<p>The description is hidden and will be shown by clicking the toggle.</p>
 </dd>
-<dt>Type-along</dt><dd><p>The text and code for these activities are in a separate text box, marked with
-a keyboard emoji:</p>
-<div class="admonition-let-s-look-at-an-example typealong toggle-shown dropdown admonition" id="typealong-0">
-<p class="admonition-title">Let’s look at an example</p>
+<dt>Type-along</dt><dd><p>O texto e o código dessas atividades estão em uma caixa de texto separada,
+marcada com um emoji de teclado:</p>
+<div class="admonition-vejamos-um-exemplo typealong toggle-shown dropdown admonition" id="typealong-0">
+<p class="admonition-title">Vejamos um exemplo</p>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.16</span><span class="p">)</span>
 
 <span class="nb">project</span><span class="p">(</span><span class="s">Hello</span><span class="w"> </span><span class="s">LANGUAGES</span><span class="w"> </span><span class="s">CXX</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<p>The content can be hidden by clicking the toggle.</p>
 </dd>
-<dt>Exercises</dt><dd><p>Each exercise is presented in a separate text box, marked with a hand emoji. Each box introduces the exercise and describes the objectives:</p>
-<div class="admonition-exercise-10 exercise important admonition" id="exercise-0">
-<p class="admonition-title">Exercise 10</p>
-<p>We will use CMake to build a Fortran library.</p>
+<dt>Exercícios</dt><dd><p>Cada exercício é apresentado em uma caixa de texto separada,
+marcada com um emoji de mão. Cada caixa apresenta o exercício e descreve os objetivos:</p>
+<div class="admonition-exercicio-10 exercise important admonition" id="exercise-0">
+<p class="admonition-title">Exercício 10</p>
+<p>Usaremos o CMake para construir uma biblioteca Fortran.</p>
 </div>
 </dd>
 </dl>
@@ -200,7 +196,7 @@ a keyboard emoji:</p>
 </section>
 <section id="veja-tambem">
 <h2>Veja Também<a class="headerlink" href="#veja-tambem" title="Permalink to this headline"></a></h2>
-<p>Existem muitos fontes gratuitas on-line sobre o CMake:</p>
+<p>Existem muitas fontes gratuitas on-line sobre o CMake:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://cmake.org/cmake/help/latest/command/cmake_minimum_required.html">Documentação CMake official</a>.</p></li>
 <li><p><a class="reference external" href="https://cmake.org/cmake/help/v3.19/guide/tutorial/index.html#guide:CMake%20Tutorial">CMake tutorial</a>.</p></li>

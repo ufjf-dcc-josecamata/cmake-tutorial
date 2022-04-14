@@ -43,6 +43,11 @@ implantar suas bases de código. Neste tutorial você vai aprender:
    hello-ctest
    environment
    probing
+   targets
+   dependencies
+   ..fetch-content
+   ..python-bindings
+   ..tips-and-tricks
 
 
 .. toctree::
@@ -50,7 +55,7 @@ implantar suas bases de código. Neste tutorial você vai aprender:
    :maxdepth: 1
    :caption: Topicos Adicionais
 
-   
+   .. cxx-fortran
 
 .. see also the schedule in guide.rst
 
@@ -62,13 +67,21 @@ implantar suas bases de código. Neste tutorial você vai aprender:
    30 min ; :doc:`cmake-syntax`
    30 min ; :doc:`hello-ctest`
    30 min ; :doc:`environment`
+   30 min ; :doc:`probing`
+   40 min ; :doc:`targets`
+   ..40 min ; :doc:`dependencies`
+   ..40 min ; :doc:`fetch-content`
+   ..30 min ; :doc:`python-bindings`
+   ..30 min ; :doc:`tips-and-tricks`
+
 
 
 .. toctree::
    :maxdepth: 1
-   :caption: Referencias
-
-
+   :caption: Referências
+   
+   quick-reference
+   zbibliography
 
 
 .. _learner-personas:

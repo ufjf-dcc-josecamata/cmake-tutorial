@@ -6,7 +6,7 @@ A04 - Detectando seu ambiente
 
 .. questions::
 
-   - Como o CMAKE interage com o ambiente?
+   - Como o CMake interage com o ambiente?
 
 .. objectives::
 
@@ -40,7 +40,7 @@ pois permite customizar a criação de artefatos em tempo real.
    CMake descobre e isso é independente da linguagem de programação.
 
    Você pode encontrar o exemplo completo e funcional em
-   ``content/code/day-1/12_OS/solution``.
+   ``source/code/day-1/12_OS/solution``.
 
 
 Descobrindo o processador
@@ -66,13 +66,13 @@ sistema host com o comando built-in |cmake_host_system_information|.
    sobre o sistema host e isso é independente da linguagem de programação.
 
    Você pode encontrar o exemplo completo e funcional em
-   ``content/code/day-1/13_processor/solution``.
+   ``source/code/day-1/13_processor/solution``.
 
 
 .. exercise:: Exercício 14: Conheça o seu host
 
    O projeto é baseado no modelo anterior e pode ser encontrado na pasta
-   ``content/code/day-1/14_host_system_information``.
+   ``source/code/day-1/14_host_system_information``.
 
    #. Abra a página de ajuda para |cmake_host_system_information|. 
       Tanto no navegador quanto na linha de comando:
@@ -110,7 +110,7 @@ Código-fonte dependente da plataforma e do compilador
    Podemos conseguir isso com o CMake com uma combinação de introspecção 
    do sistema host com o comando |target_compile_definitions|.
 
-   Uma solução funcional está na subpasta ``content/code/day-1/15_sys_preproc/solution``.
+   Uma solução funcional está na subpasta ``source/code/day-1/15_sys_preproc/solution``.
 
 .. signature:: |target_compile_definitions|
 

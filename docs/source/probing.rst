@@ -12,11 +12,11 @@ A05 - Compilação, vinculação e execução
 
    - Aprenda como e quando usar |execute_process|
    - Aprenda a usar |add_custom_command| com alvos.
-   - Aprenda a testar a compilação, vinculação e execução.
+   - Aprenda a testar a compilação, a vinculação e a execução.
 
 
-CMAKE permite que você execute comandos arbitrários em qualquer estágio no ciclo de vida do projeto.
-Este é mais um mecanismo de personalização e discutiremos algumas das 
+CMake permite que você execute comandos arbitrários em qualquer estágio no ciclo de vida 
+do projeto. Este é mais um mecanismo de personalização e discutiremos algumas das 
 opções neste tutorial.
 
 
@@ -54,8 +54,8 @@ comando |execute_process|.
    ``RESULT_VARIABLE``.
 
 
-É importante notar que qualquer comando invocado ``execute_process``
-só será executado na execução do ``cmake``.  *
+É importante notar que qualquer comando invocado pelo ``execute_process``
+só será executado na execução do ``cmake``.  
 
 
 .. exercise:: Exercício 17: Encontre um módulo Python
@@ -68,7 +68,7 @@ só será executado na execução do ``cmake``.  *
       $ python -c "import cffi; print(cffi.__version__)"
 
    Seu objetivo é replicar o mesmo no CMake. O código base está em 
-   ``content/code/day-1/17_find_cffi``. 
+   ``source/code/day-1/17_find_cffi``. 
    Você terá que modificar a chamada de |execute_process| para executar 
    o comando acima. 
    
@@ -92,13 +92,13 @@ Comandos personalizados para seus alvos (*targets*)
 -----------------------------------------------------
 
 Como mencionado, o principal problema de |execute_process| é que vai rodar 
-um comando quando o comando ``cmake`` é invocado pela primeira vez.
+o processo somente quando o comando ``cmake`` é invocado pela primeira vez.
 Portanto, *não* é uma alternativa viável se pretendermos realizar algumas 
 ações específicas dependendo dos alvos ou tornar o resultado dos comandos 
 personalizados uma dependência para outros alvos.
 
-Ambos os casos têm exemplos do mundo real, como ao usar código gerado automaticamente. O comando CMake |add_custom_command| 
-pode ser usado em alguns desses casos.
+Ambos os casos têm exemplos do mundo real, como ao usar código gerado automaticamente. 
+O comando CMake |add_custom_command| pode ser usado em alguns desses casos.
 
 .. signature:: |add_custom_command|
 
@@ -114,7 +114,7 @@ pode ser usado em alguns desses casos.
                    [VERBATIM] [USES_TERMINAL])
 
    Adicione um ou mais comandos customizados a um destino, como uma biblioteca ou um executável. 
-   Os comandos podem ser executados antes de vincular (com ``PRE_BUILD`` e ``PRE_LINK``) 
+   Os comandos podem ser executados antes da vinculaçao (com ``PRE_BUILD`` e ``PRE_LINK``) 
    ou depois (com ``POST_BUILD``)
 
 
@@ -139,7 +139,7 @@ pode ser usado em alguns desses casos.
    Um exemplo funcional está na subpasta ``solution``.
 
 
-Testar compilação, vinculação e execução
+Testar a compilação, vinculação e execução
 -------------------------------------------
 
 Também queremos poder executar verificações em nossos compiladores e 
@@ -162,7 +162,7 @@ In all cases, ``<LANG>`` can be one of ``CXX``, ``C`` or ``Fortran``.
    the need to test whether some flags are available before using them in your
    build.
 
-   The scaffold code is in ``content/code/day-1/19_check_compiler_flag``.
+   The scaffold code is in ``source/code/day-1/19_check_compiler_flag``.
 
    #. Implement a ``CMakeLists.txt`` to build an executable from the
       ``asan-example.cpp`` source file.

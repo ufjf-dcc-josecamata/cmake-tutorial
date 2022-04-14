@@ -42,6 +42,7 @@ implantar suas bases de código. Neste tutorial você vai aprender:
    cmake-syntax
    hello-ctest
    environment
+   probing
 
 
 .. toctree::
@@ -87,7 +88,6 @@ anterior ou ou algum conhecimento dos seguintes tópicos:
 - Compilação e vinculação de executáveis e bibliotecas.
 - Diferenças entre bibliotecas compartilhadas e estáticas.
 - Testes automatizados
-
 
 
 Convenções textuais e gráficas

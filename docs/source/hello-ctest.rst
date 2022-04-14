@@ -10,11 +10,11 @@ A03 - Criando e executando testes com o CTest
 
 .. objectives::
 
-   - Aprenda a produzir executáveis de teste com cmake.
+   - Aprenda a produzir executáveis de teste com CMake.
    - Aprenda a executar seus testes através do CTest.
 
 
-O teste é uma atividade essencial no ciclo de desenvolvimento.Um conjunto de testes bem 
+O teste é uma atividade essencial no ciclo de desenvolvimento. Um conjunto de testes bem 
 projetado irá ajudá-lo a detectar *bugs* e também pode facilitar a integração de novos
 desenvolvedores.
 
@@ -57,7 +57,7 @@ Existem duas etapas para integrar seu sistema de compilação CMake com a ferram
 
    Vamos construir uma simples biblioteca para somar inteiros e um executável usando esta
    biblioteca.  Use o projeto base localizado na pasta
-   ``content/code/day-1/05_hello-ctest``.
+   ``source/code/day-1/05_hello-ctest``.
 
    .. code-block:: cmake
 
@@ -110,14 +110,14 @@ Existem duas etapas para integrar seu sistema de compilação CMake com a ferram
       $ cmake --build .
       $ ctest
 
-  Uma solução está na subpasta ``solução``.
+  Uma solução está na subpasta ``solution``.
 
 .. exercise:: Exercício 6: Executando os testes através de um script shell
 
    Qualquer comando pode ser usado para executar testes. 
    Neste exercício, vamos estender o código cmake anterior para testar o executável principal 
    dentro de um script de shell.
-   Use o projeto base localizado na pasta ``content/code/day-1/06_bash-ctest``.
+   Use o projeto base localizado na pasta ``source/code/day-1/06_bash-ctest``.
 
    #. Encontre o executável bash apropriado para executar ``test.sh``. 
       Você deve usar o comando ``find_program`` do CMake.
@@ -149,7 +149,7 @@ Existem duas etapas para integrar seu sistema de compilação CMake com a ferram
    É muito mais comum hoje em dia usar python, em vez de scripts de shell.  
    Neste exercício, adicionaremos mais dois testes ao nosso projeto. 
    Esses novos testes executarão o programa principal por meio de um script Python.
-   Use o projeto base localizado na pasta ``content/code/day-1/07_python-ctest``.
+   Use o projeto base localizado na pasta ``source/code/day-1/07_python-ctest``.
 
    #. Encontre o intérprete Python para executar ``test.py``. Você deve usar 
    o comando |find_package| do CMake:
@@ -267,7 +267,7 @@ propriedades disponíveis.
    - ``quick`` para testes com um tempo de execução muito curto.
    - ``long`` para testes de benchmarking com um tempo de execução mais longo.
 
-   Use o projeto base localizado na pasta ``content/code/day-1/08_ctest-labels``.
+   Use o projeto base localizado na pasta ``source/code/day-1/08_ctest-labels``.
 
    .. tabs::
 
@@ -316,7 +316,7 @@ Entre as muitas propriedades que podem ser definidas em testes, gostaríamos de 
       .. tab:: WILL_FAIL
 
          Use o projeto base localizado na pasta
-         ``content/code/day-1/09_ctest-will-fail``.
+         ``source/code/day-1/09_ctest-will-fail``.
 
          1. Crie um projeto sem uma linguagem.
          2. Encontre o interpretador Python.
@@ -332,7 +332,7 @@ Entre as muitas propriedades que podem ser definidas em testes, gostaríamos de 
       .. tab:: COST
 
          Use o projeto base localizado na pasta
-         ``content/code/day-1/10_ctest-cost``.
+         ``source/code/day-1/10_ctest-cost``.
 
          1. Ativar testes no ``CMakeLists.txt``.
          2. Adicionar testes em execução a cada um dos scripts na pasta ``test``.
@@ -345,7 +345,7 @@ Entre as muitas propriedades que podem ser definidas em testes, gostaríamos de 
       .. tab:: TIMEOUT
 
          Use o projeto base localizado na pasta
-         ``content/code/day-1/11_ctest-timeout``.
+         ``source/code/day-1/11_ctest-timeout``.
 
          1. Crie um projeto sem uma linguagem.
          2. Encontre o interpretador Python.

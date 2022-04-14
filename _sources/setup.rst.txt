@@ -65,7 +65,7 @@ Isso levará você à página de carregamento do bloco de anotações do binder,
 que pode levar alguns minutos para inicializar. Não se desespere!
 
 
-.. figure:: img/binder_loading.png
+.. figure:: img/binder_loading2.png
    :scale: 50%
    :alt: The binder is loading
    :align: center
@@ -77,12 +77,9 @@ Um vez carregado, voce verá o painel do Jupyter Notebook que estará rodando na
    :alt: The notebook dashboard
    :align: center
 
-Para abrir um terminal, clique em "New" e selecione Terminal.
 
-.. figure:: img/open_terminal_in_binder.png
-   :scale: 50%
-   :alt: The notebook dashboard
-   :align: center
+Para abrir um terminal, clique no icone Terminal.
+
 
 Voce pode navegar pelo conteúdo do tutorial com ``ls docs``. Os códigos dos
 exercicios estão em ``docs/source/code``.

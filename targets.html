@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="pt-br" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A06 -Sistemas de compilação baseados em alvos com CMake &mdash; cmake-tutorial  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="_static/mystnb.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sphinx_lesson.css" type="text/css" />
+      <link rel="stylesheet" href="_static/overrides.css" type="text/css" />
+      <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/clipboard.min.js"></script>
+        <script src="_static/copybutton.js"></script>
+        <script src="_static/minipres.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="_static/togglebutton.js"></script>
+        <script src="_static/tabs.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="A07 - Encontrando e usando dependências" href="dependencies.html" />
+    <link rel="prev" title="A05 - Compilação, vinculação e execução" href="probing.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> cmake-tutorial
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Pré-Requisitos</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Configurando seu sistema</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Atividades</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="hello-cmake.html">A01 - Dos fontes para os executáveis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cmake-syntax.html">A02 - Síntaxe CMake</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hello-ctest.html">A03 - Criando e executando testes com o CTest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="environment.html">A04 - Detectando seu ambiente</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probing.html">A05 - Compilação, vinculação e execução</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">A06 -Sistemas de compilação baseados em alvos com CMake</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#e-tudo-sobre-alvos-e-propriedades">É tudo sobre alvos e propriedades</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#alvos-targets">Alvos (Targets)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#propriedades">Propriedades</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#multiplas-pastas">Múltiplas pastas</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dependencies.html">A07 - Encontrando e usando dependências</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Referências</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="quick-reference.html">Referência rápida</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zbibliography.html">Bibliografia</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">cmake-tutorial</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>A06 -Sistemas de compilação baseados em alvos com CMake</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/targets.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="a06-sistemas-de-compilacao-baseados-em-alvos-com-cmake">
+<span id="targets"></span><h1>A06 -Sistemas de compilação baseados em alvos com CMake<a class="headerlink" href="#a06-sistemas-de-compilacao-baseados-em-alvos-com-cmake" title="Permalink to this headline"></a></h1>
+<div class="admonition-questions questions admonition" id="questions-0">
+<p class="admonition-title">Questions</p>
+<ul class="simple">
+<li><p>Como podemos lidar com projetos mais complexos com o CMake?</p></li>
+<li><p>O que exatamente são <strong>alvos (targets)</strong> na linguagem específica de domínio (DSL) do CMake?</p></li>
+</ul>
+</div>
+<div class="admonition-objectives objectives admonition" id="objectives-0">
+<p class="admonition-title">Objectives</p>
+<ul class="simple">
+<li><p>Aprenda que os elementos básicos no CMake <em>não</em> são  variáveis, <em>mas</em> alvos.</p></li>
+<li><p>Saiba mais sobre as propriedades dos alvos e como usá-los.</p></li>
+<li><p>Aprenda a usar <em>níveis de visibilidade</em> para expressar dependências entre alvos.</p></li>
+<li><p>Saiba como trabalhar com projetos que abrangem várias pastas.</p></li>
+<li><p>Saiba como lidar com multiplos alvos em um projeto.</p></li>
+</ul>
+</div>
+<p>Projetos do mundo real exigem mais do que compilar alguns arquivos fontes
+em executáveis e/ou bibliotecas. Na grande maioria dos casos, você se deparará
+com projetos que compreendem centenas de arquivos fontes espalhados em uma estrutura
+complexa. O uso do CMake ajuda a manter a complexidade do sistema de compilação
+sob controle.</p>
+<section id="e-tudo-sobre-alvos-e-propriedades">
+<h2>É tudo sobre alvos e propriedades<a class="headerlink" href="#e-tudo-sobre-alvos-e-propriedades" title="Permalink to this headline"></a></h2>
+<p>Com o advento do CMake 3.0, também conhecido como <strong>Modern CMake</strong>, houve uma mudança
+significativa na forma como a linguagem específica de domínio (DSL) do
+CMake é estruturada. Em vez de depender de <strong>variáveis</strong> para transmitir
+informações em um projeto, devemos passar a usar <strong>alvos</strong> e <strong>propriedades</strong>.</p>
+<section id="alvos-targets">
+<h3>Alvos (Targets)<a class="headerlink" href="#alvos-targets" title="Permalink to this headline"></a></h3>
+<p>Um alvo é declarado por <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/add_executable.html"><span class="xref std std-term"><code class="docutils literal notranslate">add_executable</code></span></a> ou <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/add_library.html"><span class="xref std std-term"><code class="docutils literal notranslate">add_library</code></span></a>: assim,
+em termos gerais, um destino mapeia para um artefato de construção
+no projeto. <a class="footnote-reference brackets" href="#custom-targets" id="id1">1</a>
+Qualquer destino tem uma coleção de <strong>propriedades</strong>, que definem <em>como</em> o
+artefato de compilação deve ser produzido <strong>e</strong> <em>como</em> ele deve ser usado
+por outros destinos dependentes no projeto.</p>
+<figure class="align-center" id="id4">
+<img alt="_images/target.svg" src="_images/target.svg" /><figcaption>
+<p><span class="caption-text">Um alvo é o elemento básico no CMake DSL. Cada destino possui <em>propriedades</em>,
+que podem ser lidas com <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/get_target_property.html"><span class="xref std std-term"><code class="docutils literal notranslate">get_target_property</code></span></a> e modificado
+com <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/set_target_properties.html"><span class="xref std std-term"><code class="docutils literal notranslate">set_target_properties</code></span></a>. Opções de compilação, definições,
+diretórios de inclusão, arquivos de origem, bibliotecas de links e
+opções de links são propriedades dos alvos.</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>É muito mais robusto usar alvos e propriedades do que usar variáveis.
+Dado um alvo <code class="docutils literal notranslate"><span class="pre">tgtA</span></code>, podemos invocar um comando na família <code class="docutils literal notranslate"><span class="pre">target_*</span></code> como:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">tgtA</span>
+<span class="w">  </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">tgtB</span>
+<span class="w">  </span><span class="s">INTERFACE</span><span class="w"> </span><span class="s">tgtC</span>
+<span class="w">  </span><span class="s">PUBLIC</span><span class="w"> </span><span class="s">tgtD</span>
+<span class="w">  </span><span class="p">)</span>
+</pre></div>
+</div>
+<p>O uso dos níveis de visibilidade podem ser os seguintes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">PRIVATE</span></code>. A propriedade só será usada para construir o alvo dado
+como primeiro argumento. Em nosso pseudo-código, <code class="docutils literal notranslate"><span class="pre">tgtB</span></code> será usado
+apenas para construir <code class="docutils literal notranslate"><span class="pre">tgtA</span></code> mas não será propagado como uma
+dependência para outros alvos consumindo <code class="docutils literal notranslate"><span class="pre">tgtA</span></code>.</p></li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">INTERFACE</span></code>. A propriedade será usada apenas para construir destinos que</dt><dd><p>consumam o alvo fornecido como primeiro argumento. Em nosso pseudo-código,
+o <code class="docutils literal notranslate"><span class="pre">tgtC</span></code> só será propagado como uma dependência para outros alvos que
+consomem <code class="docutils literal notranslate"><span class="pre">tgtA</span></code>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">PUBLIC</span></code>. A propriedade será usada <strong>em ambos</strong> para construir o destino</dt><dd><p>fornecido como o primeiro argumento <strong>e</strong> os destinos que o consomem.
+Em nosso pseudo-código, <code class="docutils literal notranslate"><span class="pre">tgtD</span></code> será usado para construir <code class="docutils literal notranslate"><span class="pre">tgtA</span></code> e
+será propagado como uma dependência para qualquer outro alvo
+que consuma <code class="docutils literal notranslate"><span class="pre">tgtA</span></code>.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<figure class="align-center" id="id5">
+<img alt="_images/target_inheritance.svg" src="_images/target_inheritance.svg" /><figcaption>
+<p><span class="caption-text">As propriedades dos alvos têm <strong>níveis de visibilidade</strong> que determinam
+como o CMake deve propagá-las entre alvos interdependentes.</span><a class="headerlink" href="#id5" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Os cinco comandos mais usados para lidar com alvos são:</p>
+<div class="admonition-target-sources signature toggle-shown dropdown admonition" id="signature-0">
+<p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/target_sources.html"><span class="xref std std-term"><code class="docutils literal notranslate">target_sources</code></span></a></p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">target_sources</span><span class="p">(</span><span class="s">&lt;target&gt;</span>
+<span class="w">  </span><span class="s">&lt;INTERFACE|PUBLIC|PRIVATE&gt;</span><span class="w"> </span><span class="s">[items1...]</span>
+<span class="w">  </span><span class="s">[&lt;INTERFACE|PUBLIC|PRIVATE&gt;</span><span class="w"> </span><span class="s">[items2...]</span><span class="w"> </span><span class="s">...]</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Use-o para especificar quais arquivos fontes devem ser usados ao
+compilar um alvo.</p>
+</div>
+<div class="admonition-target-compile-options signature toggle-shown dropdown admonition" id="signature-1">
+<p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/target_compile_options.html"><span class="xref std std-term"><code class="docutils literal notranslate">target_compile_options</code></span></a></p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">target_compile_options</span><span class="p">(</span><span class="s">&lt;target&gt;</span><span class="w"> </span><span class="s">[BEFORE]</span>
+<span class="w">  </span><span class="s">&lt;INTERFACE|PUBLIC|PRIVATE&gt;</span><span class="w"> </span><span class="s">[items1...]</span>
+<span class="w">  </span><span class="s">[&lt;INTERFACE|PUBLIC|PRIVATE&gt;</span><span class="w"> </span><span class="s">[items2...]</span><span class="w"> </span><span class="s">...]</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Use-o para especificar quais <em>flags</em> de compilador devem ser usados.</p>
+</div>
+<div class="admonition-target-compile-definitions signature toggle-shown dropdown admonition" id="signature-2">
+<p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/target_compile_definitions.html"><span class="xref std std-term"><code class="docutils literal notranslate">target_compile_definitions</code></span></a></p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">target_compile_definitions</span><span class="p">(</span><span class="s">&lt;target&gt;</span>
+<span class="w">  </span><span class="s">&lt;INTERFACE|PUBLIC|PRIVATE&gt;</span><span class="w"> </span><span class="s">[items1...]</span>
+<span class="w">  </span><span class="s">[&lt;INTERFACE|PUBLIC|PRIVATE&gt;</span><span class="w"> </span><span class="s">[items2...]</span><span class="w"> </span><span class="s">...]</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Use-o para especificar quais definições do compilador devem ser usadas.</p>
+</div>
+<div class="admonition-target-include-directories signature toggle-shown dropdown admonition" id="signature-3">
+<p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/target_include_directories.html"><span class="xref std std-term"><code class="docutils literal notranslate">target_include_directories</code></span></a></p>
+<blockquote>
+<div><div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">target_include_directories</span><span class="p">(</span><span class="s">&lt;target&gt;</span><span class="w"> </span><span class="s">[SYSTEM]</span><span class="w"> </span><span class="s">[BEFORE]</span>
+<span class="w">  </span><span class="s">&lt;INTERFACE|PUBLIC|PRIVATE&gt;</span><span class="w"> </span><span class="s">[items1...]</span>
+<span class="w">  </span><span class="s">[&lt;INTERFACE|PUBLIC|PRIVATE&gt;</span><span class="w"> </span><span class="s">[items2...]</span><span class="w"> </span><span class="s">...]</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Use-o para especificar quais diretórios conterão arquivos de
+cabeçalho (para C/C++) e de módulo (para Fortran).</p>
+</div>
+<div class="admonition-target-link-libraries signature toggle-shown dropdown admonition" id="signature-4">
+<p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/target_link_libraries.html"><span class="xref std std-term"><code class="docutils literal notranslate">target_link_libraries</code></span></a></p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">&lt;target&gt;</span>
+<span class="w">  </span><span class="s">&lt;PRIVATE|PUBLIC|INTERFACE&gt;</span><span class="w"> </span><span class="s">&lt;item&gt;...</span>
+<span class="w">  </span><span class="s">[&lt;PRIVATE|PUBLIC|INTERFACE&gt;</span><span class="w"> </span><span class="s">&lt;item&gt;...]...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Use-o para especificar quais bibliotecas devem ser vinculadas ao alvo atual.</p>
+</div>
+<p>Existem comandos adicionais na família <code class="docutils literal notranslate"><span class="pre">target_*</span></code>. Para ver quais são eles, faça:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --help-command-link <span class="p">|</span> grep <span class="s2">&quot;^target_&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="propriedades">
+<h3>Propriedades<a class="headerlink" href="#propriedades" title="Permalink to this headline"></a></h3>
+<p>Até agora vimos que você pode definir propriedades em alvos,
+mas também em testes (veja <a class="reference internal" href="hello-ctest.html#hello-ctest"><span class="std std-ref">A03 - Criando e executando testes com o CTest</span></a>).
+O CMake permite definir propriedades em vários níveis diferentes
+de visibilidade em todo o projeto:</p>
+<ul class="simple">
+<li><p><strong>Escopo Global</strong>. Elas são equivalentes às variáveis definidas na raiz <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>. Seu uso é, no entanto,
+mais poderoso, pois eles podem ser definidos a partir
+de <em>qualquer</em> folha <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>.</p></li>
+<li><p><strong>Escopo do diretório</strong>. Elas são equivalentes a variáveis definidas em uma determinada folha <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>.</p></li>
+<li><p><strong>Target</strong>. Essas são as propriedades definidas nos alvos que discutimos acima.</p></li>
+<li><p><strong>Teste</strong>.</p></li>
+<li><p><strong>Arquivos Fontes</strong>. Por exemplo, flags do compilador.</p></li>
+<li><p><strong>Entradas de cache</strong>.</p></li>
+<li><p><strong>Arquivos instalados</strong>.</p></li>
+</ul>
+<p>Para obter uma lista completa de propriedades conhecidas pelo CMake:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --help-properties <span class="p">|</span> less
+</pre></div>
+</div>
+<p>Você pode obter o valor atual de qualquer propriedade com:</p>
+<div class="admonition-get-property signature toggle-shown dropdown admonition" id="signature-5">
+<p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/get_property.html"><span class="xref std std-term"><code class="docutils literal notranslate">get_property</code></span></a></p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">get_property</span><span class="p">(</span><span class="s">&lt;variable&gt;</span>
+<span class="w">       </span><span class="s">&lt;GLOBAL</span>
+<span class="w">        </span><span class="s">DIRECTORY</span><span class="w"> </span><span class="s">[&lt;dir&gt;]</span>
+<span class="w">        </span><span class="s">TARGET</span><span class="w">    </span><span class="s">&lt;target&gt;</span>
+<span class="w">        </span><span class="s">SOURCE</span><span class="w">    </span><span class="s">&lt;source&gt;</span>
+<span class="w">                  </span><span class="s">[DIRECTORY</span><span class="w"> </span><span class="s">&lt;dir&gt;</span><span class="w"> </span><span class="s">|</span><span class="w"> </span><span class="s">TARGET_DIRECTORY</span><span class="w"> </span><span class="s">&lt;target&gt;]</span>
+<span class="w">        </span><span class="s">INSTALL</span><span class="w">   </span><span class="s">&lt;file&gt;</span>
+<span class="w">        </span><span class="s">TEST</span><span class="w">      </span><span class="s">&lt;test&gt;</span>
+<span class="w">        </span><span class="s">CACHE</span><span class="w">     </span><span class="s">&lt;entry&gt;</span>
+<span class="w">        </span><span class="s">VARIABLE</span>
+<span class="w">       </span><span class="s">PROPERTY</span><span class="w"> </span><span class="s">&lt;name&gt;</span>
+<span class="w">       </span><span class="s">[SET</span><span class="w"> </span><span class="s">|</span><span class="w"> </span><span class="s">DEFINED</span><span class="w"> </span><span class="s">|</span><span class="w"> </span><span class="s">BRIEF_DOCS</span><span class="w"> </span><span class="s">|</span><span class="w"> </span><span class="s">FULL_DOCS]</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>e defina o valor de qualquer propriedade com:</p>
+<div class="admonition-set-property signature toggle-shown dropdown admonition" id="signature-6">
+<p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/set_property.html"><span class="xref std std-term"><code class="docutils literal notranslate">set_property</code></span></a></p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">set_property</span><span class="p">(</span><span class="s">&lt;GLOBAL</span>
+<span class="w">        </span><span class="s">DIRECTORY</span><span class="w"> </span><span class="s">[&lt;dir&gt;]</span>
+<span class="w">        </span><span class="s">TARGET</span><span class="w">    </span><span class="s">[&lt;target1&gt;</span><span class="w"> </span><span class="s">...]</span>
+<span class="w">        </span><span class="s">SOURCE</span><span class="w">    </span><span class="s">[&lt;src1&gt;</span><span class="w"> </span><span class="s">...]</span>
+<span class="w">                  </span><span class="s">[DIRECTORY</span><span class="w"> </span><span class="s">&lt;dirs&gt;</span><span class="w"> </span><span class="s">...]</span>
+<span class="w">                  </span><span class="s">[TARGET_DIRECTORY</span><span class="w"> </span><span class="s">&lt;targets&gt;</span><span class="w"> </span><span class="s">...]</span>
+<span class="w">        </span><span class="s">INSTALL</span><span class="w">   </span><span class="s">[&lt;file1&gt;</span><span class="w"> </span><span class="s">...]</span>
+<span class="w">        </span><span class="s">TEST</span><span class="w">      </span><span class="s">[&lt;test1&gt;</span><span class="w"> </span><span class="s">...]</span>
+<span class="w">        </span><span class="s">CACHE</span><span class="w">     </span><span class="s">[&lt;entry1&gt;</span><span class="w"> </span><span class="s">...]</span>
+<span class="w">       </span><span class="s">[APPEND]</span><span class="w"> </span><span class="s">[APPEND_STRING]</span>
+<span class="w">       </span><span class="s">PROPERTY</span><span class="w"> </span><span class="s">&lt;name&gt;</span><span class="w"> </span><span class="s">[&lt;value1&gt;</span><span class="w"> </span><span class="s">...]</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+<section id="multiplas-pastas">
+<span id="multiple-folders"></span><h2>Múltiplas pastas<a class="headerlink" href="#multiplas-pastas" title="Permalink to this headline"></a></h2>
+<p>Cada pasta em um projeto de várias pastas conterá
+um <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>: uma árvore de origem com
+uma <strong>raiz</strong> e muitas <strong>folhas</strong>.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>project/
+├── CMakeLists.txt           &lt;--- Root
+├── external
+│   ├── CMakeLists.txt       &lt;--- Leaf at level 1
+└── src
+    ├── CMakeLists.txt       &lt;--- Leaf at level 1
+    ├── evolution
+    │   ├── CMakeLists.txt   &lt;--- Leaf at level 2
+    ├── initial
+    │   ├── CMakeLists.txt   &lt;--- Leaf at level 2
+    ├── io
+    │   ├── CMakeLists.txt   &lt;--- Leaf at level 2
+    └── parser
+        └── CMakeLists.txt   &lt;--- Leaf at level 2
+</pre></div>
+</div>
+<p>O script <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> raiz conterá a invocação do comando <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/project.html"><span class="xref std std-term"><code class="docutils literal notranslate">project</code></span></a>:
+variáveis e alvos declarados na raiz têm escopo efetivamente global.
+Lembre-se também que <a class="reference internal" href="https://cmake.org/cmake/help/latest/variable/PROJECT_SOURCE_DIR.html"><span class="xref std std-term"><code class="docutils literal notranslate">PROJECT_SOURCE_DIR</code></span></a> apontará para a pasta que contém o <a href="#id2"><span class="problematic" id="id3">``</span></a>CMakeLists.txt``raiz.
+Para mover-se entre a raiz e uma folha ou entre folhas,
+você usará o comando <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/add_subdirectory.html"><span class="xref std std-term"><code class="docutils literal notranslate">add_subdirectory</code></span></a>:</p>
+<div class="admonition-add-subdirectory signature toggle-shown dropdown admonition" id="signature-7">
+<p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/add_subdirectory.html"><span class="xref std std-term"><code class="docutils literal notranslate">add_subdirectory</code></span></a></p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">add_subdirectory</span><span class="p">(</span><span class="s">source_dir</span><span class="w"> </span><span class="s">[binary_dir]</span><span class="w"> </span><span class="s">[EXCLUDE_FROM_ALL]</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Normalmente, você só precisa passar o primeiro argumento: a pasta dentro
+da árvore de compilação será calculada automaticamente pelo CMake.
+Podemos declarar alvos em qualquer nível, não necessariamente na raiz:
+um alvo é visível no nível em que é declarado e em todos os níveis superiores.</p>
+<div class="admonition-exercicio-21-automatos-celulares exercise important admonition" id="exercise-0">
+<p class="admonition-title">Exercício 21: Autômatos celulares</p>
+<p>Vamos além do “Hello, world” e trabalharemos em um projeto que abrange
+várias pastas. Implementaremos um código relativamente simples para
+calcular e imprimir na tela <a class="reference external" href="https://en.wikipedia.org/wiki/Cellular_automaton#Elementary_cellular_automata">autômatos celulares elementares</a>.
+Separamos as fontes em <code class="docutils literal notranslate"><span class="pre">src</span></code> e <code class="docutils literal notranslate"><span class="pre">external</span></code> para simular um projeto
+aninhado que reutiliza um projeto externo.</p>
+<p>Seu objetivo é:</p>
+<ul>
+<li><p>Construa uma biblioteca a partir do conteúdo de <code class="docutils literal notranslate"><span class="pre">external</span></code> e de
+cada subpasta de <code class="docutils literal notranslate"><span class="pre">src</span></code>. Use <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/add_library.html"><span class="xref std std-term"><code class="docutils literal notranslate">add_library</code></span></a> junto com <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/target_sources.html"><span class="xref std std-term"><code class="docutils literal notranslate">target_sources</code></span></a> e,
+para C++, <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/target_include_directories.html"><span class="xref std std-term"><code class="docutils literal notranslate">target_include_directories</code></span></a>. Pense cuidadosamente sobre
+os <em>níveis de visibilidade</em>.</p></li>
+<li><p>Compile o executável principal. Onde ele está localizado na árvore
+de construção? Lembre-se de que o CMake gera uma árvore de compilação
+que espelha a árvore de origem.</p></li>
+<li><p>O executável aceitará 3 argumentos: o comprimento,
+o número de passos e a regra do autômato.
+Você pode executá-lo com:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ automata <span class="m">40</span> <span class="m">5</span> <span class="m">30</span>
+</pre></div>
+</div>
+<p>Esta é a saída:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>length: 40
+number of steps: 5
+rule: 30
+                    *
+                   ***
+                  **  *
+                 ** ****
+                **  *   *
+               ** **** ***
+</pre></div>
+</div>
+</li>
+</ul>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">C++</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">Fortran</button><button aria-controls="panel-0-0-2" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-2" name="0-2" role="tab" tabindex="-1">Bonus</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><p>O projeto base está em <code class="docutils literal notranslate"><span class="pre">source/code/day-2/21_automata-cxx</span></code>.
+As fontes estão organizadas na segunte árvore:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>automata-cxx/
+├── external
+│   ├── conversion.cpp
+│   └── conversion.hpp
+└── src
+    ├── evolution
+    │   ├── evolution.cpp
+    │   └── evolution.hpp
+    ├── initial
+    │   ├── initial.cpp
+    │   └── initial.hpp
+    ├── io
+    │   ├── io.cpp
+    │   └── io.hpp
+    ├── main.cpp
+    └── parser
+        ├── parser.cpp
+        └── parser.hpp
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>Os arquivos de cabeçalho devem ser incluídos na
+chamada de <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/target_sources.html"><span class="xref std std-term"><code class="docutils literal notranslate">target_sources</code></span></a>? Se sim, qual nível de visibilidade
+você deve usar?</p></li>
+<li><p>Em <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/target_sources.html"><span class="xref std std-term"><code class="docutils literal notranslate">target_sources</code></span></a>, usar caminhos absolutos (<code class="docutils literal notranslate"><span class="pre">${CMAKE_CURRENT_LIST_DIR}/parser.cpp</span></code>)
+ou relativos (<code class="docutils literal notranslate"><span class="pre">parser.cpp</span></code>) faz alguma diferença?</p></li>
+</ol>
+<p>Um exemplo funcional está na subpasta <code class="docutils literal notranslate"><span class="pre">solution</span></code>.</p>
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><p>O projeto base está em <code class="docutils literal notranslate"><span class="pre">content/code/day-2/21_automata-f</span></code>.
+As fontes estão organizadas na segunte árvore:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>automata-f/
+├── external
+│   └── conversion.f90
+└── src
+    ├── evolution
+    │   ├── ancestors.f90
+    │   ├── empty.f90
+    │   └── evolution.f90
+    ├── initial
+    │   └── initial.f90
+    ├── io
+    │   └── io.f90
+    ├── main.f90
+    └── parser
+        └── parser.f90
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>A fonte <code class="docutils literal notranslate"><span class="pre">empty.f90</span></code> declara, como o nome sugere, um módulo
+Fortran vazio. Este módulo é usado apenas dentro da
+subpasta <code class="docutils literal notranslate"><span class="pre">evolution</span></code>: qual nível de visibilidade ele deve
+ter em <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/target_sources.html"><span class="xref std std-term"><code class="docutils literal notranslate">target_sources</code></span></a>?</p></li>
+<li><p>Observe que o CMake pode entender a ordem de compilação
+imposta pelos módulos Fortran sem intervenção adicional.
+Onde estão os arquivos <code class="docutils literal notranslate"><span class="pre">.mod</span></code>?</p></li>
+</ol>
+<p>Um exemplo funcional está na subpasta <code class="docutils literal notranslate"><span class="pre">solution</span></code>.</p>
+</div><div aria-labelledby="tab-0-0-2" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-2" name="0-2" role="tabpanel" tabindex="0"><p>Você pode decidir onde executáveis, bibliotecas estáticas
+e compartilhadas e arquivos Fortran <code class="docutils literal notranslate"><span class="pre">.mod</span></code> serão armazenados
+na árvore de compilação.
+As variáveis relevantes são:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">CMAKE_RUNTIME_OUTPUT_DIRECTORY</span></code>, para executáveis.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CMAKE_ARCHIVE_OUTPUT_DIRECTORY</span></code>, para bibliotecas estáticas.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CMAKE_LIBRARY_OUTPUT_DIRECTORY</span></code>, para bibliotecas compartilhadas.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CMAKE_Fortran_MODULE_DIRECTORY</span></code>, Para arquivos Fortran <code class="docutils literal notranslate"><span class="pre">.mod</span></code></p></li>
+</ul>
+<p>Modifique seu <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> para gerar o executável
+<code class="docutils literal notranslate"><span class="pre">automata</span></code> em <cite>build/bin`</cite> e as bibliotecas em <code class="docutils literal notranslate"><span class="pre">build/lib</span></code></p>
+</div></div>
+</div>
+<div class="admonition-a-arvore-de-dependencia-interna callout admonition-no-content admonition" id="callout-0">
+<p class="admonition-title">A árvore de dependência interna</p>
+</div>
+<p>Você pode visualizar as dependências entre os alvos em seu projeto com o Graphviz:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> build
+$ cmake --graphviz<span class="o">=</span>project.dot ..
+$ dot -T svg project.dot -o project.svg
+</pre></div>
+</div>
+<figure class="align-center" id="id6">
+<img alt="_images/project.svg" src="_images/project.svg" /><figcaption>
+<p><span class="caption-text">As dependências entre alvos no projeto de autômatos celulares.</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</div></blockquote>
+<div class="admonition-keypoints keypoints admonition" id="keypoints-0">
+<p class="admonition-title">Keypoints</p>
+<ul class="simple">
+<li><p>Usando alvos, você pode obter controle granular sobre como os
+artefatos são criados e como suas dependências são tratadas.</p></li>
+<li><p><em>Flags</em> de compilador, definições, arquivos de origem, pastas de inclusão,
+bibliotecas de links e opções de vinculador são <strong>propriedades</strong> de um alvo.</p></li>
+<li><p>Evite usar variáveis para expressar dependências entre alvos:
+use os níveis de visibilidade <code class="docutils literal notranslate"><span class="pre">PRIVATE</span></code>, <code class="docutils literal notranslate"><span class="pre">INTERFACE</span></code>, <code class="docutils literal notranslate"><span class="pre">PUBLIC</span></code> e
+deixe o CMake descobrir os detalhes.</p></li>
+<li><p>Use <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/get_property.html"><span class="xref std std-term"><code class="docutils literal notranslate">get_property</code></span></a> para consultar e <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/set_property.html"><span class="xref std std-term"><code class="docutils literal notranslate">set_property</code></span></a> para modificar os valores das propriedades.</p></li>
+<li><p>Para manter a complexidade do sistema de compilação no mínimo, cada pasta em um projeto
+de várias pastas deve ter seu próprio script CMake.</p></li>
+</ul>
+</div>
+<p class="rubric">Footnotes</p>
+<dl class="footnote brackets">
+<dt class="label" id="custom-targets"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Você pode incluir alvos customizados no sistema de construção com <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/add_custom_target.html"><span class="xref std std-term"><code class="docutils literal notranslate">add_custom_target</code></span></a>.
+Alvos personalizados não são necessariamente artefatos construídos.</p>
+</dd>
+</dl>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="probing.html" class="btn btn-neutral float-left" title="A05 - Compilação, vinculação e execução" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dependencies.html" class="btn btn-neutral float-right" title="A07 - Encontrando e usando dependências" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Jose J. Camata.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

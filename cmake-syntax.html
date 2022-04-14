@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="pt-br" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A02 - Síntaxe CMake &mdash; cmake-tutorial  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="_static/mystnb.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sphinx_lesson.css" type="text/css" />
+      <link rel="stylesheet" href="_static/overrides.css" type="text/css" />
+      <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/clipboard.min.js"></script>
+        <script src="_static/copybutton.js"></script>
+        <script src="_static/minipres.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="_static/togglebutton.js"></script>
+        <script src="_static/tabs.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="A03 - Criando e executando testes com o CTest" href="hello-ctest.html" />
+    <link rel="prev" title="A01 - Dos fontes para os executáveis" href="hello-cmake.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> cmake-tutorial
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Configurando seu sistema</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Atividades</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="hello-cmake.html">A01 - Dos fontes para os executáveis</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">A02 - Síntaxe CMake</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#the-cmake-dsl">The CMake DSL</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#variaveis">Variáveis.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#comandos">Comandos</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modulos">Módulos</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#a-arvore-de-construcao">A árvore de construção</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#controle-de-fluxo">Controle de fluxo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mensagens-de-impressao">Mensagens de impressão</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#controlando-a-construcao-com-opcoes">Controlando a construção com opções</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="hello-ctest.html">A03 - Criando e executando testes com o CTest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="environment.html">A04 - Detectando seu ambiente</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">cmake-tutorial</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>A02 - Síntaxe CMake</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/cmake-syntax.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="a02-sintaxe-cmake">
+<span id="cmake-syntax"></span><h1>A02 - Síntaxe CMake<a class="headerlink" href="#a02-sintaxe-cmake" title="Permalink to this headline"></a></h1>
+<div class="admonition-questions questions admonition" id="questions-0">
+<p class="admonition-title">Questions</p>
+<ul class="simple">
+<li><p>Como podemos alcançar mais controle sobre o sistema de construção gerado por cmake?</p></li>
+<li><p>É possível deixar o usuário decidir o que gerar?</p></li>
+</ul>
+</div>
+<div class="admonition-objectives objectives admonition" id="objectives-0">
+<p class="admonition-title">Objectives</p>
+<ul class="simple">
+<li><p>Aprenda a definir variáveis com <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/set.html"><span class="xref std std-term"><code class="docutils literal notranslate">set</code></span></a> e usá-los com o operador <code class="docutils literal notranslate"><span class="pre">${}</span></code>
+para <a class="reference external" href="https://cmake.org/cmake/help/latest/manual/cmake-language.7.html#variable-references">referenciar variáveis</a>.</p></li>
+<li><p>Aprenda a sintaxe para condicionais em cmake: <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/if.html"><span class="xref std std-term"><code class="docutils literal notranslate">if</code></span></a> - <code class="docutils literal notranslate"><span class="pre">elseif</span></code> - <code class="docutils literal notranslate"><span class="pre">else</span></code> - <code class="docutils literal notranslate"><span class="pre">endif</span></code></p></li>
+<li><p>Aprenda a sintaxe para loops em cmake: <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/foreach.html"><span class="xref std std-term"><code class="docutils literal notranslate">foreach</code></span></a></p></li>
+<li><p>Aprenda como as estruturas CMAKE constroem artefatos.</p></li>
+<li><p>Aprenda a imprimir mensagens úteis.</p></li>
+<li><p>Aprenda a lidar com as opções voltadas para o usuário: <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/option.html"><span class="xref std std-term"><code class="docutils literal notranslate">option</code></span></a> e o papel do cache do CMAKE.</p></li>
+</ul>
+</div>
+<p>CMAKE Oferece um  <em>idioma específico de domínio</em> (do ingles, <em>domain-specific language</em>, DSL) para descrever como gerar um
+sistema de compilação nativo de uma plataforma específica que você pode deseja executar.
+Neste tópico, vamos nos familiarizar com sua sintaxe.</p>
+<section id="the-cmake-dsl">
+<h2>The CMake DSL<a class="headerlink" href="#the-cmake-dsl" title="Permalink to this headline"></a></h2>
+<p>Lembre-se de que o DSL é <em>insensível a maiúsculas e minúsculas</em>.
+Agora vamos dar uma olhada nos seus principais elementos.</p>
+<section id="variaveis">
+<h3>Variáveis.<a class="headerlink" href="#variaveis" title="Permalink to this headline"></a></h3>
+<p>Há variáveis definidas pelo cmake ou pelo usuário. Pode-se obter a lista de variáveis definidas pelo
+CMAKE com:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --help-variable-list
+</pre></div>
+</div>
+<p>Você pode criar uma nova variável com o comando <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/set.html"><span class="xref std std-term"><code class="docutils literal notranslate">set</code></span></a>:</p>
+<div class="admonition-set signature toggle-shown dropdown admonition" id="signature-0">
+<p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/set.html"><span class="xref std std-term"><code class="docutils literal notranslate">set</code></span></a></p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">set</span><span class="p">(</span><span class="s">&lt;variable&gt;</span><span class="w"> </span><span class="s">&lt;value&gt;...</span><span class="w"> </span><span class="s">[PARENT_SCOPE]</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Variáveis no Cmake são sempre de tipo string, mas certos comandos podem interpretá-los como outros tipos.
+Se você quiser declarar uma variável <em>list</em>, você terá que fornecer-lhe como uma string separada por
+ponto-e-virgula. Listas podem ser manipuladas com a comando <code class="docutils literal notranslate"><span class="pre">list</span></code>.</p>
+<p>Você pode inspecionar o valor de qualquer variável por <em>desreferenciação</em> com o operador <code class="docutils literal notranslate"><span class="pre">${}</span></code>,
+assim como no <em>bash</em>. Por exemplo, o trecho a seguir define o conteúdo
+da variável <code class="docutils literal notranslate"><span class="pre">hello</span></code> e, em seguida, imprime seu conteúdo:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">set</span><span class="p">(</span><span class="s">hello</span><span class="w"> </span><span class="s2">&quot;world&quot;</span><span class="p">)</span>
+<span class="nb">message</span><span class="p">(</span><span class="s2">&quot;hello ${hello}&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Duas coisas para observar:</p>
+<ul class="simple">
+<li><p>Se a variável dentro do operator <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">{}</span></code>’  não estiver definida, você receberá uma string vazia.</p></li>
+<li><p>Você pode referenciar variáveis aninhadas: <code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">{Outer_${inner_variable}</span> <span class="pre">_variable}</span></code>
+Elas serão avaliadas de dentro para fora.</p></li>
+</ul>
+<p>Um dos aspectos mais confusos no CMAKE é a escopo das variáveis. Existem três escopos de variáveis:</p>
+<ul>
+<li><dl class="simple">
+<dt>Função. Escopo quando uma variável é definida (comando <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/set.html"><span class="xref std std-term"><code class="docutils literal notranslate">set</code></span></a>) em uma função:</dt><dd><p>a variável será visível dentro da função, mas não fora.</p>
+</dd>
+</dl>
+</li>
+<li><p>Diretório. Escopo ao processar um <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> em um diretório:
+Variáveis na pasta pai estarão disponíveis, mas qualquer um que é definida na
+pasta atual não será propagada para o pai.</p></li>
+<li><p>Cache. Essas variáveis são <em>persistentes</em> através de chamadas para <code class="docutils literal notranslate"><span class="pre">cmake</span></code> e
+disponível para todos os escopos no projeto.
+Modificar uma variável de cache requer o uso de uma forma especial da função <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/set.html"><span class="xref std std-term"><code class="docutils literal notranslate">set</code></span></a>:</p>
+<div class="admonition-set signature toggle-shown dropdown admonition" id="signature-1">
+<p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/set.html"><span class="xref std std-term"><code class="docutils literal notranslate">set</code></span></a></p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">set</span><span class="p">(</span><span class="s">&lt;variable&gt;</span><span class="w"> </span><span class="s">&lt;value&gt;...</span><span class="w"> </span><span class="s">CACHE</span><span class="w"> </span><span class="s">&lt;type&gt;</span><span class="w"> </span><span class="s">&lt;docstring&gt;</span><span class="w"> </span><span class="s">[FORCE]</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</li>
+</ul>
+<p>Aqui está uma lista de algumas variáveis definidas pela CMAKE:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="https://cmake.org/cmake/help/latest/variable/PROJECT_BINARY_DIR.html"><span class="xref std std-term"><code class="docutils literal notranslate">PROJECT_BINARY_DIR</code></span></a>. Indica a pasta build do projeto.</p></li>
+<li><p><a class="reference internal" href="https://cmake.org/cmake/help/latest/variable/PROJECT_SOURCE_DIR.html"><span class="xref std std-term"><code class="docutils literal notranslate">PROJECT_SOURCE_DIR</code></span></a>. Indica a pasta raiz do projeto.</p></li>
+<li><p><a class="reference internal" href="https://cmake.org/cmake/help/latest/variable/CMAKE_CURRENT_LIST_DIR.html"><span class="xref std std-term"><code class="docutils literal notranslate">CMAKE_CURRENT_LIST_DIR</code></span></a>. Indica a pasta  para o  <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> que está sendo processado atualmente.</p></li>
+</ul>
+<p>Para obter ajuda sobre uma variável CMAKE faça:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --help-variable PROJECT_BINARY_DIR
+</pre></div>
+</div>
+</section>
+<section id="comandos">
+<h3>Comandos<a class="headerlink" href="#comandos" title="Permalink to this headline"></a></h3>
+<p>São blocos essenciais do CMAKE, pois permitem manipular variáveis.
+Eles incluem construções de fluxo de controle e familas de comando <code class="docutils literal notranslate"><span class="pre">target_*</span></code> .
+Você pode encontrar uma lista completa de comandos disponíveis com:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --help-command-list
+</pre></div>
+</div>
+<p><strong>Funções</strong> e <strong>macros</strong> são construídos no topo dos comandos e
+são definidos pelo usuário ou pré-definidos pelo cmake
+Estes são úteis para evitar a scripts CMAke repetitivos.</p>
+<p>A diferença entre uma função e uma macro é seu <em>escopo</em>:</p>
+<ol class="arabic simple">
+<li><p>Funções têm seu próprio escopo: variáveis definidas dentro de uma função não são
+propagadas de volta ao chamador.</p></li>
+<li><p>Macros não têm seu próprio escopo: as variáveis do escopo pai podem ser modificadas
+e novas variáveis no escopo pai podem ser definidas.</p></li>
+</ol>
+<p>Obter ajuda em um comando específico, função ou macro pode ser obtido com:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --help-command target_link_libraries
+</pre></div>
+</div>
+</section>
+<section id="modulos">
+<h3>Módulos<a class="headerlink" href="#modulos" title="Permalink to this headline"></a></h3>
+<p>São coleções de funções e macros definidos pelo usuário ou pelo cmake.
+Cmake vem com um rico ecossistema de módulos e você provavelmente escreverá alguns
+para encapular funções ou macros freqüentemente usados em seus scripts cmake.</p>
+<p>Para usar um módulo, voce deverá usar o comando <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/include.html"><span class="xref std std-term"><code class="docutils literal notranslate">include</code></span></a>. Veja o exemplo abaixo:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">include</span><span class="p">(</span><span class="s">CMakePrintHelpers</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A lista completa de módulos internos está disponível com:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --help-module-list
+</pre></div>
+</div>
+<p>Ajuda em um módulo integrado específico pode ser obtido com:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --help-module CMakePrintHelpers
+</pre></div>
+</div>
+</section>
+</section>
+<section id="a-arvore-de-construcao">
+<h2>A árvore de construção<a class="headerlink" href="#a-arvore-de-construcao" title="Permalink to this headline"></a></h2>
+<p>É intuitivo navegar na pasta Build do projeto:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ tree -L <span class="m">2</span> build
+
+build
+├── CMakeCache.txt
+├── CMakeFiles
+│   ├── <span class="m">3</span>.18.4
+│   ├── cmake.check_cache
+│   ├── CMakeDirectoryInformation.cmake
+│   ├── CMakeOutput.log
+│   ├── CMakeTmp
+│   ├── compute-areas.dir
+│   ├── geometry.dir
+│   ├── Makefile2
+│   ├── Makefile.cmake
+│   ├── progress.marks
+│   └── TargetDirectories.txt
+├── cmake_install.cmake
+├── compute-areas
+├── libgeometry.a
+└── Makefile
+</pre></div>
+</div>
+<p>Note que:</p>
+<ul class="simple">
+<li><p>O projeto foi configurado com o gerador <code class="docutils literal notranslate"><span class="pre">makefile</span></code>.</p></li>
+<li><p>A cache é um arquivo texto <code class="docutils literal notranslate"><span class="pre">CMakeCache.txt</span></code>.</p></li>
+<li><p>Para cada alvo (<em>target</em>)no projeto, CMake criará uma subpasta
+<code class="docutils literal notranslate"><span class="pre">&lt;target&gt;.dir</span></code> em <code class="docutils literal notranslate"><span class="pre">CMakeFiles</span></code>. Os arquivos de objeto intermediários são
+armazenado nessas pastas, juntamente com flags do compilador e linha de links.</p></li>
+<li><p>Os artefatos de construção, <code class="docutils literal notranslate"><span class="pre">compute-areas</span></code> e <code class="docutils literal notranslate"><span class="pre">libgeometry.a</span></code>,  são armazenados na
+raiz da árvore de  construção (<em>build</em>).</p></li>
+</ul>
+</section>
+<section id="controle-de-fluxo">
+<h2>Controle de fluxo<a class="headerlink" href="#controle-de-fluxo" title="Permalink to this headline"></a></h2>
+<p>Os comandos <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/if.html"><span class="xref std std-term"><code class="docutils literal notranslate">if</code></span></a> e <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/foreach.html"><span class="xref std std-term"><code class="docutils literal notranslate">foreach</code></span></a>  estão disponíveis como construções de controle de fluxo no
+Cmake e você certamente está familiarizado com seu uso em outras linguagens de programação</p>
+<p>Desde que <em>todas</em> as variáveis no cmake são strings, a sintaxe para <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/if.html"><span class="xref std std-term"><code class="docutils literal notranslate">if</code></span></a> e | foreach |
+aparecem em algumas variantes.</p>
+<div class="admonition-if signature toggle-shown dropdown admonition" id="signature-2">
+<p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/if.html"><span class="xref std std-term"><code class="docutils literal notranslate">if</code></span></a></p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">if</span><span class="p">(</span><span class="s">&lt;condition&gt;</span><span class="p">)</span>
+<span class="w">  </span><span class="c"># &lt;commands&gt;</span>
+<span class="nb">elseif</span><span class="p">(</span><span class="s">&lt;condition&gt;</span><span class="p">)</span><span class="w"> </span><span class="c"># optional block, can be repeated</span>
+<span class="w">  </span><span class="c"># &lt;commands&gt;</span>
+<span class="nb">else</span><span class="p">()</span><span class="w">              </span><span class="c"># optional block</span>
+<span class="w">  </span><span class="c"># &lt;commands&gt;</span>
+<span class="nb">endif</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>O valor da verdade das condições no blocos <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/if.html"><span class="xref std std-term"><code class="docutils literal notranslate">if</code></span></a> e <code class="docutils literal notranslate"><span class="pre">elseif</span></code> é
+determinado por operadores booleanos. No CMAKE:</p>
+<ul class="simple">
+<li><p>Verdadeiro é qualquer expressão avaliado para: <code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">ON</span></code>, <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>, <code class="docutils literal notranslate"><span class="pre">YES</span></code>, e
+<code class="docutils literal notranslate"><span class="pre">Y</span></code>.</p></li>
+<li><p>Falso é qualquer expressão avaliado para: <code class="docutils literal notranslate"><span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">OFF</span></code>, <code class="docutils literal notranslate"><span class="pre">FALSE</span></code>, <code class="docutils literal notranslate"><span class="pre">NO</span></code>,
+<code class="docutils literal notranslate"><span class="pre">N</span></code>, <code class="docutils literal notranslate"><span class="pre">IGNORE</span></code>, e <code class="docutils literal notranslate"><span class="pre">NOTFOUND</span></code>.</p></li>
+</ul>
+<p>Cmake oferece operador booleano para comparações de string, tal como <code class="docutils literal notranslate"><span class="pre">STREQUAL</span></code> por
+igualdade de strings, e para comparações de versão,  como  <code class="docutils literal notranslate"><span class="pre">VERSION_EQUAL</span></code>.</p>
+<div class="admonition-expansoes-de-variaveis-em-condicionais callout admonition" id="callout-0">
+<p class="admonition-title">Expansões de variáveis em condicionais</p>
+<p>O comando <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/if.html"><span class="xref std std-term"><code class="docutils literal notranslate">if</code></span></a> expande o conteúdo das variáveis antes de avaliar seu valor de verdade.
+Veja a <a class="reference external" href="https://cmake.org/cmake/help/latest/command/if.html?highlight=#variable-expansion">documentação oficial</a>
+para mais detalhes.</p>
+</div>
+<div class="admonition-exercicio-2-condicionais-no-cmake exercise important admonition" id="exercise-0">
+<p class="admonition-title">Exercício 2: Condicionais no Cmake</p>
+<p>Modique o <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt``do</span> <span class="pre">exercicio</span> <span class="pre">anterior</span> <span class="pre">para</span> <span class="pre">contruir</span> <span class="pre">uma</span> <span class="pre">biblioteca</span>
+<span class="pre">*statica*</span> <span class="pre">ou</span> <span class="pre">*compartilhada*</span>&#160; <span class="pre">dependendo</span> <span class="pre">do</span> <span class="pre">valor</span> <span class="pre">do</span> <span class="pre">booleano</span>
+<span class="pre">``MAKE_SHARED_LIBRARY</span></code>:</p>
+<ol class="arabic simple">
+<li><p>Define a variável <code class="docutils literal notranslate"><span class="pre">MAKE_SHARED_LIBRARY</span></code>.</p></li>
+<li><p>Escreva uma verificação condicional da variável. Dependendo da condição, chame adequadamente a funçao <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/add_library.html"><span class="xref std std-term"><code class="docutils literal notranslate">add_library</code></span></a> .</p></li>
+</ol>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">C++</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">Fortran</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><p>Você pode encontrar um projeto de base em <code class="docutils literal notranslate"><span class="pre">content/code/day-1/02_conditionals-cxx</span></code>.
+Uma solução está na subpasta <code class="docutils literal notranslate"><span class="pre">solution</span></code>.</p>
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><dl class="simple">
+<dt>Você pode encontrar um projeto de base em <code class="docutils literal notranslate"><span class="pre">content/code/day-1/02_conditionals-f</span></code>.</dt><dd><p>Uma solução está na subpasta <code class="docutils literal notranslate"><span class="pre">solution</span></code>.</p>
+</dd>
+</dl>
+</div></div>
+</div>
+<p>Você pode executar a mesma operação em uma coleção de itens com <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/foreach.html"><span class="xref std std-term"><code class="docutils literal notranslate">foreach</code></span></a>:</p>
+<div class="admonition-foreach signature toggle-shown dropdown admonition" id="signature-3">
+<p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/foreach.html"><span class="xref std std-term"><code class="docutils literal notranslate">foreach</code></span></a></p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">foreach</span><span class="p">(</span><span class="s">&lt;loop_var&gt;</span><span class="w"> </span><span class="s">&lt;items&gt;</span><span class="p">)</span>
+<span class="w">  </span><span class="c"># &lt;commands&gt;</span>
+<span class="nb">endforeach</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>A lista de itens pode ser sepradados por espaço ou ponto-e-virgula. <code class="docutils literal notranslate"><span class="pre">break()</span></code> e
+<code class="docutils literal notranslate"><span class="pre">continue()</span></code> também estão disponíveis.</p>
+<div class="admonition-loops-no-cmake typealong toggle-shown dropdown admonition" id="typealong-0">
+<p class="admonition-title">Loops no CMake</p>
+<p>Aqui, vamos mostrar como usar <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/foreach.html"><span class="xref std std-term"><code class="docutils literal notranslate">foreach</code></span></a> e listas no CMake. Vamos trabalhar a partir de um projeto base  <code class="docutils literal notranslate"><span class="pre">content/code/day-1/03_loops-cxx</span></code>.
+O objetivo é compilar uma biblioteca com varios arquivos: alguns deles
+devem ser compilados com nível de otimização <code class="docutils literal notranslate"><span class="pre">-O3</span></code>, enquanto alguns outros com <code class="docutils literal notranslate"><span class="pre">-O2</span></code>.</p>
+<p>Vamos definir as <em>flags</em> de compilação como propriedades no destino da biblioteca.
+Alvos e propriedades serão discutidos em maior profundidade em <span class="xref std std-ref">targets</span>.</p>
+<p>Uma solução está na subpasta <code class="docutils literal notranslate"><span class="pre">solution</span></code>.</p>
+</div>
+</section>
+<section id="mensagens-de-impressao">
+<h2>Mensagens de impressão<a class="headerlink" href="#mensagens-de-impressao" title="Permalink to this headline"></a></h2>
+<p>Você provavelmente terá que depurar seus scripts CMAKE em algum momento.
+Acreditamos que a depuração de impressão é a maneira mais eficaz de
+fazê-lo e para isso podemos usar o coamnndo <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/message.html"><span class="xref std std-term"><code class="docutils literal notranslate">message</code></span></a>:</p>
+<div class="admonition-message signature toggle-shown dropdown admonition" id="signature-4">
+<p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/message.html"><span class="xref std std-term"><code class="docutils literal notranslate">message</code></span></a></p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">message</span><span class="p">(</span><span class="s">[&lt;mode&gt;]</span><span class="w"> </span><span class="s2">&quot;message to display&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition-parameters parameters dropdown admonition" id="parameters-0">
+<p class="admonition-title">Parameters</p>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">&lt;mode&gt;</span></code></dt><dd><p>Que tipo de mensagem é exibida, por exemplo:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">STATUS</span></code>, para informações incidentais.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FATAL_ERROR</span></code>, para relatar um erro que impede a continuidade do processamento.</p></li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+</div>
+<p>O comando <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/message.html"><span class="xref std std-term"><code class="docutils literal notranslate">message</code></span></a> pode ser um pouco estranho para se trabalhar, especialmente quando você deseja imprimir o nome <em>e</em> valor de uma variável.
+Incluindo o módulo embutido <code class="docutils literal notranslate"><span class="pre">CMakePrintHelpers</span></code> vai facilitar sua vida ao depurar, já que
+fornece o função <a class="reference internal" href="https://cmake.org/cmake/help/latest/module/CMakePrintHelpers.html"><span class="xref std std-term"><code class="docutils literal notranslate">cmake_print_variables</code></span></a>:</p>
+<div class="admonition-cmake-print-variables signature toggle-shown dropdown admonition" id="signature-5">
+<p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/module/CMakePrintHelpers.html"><span class="xref std std-term"><code class="docutils literal notranslate">cmake_print_variables</code></span></a></p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">cmake_print_variables</span><span class="p">(</span><span class="s">var1</span><span class="w"> </span><span class="s">var2</span><span class="w"> </span><span class="s">...</span><span class="w"> </span><span class="s">varN</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<dl>
+<dt>Este comando aceita um número arbitrário de variáveis e imprime seu nome e valor para a saída padrão.</dt><dd><p>Por exemplo:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">include</span><span class="p">(</span><span class="s">CMakePrintHelpers</span><span class="p">)</span>
+
+<span class="nb">cmake_print_variables</span><span class="p">(</span><span class="s">CMAKE_C_COMPILER</span><span class="w"> </span><span class="s">CMAKE_MAJOR_VERSION</span><span class="w"> </span><span class="s">DOES_NOT_EXIST</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<p>dá:</p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>-- CMAKE_C_COMPILER=&quot;/usr/bin/gcc&quot; ; CMAKE_MAJOR_VERSION=&quot;2&quot; ; DOES_NOT_EXIST=&quot;&quot;
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="controlando-a-construcao-com-opcoes">
+<h2>Controlando a construção com opções<a class="headerlink" href="#controlando-a-construcao-com-opcoes" title="Permalink to this headline"></a></h2>
+<p>Nós mencionamos anteriormente que o <code class="docutils literal notranslate"><span class="pre">-D</span></code> empregado ma interface da linha de comando (CLI)
+do comando <code class="docutils literal notranslate"><span class="pre">cmake``pode</span> <span class="pre">ser</span> <span class="pre">usado</span> <span class="pre">para</span> <span class="pre">passar</span> <span class="pre">opções.</span> <span class="pre">Entretanto,</span> <span class="pre">como</span> <span class="pre">definimos</span> <span class="pre">estas</span>
+<span class="pre">opções</span> <span class="pre">no</span> <span class="pre">nosso</span> <span class="pre">``cmakelists.txt</span></code>.</p>
+<p>É aí que o comando <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/option.html"><span class="xref std std-term"><code class="docutils literal notranslate">option</code></span></a> entra em jogo!</p>
+<div class="admonition-option signature toggle-shown dropdown admonition" id="signature-6">
+<p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/option.html"><span class="xref std std-term"><code class="docutils literal notranslate">option</code></span></a></p>
+<blockquote>
+<div><div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">option</span><span class="p">(</span><span class="s">&lt;variable&gt;</span><span class="w"> </span><span class="s2">&quot;&lt;help_text&gt;&quot;</span><span class="w"> </span><span class="s">[value]</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Com isso, você pode fornecer uma alternância ON/OFF controlável pelo CLI.</p>
+</div>
+<p>Importando o modulo <code class="docutils literal notranslate"><span class="pre">CMakeDependentOption</span></code>,você pode lidar com casos onde
+as opções são relevantes apenas <em>se</em> outras opções já estão definidas
+para valores específicos:</p>
+<div class="admonition-cmake-dependent-option signature toggle-shown dropdown admonition" id="signature-7">
+<p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/module/CMakeDependentOption.html"><span class="xref std std-term"><code class="docutils literal notranslate">cmake_dependent_option</code></span></a></p>
+<blockquote>
+<div><div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">cmake_dependent_option</span><span class="p">(</span><span class="s">USE_FOO</span><span class="w"> </span><span class="s2">&quot;Use Foo&quot;</span><span class="w"> </span><span class="s">ON</span>
+<span class="w">                       </span><span class="s2">&quot;USE_BAR;NOT USE_ZOT&quot;</span><span class="w"> </span><span class="s">OFF</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Se a opção <code class="docutils literal notranslate"><span class="pre">USE_BAR</span></code> é verdade e a opção <code class="docutils literal notranslate"><span class="pre">USE_ZOT</span></code> é falso, então
+a opção <code class="docutils literal notranslate"><span class="pre">USE_FOO</span></code> será apresentado ao usuário e será verdadeiro por
+predefinição. Se a condição em <code class="docutils literal notranslate"><span class="pre">USE_BAR</span></code> e <code class="docutils literal notranslate"><span class="pre">USE_ZOT</span></code> não é realizado, o
+opção é definida como false.</p>
+</div>
+<div class="admonition-exercicio-4-opcoes-voltadas-para-o-usuario exercise important admonition" id="exercise-1">
+<p class="admonition-title">Exercício 4: Opções voltadas para o usuário</p>
+<p>Neste exercício, vamos trabalhar com <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/option.html"><span class="xref std std-term"><code class="docutils literal notranslate">option</code></span></a> e <a class="reference internal" href="https://cmake.org/cmake/help/latest/module/CMakeDependentOption.html"><span class="xref std std-term"><code class="docutils literal notranslate">cmake_dependent_option</code></span></a>.
+Queremos permitir que o usuário decida se deve construir uma biblioteca e se
+deve ser estática ou compartilhada.</p>
+<ol class="arabic simple">
+<li><p>Adicione a opção <code class="docutils literal notranslate"><span class="pre">USE_LIBRARY</span></code>.</p></li>
+<li><p>Adicione opções dependentes <code class="docutils literal notranslate"><span class="pre">MAKE_STATIC_LIBRARY</span></code> e <code class="docutils literal notranslate"><span class="pre">MAKE_SHARED_LIBRARY</span></code>.
+Eles só serão apresentados se <code class="docutils literal notranslate"><span class="pre">USE_LIBRARY</span></code> for verdadeiro.</p></li>
+<li><p>Use condicionais para orquestrar a construção da biblioteca estática/compartilhada.</p></li>
+</ol>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-1-1-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-1-1-0" name="1-0" role="tab" tabindex="0">C++</button><button aria-controls="panel-1-1-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-1-1-1" name="1-1" role="tab" tabindex="-1">Fortran</button></div><div aria-labelledby="tab-1-1-0" class="sphinx-tabs-panel" id="panel-1-1-0" name="1-0" role="tabpanel" tabindex="0"><p>Você pode encontrar um projeto base na pasta <code class="docutils literal notranslate"><span class="pre">content/code/day-1/04_options-cxx</span></code>.
+Uma solução está na subpasta <code class="docutils literal notranslate"><span class="pre">solution</span></code>.</p>
+</div><div aria-labelledby="tab-1-1-1" class="sphinx-tabs-panel" hidden="true" id="panel-1-1-1" name="1-1" role="tabpanel" tabindex="0"><p>Você pode encontrar um projeto base na pasta <code class="docutils literal notranslate"><span class="pre">content/code/day-1/04_options-f</span></code>.
+Uma solução está na subpasta  <code class="docutils literal notranslate"><span class="pre">solution</span></code>.</p>
+</div></div>
+</div>
+<div class="admonition-keypoints keypoints admonition" id="keypoints-0">
+<p class="admonition-title">Keypoints</p>
+<ul class="simple">
+<li><p>Cmake oferece um DSL completo que capacita  a escrita de  <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> complexos.</p></li>
+<li><p>Variáveis têm regras de escopo.</p></li>
+<li><p>A estrutura do projeto é espelhada na pasta Build.</p></li>
+</ul>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="hello-cmake.html" class="btn btn-neutral float-left" title="A01 - Dos fontes para os executáveis" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="hello-ctest.html" class="btn btn-neutral float-right" title="A03 - Criando e executando testes com o CTest" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Jose J. Camata.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

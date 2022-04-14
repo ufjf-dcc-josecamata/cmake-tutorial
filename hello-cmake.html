@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="pt-br" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A01 - Dos fontes para os executáveis &mdash; cmake-tutorial  documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="_static/mystnb.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sphinx_lesson.css" type="text/css" />
+      <link rel="stylesheet" href="_static/overrides.css" type="text/css" />
+      <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/clipboard.min.js"></script>
+        <script src="_static/copybutton.js"></script>
+        <script src="_static/minipres.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="_static/togglebutton.js"></script>
+        <script src="_static/tabs.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="A02 - Síntaxe CMake" href="cmake-syntax.html" />
+    <link rel="prev" title="Configurando seu sistema" href="setup.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> cmake-tutorial
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Configurando seu sistema</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Atividades</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">A01 - Dos fontes para os executáveis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#o-que-e-cmake-e-por-que-voce-deveria-se-importar">O que é CMAKE e por que você deveria se importar?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">Hello, CMake!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#um-conjunto-de-ferramentas-completo">Um conjunto de ferramentas completo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#produzindo-bibliotecas">Produzindo bibliotecas</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cmake-syntax.html">A02 - Síntaxe CMake</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hello-ctest.html">A03 - Criando e executando testes com o CTest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="environment.html">A04 - Detectando seu ambiente</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">cmake-tutorial</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>A01 - Dos fontes para os executáveis</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/hello-cmake.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="a01-dos-fontes-para-os-executaveis">
+<span id="hello-cmake"></span><h1>A01 - Dos fontes para os executáveis<a class="headerlink" href="#a01-dos-fontes-para-os-executaveis" title="Permalink to this headline"></a></h1>
+<div class="admonition-questions questions admonition" id="questions-0">
+<p class="admonition-title">Questions</p>
+<p>-Como usamos o CMAKE para compilar arquivos fontes para gerar executáveis?</p>
+</div>
+<div class="admonition-objectives objectives admonition" id="objectives-0">
+<p class="admonition-title">Objectives</p>
+<ul class="simple">
+<li><p>Aprenda ferramentas disponíveis na suíte Cmake.</p></li>
+<li><p>Aprenda a escrever um simples <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>.</p></li>
+<li><p>Aprenda a diferença entre <em>build systems</em>, <em>build tools</em>, e <em>build system generator</em>.</p></li>
+<li><p>Aprenda a distinguir entre tempos de <em>configuração</em>, <em>geração</em>, and <em>construção</em>.</p></li>
+</ul>
+</div>
+<section id="o-que-e-cmake-e-por-que-voce-deveria-se-importar">
+<h2>O que é CMAKE e por que você deveria se importar?<a class="headerlink" href="#o-que-e-cmake-e-por-que-voce-deveria-se-importar" title="Permalink to this headline"></a></h2>
+<p>Sempre que você executar um software, qualquer que seja, desde aplicativos de calendário
+até programas de computação intensivos, haverá um sistema de construção envolvido na
+transformação do código-fonte de texto simples em arquivos binários que podem ser
+executados nos dispositivos que você esteja usando.</p>
+<p>Cmake é uma ferramenta open-source que permite gerar automaticamente scripts de construção de aplicação em diferentes plataformas.
+Ele fornece uma família de ferramentas e um <em>linguagem</em> para <strong>descrever</strong> um o sistema de compilação quando
+as ferramentas de construção apropriadas são invocadas.</p>
+<p>A linguagem independe da plataforma <em>e</em> do compilador: você pode reutilizar o mesmo
+scripts CMAKE para obter <em>sistemas de construção nativos</em> em qualquer plataforma.</p>
+<figure class="align-center" id="id2">
+<img alt="_images/build-systems.svg" src="_images/build-systems.svg" /><figcaption>
+<p><span class="caption-text">Em sistemas GNU/Linux,O sistema de construção nativo será uma coleção de <code class="docutils literal notranslate"><span class="pre">Makefile</span></code>-s.
+A ferramenta de construção <code class="docutils literal notranslate"><span class="pre">make</span></code> usa estes <code class="docutils literal notranslate"><span class="pre">Makefile</span></code>-s para transformar fontes em
+executáveis e bibliotecas.
+CMAke abstrai o processo de gerar o <code class="docutils literal notranslate"><span class="pre">Makefile</span></code>-s em um script genérico.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Um sistema de compilação baseado em CMAKE:</p>
+<ul class="simple">
+<li><p>Pode trazer seu software mais perto de ser independente de plataforma <em>e</em> do compilador.</p></li>
+<li><p>tem um bom suporte em muitos ambientes de desenvolvimento integrados (IDES).</p></li>
+<li><p>rastreia automaticamente e propaga dependências internas em seu projeto.</p></li>
+</ul>
+</section>
+<section id="id1">
+<h2>Hello, CMake!<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h2>
+<div class="admonition-compilando-hello-world-com-cmake typealong toggle-shown dropdown admonition" id="typealong-0">
+<p class="admonition-title">Compilando “Hello, world” com CMake</p>
+<p>Agora vamos compilar um único arquivo de origem para um executável. Escolha
+sua língua favorita e comece a digitar!</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">C++</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">Fortran</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><p>Você pode encontrar o arquivo com o código-fonte completo na pasta
+<code class="docutils literal notranslate"><span class="pre">content/code/day-1/00_hello-cxx</span></code>.</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdlib&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Hello world&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">EXIT_SUCCESS</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Uma solução está na subpasta <code class="docutils literal notranslate"><span class="pre">solution</span></code>.</p>
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><blockquote>
+<div><p>Você pode encontrar o arquivo com o código-fonte completo na pasta <code class="docutils literal notranslate"><span class="pre">content/code/day-1/00_hello-f</span></code>.</p>
+</div></blockquote>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="k">pure function </span><span class="n">say_hello</span><span class="p">()</span><span class="w"> </span><span class="k">result</span><span class="p">(</span><span class="n">message</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">implicit none</span>
+
+<span class="k">  </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">message</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Hello world&#39;</span><span class="w"></span>
+
+<span class="k">end function</span>
+
+<span class="k">program </span><span class="n">hello_world</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">implicit none</span>
+
+<span class="k">  </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">say_hello</span><span class="w"></span>
+
+<span class="w">  </span><span class="k">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">say_hello</span><span class="p">()</span><span class="w"></span>
+
+<span class="k">end program</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Uma solução está na subpasta <code class="docutils literal notranslate"><span class="pre">solution</span></code>.</p>
+</div></div>
+<ol class="arabic">
+<li><p>A pasta contém apenas o código-fonte. Precisamos adicionar um arquivo chamado
+<code class="docutils literal notranslate"><span class="pre">Cmakelists.txt</span></code>. CMAKE lê o conteúdo desses arquivos especiais
+para gerar o sistema de construção.</p></li>
+<li><p>A primeira coisa que faremos é declarar a exigência de uma versão mínima do CMake:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.18</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Em seguida, declaramos nosso projeto e sua linguagem de programação:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">project</span><span class="p">(</span><span class="s">Hello</span><span class="w"> </span><span class="s">LANGUAGES</span><span class="w"> </span><span class="s">CXX</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Criamos um <em>alvo executável</em>. CMAKE gerará regras no sistema de compilação para
+compilar e vincular nosso arquivo-fonte a um executável:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">add_executable</span><span class="p">(</span><span class="s">hello</span><span class="w"> </span><span class="s">hello.cpp</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Estamos prontos para chamar CMAke e obter o nosso sistema de construção:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake -S. -Bbuild
+</pre></div>
+</div>
+</li>
+<li><p>E finalmente construimos nosso executável:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --build build
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<p>Há poucas coisas para notar aqui:</p>
+<ol class="arabic">
+<li><p>Qualquer sistema de compilação CMake invocará os seguintes comandos em sueu <code class="docutils literal notranslate"><span class="pre">Cmakelists.txt</span></code> <strong>raiz</strong></p>
+<div class="admonition-cmake-minimum-required signature toggle-shown dropdown admonition" id="signature-0">
+<p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/cmake_minimum_required.html"><span class="xref std std-term"><code class="docutils literal notranslate">cmake_minimum_required</code></span></a></p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">&lt;min&gt;[...&lt;max&gt;]</span><span class="w"> </span><span class="s">[FATAL_ERROR]</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition-parameters parameters dropdown admonition" id="parameters-0">
+<p class="admonition-title">Parameters</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">VERSION</span></code></dt><dd><p>Versão mínima e, opcionalmente, máxima do CMake que deve ser usado.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">FATAL_ERROR</span></code></dt><dd><p>Levanta um erro fatal se a restrição de versão não estiver satisfeita. Esta
+ppção é ignorada para versões do CMAKE &gt;= 2.6</p>
+</dd>
+</dl>
+</div>
+<div class="admonition-project signature toggle-shown dropdown admonition" id="signature-1">
+<p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/project.html"><span class="xref std std-term"><code class="docutils literal notranslate">project</code></span></a></p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">project</span><span class="p">(</span><span class="s">&lt;PROJECT-NAME&gt;</span>
+<span class="w">        </span><span class="s">[VERSION</span><span class="w"> </span><span class="s">&lt;major&gt;[.&lt;minor&gt;[.&lt;patch&gt;[.&lt;tweak&gt;]]]]</span>
+<span class="w">        </span><span class="s">[DESCRIPTION</span><span class="w"> </span><span class="s">&lt;project-description-string&gt;]</span>
+<span class="w">        </span><span class="s">[HOMEPAGE_URL</span><span class="w"> </span><span class="s">&lt;url-string&gt;]</span>
+<span class="w">        </span><span class="s">[LANGUAGES</span><span class="w"> </span><span class="s">&lt;language-name&gt;...]</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition-parameters parameters dropdown admonition" id="parameters-1">
+<p class="admonition-title">Parameters</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">&lt;PROJECT-NAME&gt;</span></code></dt><dd><p>O nome do projeto.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">LANGUAGES</span></code></dt><dd><p>Linguagem de programação do projeto.</p>
+</dd>
+</dl>
+</div>
+</li>
+<li><p>Não diferença nos Comandos e variáveis Cmake escritos em minuscúlo ou maiúsculas.
+No entanto, os arquivos de scripts  <strong>devem ser
+Chamado exatamente</strong> <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>!</p></li>
+<li><p>O comando para adicionar executáveis ao sistema de compilação é, sem surpresa, <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/add_executable.html"><span class="xref std std-term"><code class="docutils literal notranslate">add_executable</code></span></a>:</p>
+<div class="admonition-add-executable signature toggle-shown dropdown admonition" id="signature-2">
+<p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/add_executable.html"><span class="xref std std-term"><code class="docutils literal notranslate">add_executable</code></span></a></p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">add_executable</span><span class="p">(</span><span class="s">&lt;name&gt;</span><span class="w"> </span><span class="s">[WIN32]</span><span class="w"> </span><span class="s">[MACOSX_BUNDLE]</span>
+<span class="w">               </span><span class="s">[EXCLUDE_FROM_ALL]</span>
+<span class="w">               </span><span class="s">[source1]</span><span class="w"> </span><span class="s">[source2</span><span class="w"> </span><span class="s">...]</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</li>
+<li><p>Com o CMAKE, você pode abstrair a geração do sistema de compilação e
+também a invocação das ferramentas de construção.</p></li>
+</ol>
+<div class="admonition-coloque-o-seu-cmakelists-txt-sob-controle-de-versao callout admonition" id="callout-0">
+<p class="admonition-title">Coloque o seu <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> sob controle de versão.</p>
+<p>Todos os arquivos relacionados ao cmake evoluirão junto com sua base de código.
+Assim, é uma boa ideia colocá-los sob controle de versão.</p>
+</div>
+<div class="admonition-a-interface-da-linha-de-comando-para-cmake typealong toggle-shown dropdown admonition" id="typealong-1">
+<p class="admonition-title">A interface da linha de comando para CMake</p>
+<blockquote>
+<div><p>Vamos nos familiarizar com o cmake e especialmente com a sua interface de linha de comando.</p>
+<p>Podemos obter ajuda a qualquer momento com:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --help
+</pre></div>
+</div>
+<p>Isso produzirá uma série de opções para a tela.
+Podemos analisar as últimas linhas primeiro:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Generators
+
+The following generators are available on this platform (* marks default):
+* Unix Makefiles               = Generates standard UNIX makefiles.
+  Green Hills MULTI            = Generates Green Hills MULTI files
+                                 (experimental, work-in-progress).
+  Ninja                        = Generates build.ninja files.
+  Ninja Multi-Config           = Generates build-&lt;Config&gt;.ninja files.
+  Watcom WMake                 = Generates Watcom WMake makefiles.
+  CodeBlocks - Ninja           = Generates CodeBlocks project files.
+  CodeBlocks - Unix Makefiles  = Generates CodeBlocks project files.
+  CodeLite - Ninja             = Generates CodeLite project files.
+  CodeLite - Unix Makefiles    = Generates CodeLite project files.
+  Sublime Text 2 - Ninja       = Generates Sublime Text 2 project files.
+  Sublime Text 2 - Unix Makefiles
+                               = Generates Sublime Text 2 project files.
+  Kate - Ninja                 = Generates Kate project files.
+  Kate - Unix Makefiles        = Generates Kate project files.
+  Eclipse CDT4 - Ninja         = Generates Eclipse CDT 4.0 project files.
+  Eclipse CDT4 - Unix Makefiles= Generates Eclipse CDT 4.0 project files.
+</pre></div>
+</div>
+<p>Na terminologia Cmake, os scripts nativos de construção e ferramentas de construção
+são chamados <strong>geradores</strong>. Em uma plataforma específica, a lista mostrará qual
+ferramentas nativos de construção podem ser usadas através do CMake.
+Eles podem ser “simples”, como <code class="docutils literal notranslate"><span class="pre">Makefile</span></code>-s ou Ninja, ou projetos IDE.</p>
+<p>A opção  <code class="docutils literal notranslate"><span class="pre">-S</span></code> especifica qual diretório de origem o CMake deve processsar,isto é
+a pasta que onde está o <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> <strong>raiz</strong> do projeto contendo o comando
+<a class="reference internal" href="https://cmake.org/cmake/help/latest/command/project.html"><span class="xref std std-term"><code class="docutils literal notranslate">project</code></span></a>.
+Por padrão, o CMake permite  que <strong>os arquivos para a construção</strong> e os artefactos gerados pela compilação
+compilação sejam armazenados ao lado de arquivos-fontes. Isso é <strong>não</strong> uma boa prática: você deve
+sempre manter os artefatos de construção o os fontes separados. Felizmente, o opção <code class="docutils literal notranslate"><span class="pre">-B</span></code>
+ajuda com isso. Ele deve ser usado para indicar onde armazenar os scripts de construção,
+incluindo o sistema de compilação gerado. Esta é a invocação mínima de <code class="docutils literal notranslate"><span class="pre">cmake</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake -S. -Bbuild
+</pre></div>
+</div>
+</div></blockquote>
+<p>Para mudar para outro gerador, usaremos o botão <code class="docutils literal notranslate"><span class="pre">-G</span></code>:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake -S. -Bbuild -GNinja
+</pre></div>
+</div>
+<p>Opções a serem usadas na geração do sistema de construção são passadas com <code class="docutils literal notranslate"><span class="pre">-D</span></code>.
+Por exemplo, para alterar os compiladores:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake -S. -Bbuild -GNinja -DCMAKE_CXX_COMPILER<span class="o">=</span>clang++
+</pre></div>
+</div>
+<p>Finalmente, você pode acessar o manual completo do CMake com:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --help-full
+</pre></div>
+</div>
+<p>Você também pode perguntar sobre um módulo específico, comando ou variável:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --help-variable CMAKE_GENERATOR
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</section>
+<section id="um-conjunto-de-ferramentas-completo">
+<h2>Um conjunto de ferramentas completo<a class="headerlink" href="#um-conjunto-de-ferramentas-completo" title="Permalink to this headline"></a></h2>
+<p>Cmake oferece uma um ferramental completo para gerenciar o ciclo de desenvolvimento:
+de fontes para scripts/projetos de construão, testes e implantação.
+Neste tutorial, vamos discutir:</p>
+<ul class="simple">
+<li><p><strong>Configuração</strong>: Esse é o estágio quando <code class="docutils literal notranslate"><span class="pre">cmake</span></code> é invocado para gerar o
+sistema de construção a partir de um arquivo <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>.</p></li>
+<li><p><strong>Construção</strong>: Isso é tratado pelas ferramentas de construção nativa</p></li>
+<li><p><strong>Teste</strong>: Nesta fase, você testará os artefatos construidos.</p></li>
+</ul>
+<figure class="align-center" id="id3">
+<img alt="_images/cmake-times.jpg" src="_images/cmake-times.jpg" />
+<figcaption>
+<p><span class="caption-text">Você pode gerenciar todos os estágios de uma vida útil de um projeto de software com as ferramentas fornecidas pelo CMAKE.
+Esta figura mostra todas essas etapas e qual ferramenta é apropriada para cada um.
+A figura é reproduzida do <a class="reference external" href="https://github.com/dev-cafe/cmake-cookbook">CMake Cookbook</a> e é licenciado sob o
+termos do <a class="reference external" href="https://creativecommons.org/licenses/by-sa/4.0/legalcode">CC-BY-SA</a>.</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="produzindo-bibliotecas">
+<h2>Produzindo bibliotecas<a class="headerlink" href="#produzindo-bibliotecas" title="Permalink to this headline"></a></h2>
+<p>CMake pode ser usado para produzir bibliotecas, bem como executáveis.
+O comando que deve ser usado nesse caso é <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/add_library.html"><span class="xref std std-term"><code class="docutils literal notranslate">add_library</code></span></a>:</p>
+<div class="admonition-add-library signature toggle-shown dropdown admonition" id="signature-3">
+<p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/add_library.html"><span class="xref std std-term"><code class="docutils literal notranslate">add_library</code></span></a></p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">add_library</span><span class="p">(</span><span class="s">&lt;name&gt;</span><span class="w"> </span><span class="s">[STATIC</span><span class="w"> </span><span class="s">|</span><span class="w"> </span><span class="s">SHARED</span><span class="w"> </span><span class="s">|</span><span class="w"> </span><span class="s">MODULE]</span>
+<span class="w">            </span><span class="s">[EXCLUDE_FROM_ALL]</span>
+<span class="w">            </span><span class="s">[&lt;source&gt;...]</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Você pode vincular bibliotecas em executáveis com <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/target_link_libraries.html"><span class="xref std std-term"><code class="docutils literal notranslate">target_link_libraries</code></span></a>:</p>
+<div class="admonition-target-link-libraries signature toggle-shown dropdown admonition" id="signature-4">
+<p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/target_link_libraries.html"><span class="xref std std-term"><code class="docutils literal notranslate">target_link_libraries</code></span></a></p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">&lt;target&gt;</span>
+<span class="w">                      </span><span class="s">&lt;PRIVATE|PUBLIC|INTERFACE&gt;</span><span class="w"> </span><span class="s">&lt;item&gt;...</span>
+<span class="w">                     </span><span class="s">[&lt;PRIVATE|PUBLIC|INTERFACE&gt;</span><span class="w"> </span><span class="s">&lt;item&gt;...]...</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition-executaveis-e-bibliotecas-sao-targets callout admonition" id="callout-1">
+<p class="admonition-title">Executáveis e bibliotecas são <em>targets</em></p>
+<p>Vamos encontrar o termo <strong>alvo (target)</strong> repetidamente. Em cmake, um alvo é qualquer
+objeto dado como primeiro argumento para <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/add_executable.html"><span class="xref std std-term"><code class="docutils literal notranslate">add_executable</code></span></a> ou <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/add_library.html"><span class="xref std std-term"><code class="docutils literal notranslate">add_library</code></span></a>.
+Sempre que você precisar organizar projetos complexo,  pense em termos de alvos e
+suas dependências.
+Toda a família de comandos cmake <code class="docutils literal notranslate"><span class="pre">target_*</span></code> Pode ser usado para expressar
+dependências e é muito mais eficaz do que acompanhar o estado de variáveis.
+Vamos esclarecer esses conceitos em <span class="xref std std-ref">targets</span>.</p>
+</div>
+<div class="admonition-exercicio-1-produzindo-bibliotecas exercise important admonition" id="exercise-0">
+<p class="admonition-title">Exercício 1: Produzindo bibliotecas</p>
+<blockquote>
+<div><div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-1-1-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-1-1-0" name="1-0" role="tab" tabindex="0">C++</button><button aria-controls="panel-1-1-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-1-1-1" name="1-1" role="tab" tabindex="-1">Fortran</button></div><div aria-labelledby="tab-1-1-0" class="sphinx-tabs-panel" id="panel-1-1-0" name="1-0" role="tabpanel" tabindex="0"><p>Você pode encontrar um projeto base na pasta
+<code class="docutils literal notranslate"><span class="pre">content/code/day-1/01_libraries-cxx</span></code> .</p>
+<ol class="arabic simple">
+<li><p>Escreva um <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> para compilar os códigos-fontes
+<code class="docutils literal notranslate"><span class="pre">Message.hpp</span></code> e  <code class="docutils literal notranslate"><span class="pre">Message.cpp</span></code> como uma bibliotecas.
+Não especifique o tipo de biblioteca, compartilhada ou estática, explicitamente.</p></li>
+<li><p>Adicione o executável  <code class="docutils literal notranslate"><span class="pre">hello-world.cpp</span></code>.</p></li>
+<li><p>Vincule a biblioteca ao executável.</p></li>
+</ol>
+<p>Uma solução está na subpasta <code class="docutils literal notranslate"><span class="pre">solution</span></code>.</p>
+</div><div aria-labelledby="tab-1-1-1" class="sphinx-tabs-panel" hidden="true" id="panel-1-1-1" name="1-1" role="tabpanel" tabindex="0"><dl>
+<dt>Você pode encontrar um projeto base na pasta</dt><dd><p><code class="docutils literal notranslate"><span class="pre">content/code/day-1/01_libraries-f</span></code> folder.</p>
+<ol class="arabic simple">
+<li><p>Escreva um  <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> para compilar o código-fonte <code class="docutils literal notranslate"><span class="pre">message.f90</span></code> como uma bibliotecas.
+Não especifique o tipo de biblioteca, compartilhada ou estática, explicitamente.</p></li>
+<li><p>Adicione o executável <code class="docutils literal notranslate"><span class="pre">hello-world.f90</span></code> .</p></li>
+<li><p>Vincule a biblioteca ao executável.</p></li>
+</ol>
+<p>Uma solução está na subpasta <code class="docutils literal notranslate"><span class="pre">solution</span></code>.</p>
+</dd>
+</dl>
+</div></div>
+</div></blockquote>
+<p>Que tipo de biblioteca você conseguiu?Estático ou compartilhado?</p>
+</div>
+<div class="admonition-keypoints keypoints admonition" id="keypoints-0">
+<p class="admonition-title">Keypoints</p>
+<ul class="simple">
+<li><p>O CMAKE é um <strong>gerador de sistema de contrução</strong>, e não sistema de compilação.</p></li>
+<li><p>Escrevemos o script <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> para descrever como as ferramentas de construção criarão artefatos de código-fontes.</p></li>
+<li><p>Você pode usar o conjunto de ferramentas CMAKE para gerenciar toda ciclo de produção de um software vida: de arquivos-fontes até testes e instalação.</p></li>
+<li><p>A estrutura do projeto é espelhada na pasta Build.</p></li>
+</ul>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="setup.html" class="btn btn-neutral float-left" title="Configurando seu sistema" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cmake-syntax.html" class="btn btn-neutral float-right" title="A02 - Síntaxe CMake" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Jose J. Camata.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

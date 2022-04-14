@@ -4,9 +4,15 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome to cmake-tutorial’s documentation! &mdash; cmake-tutorial  documentation</title>
+  <title>Tutorial CMake &mdash; cmake-tutorial  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/togglebutton.css" type="text/css" />
+      <link rel="stylesheet" href="_static/mystnb.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sphinx_lesson.css" type="text/css" />
+      <link rel="stylesheet" href="_static/overrides.css" type="text/css" />
+      <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -15,9 +21,18 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/clipboard.min.js"></script>
+        <script src="_static/copybutton.js"></script>
+        <script src="_static/minipres.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Configurando seu sistema" href="setup.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -35,12 +50,17 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">Welcome to cmake-tutorial’s documentation!</a></li>
-<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Configurando seu sistema</a></li>
 </ul>
-</div>
+<p class="caption" role="heading"><span class="caption-text">Atividades</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="hello-cmake.html">A01 - Dos fontes para os executáveis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cmake-syntax.html">A02 - Síntaxe CMake</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hello-ctest.html">A03 - Criando e executando testes com o CTest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="environment.html">A04 - Detectando seu ambiente</a></li>
+</ul>
+
         </div>
       </div>
     </nav>
@@ -55,7 +75,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="#" class="icon icon-home"></a> &raquo;</li>
-      <li>Welcome to cmake-tutorial’s documentation!</li>
+      <li>Tutorial CMake</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -65,24 +85,166 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="welcome-to-cmake-tutorial-s-documentation">
-<h1>Welcome to cmake-tutorial’s documentation!<a class="headerlink" href="#welcome-to-cmake-tutorial-s-documentation" title="Permalink to this headline"></a></h1>
+  <section id="tutorial-cmake">
+<h1>Tutorial CMake<a class="headerlink" href="#tutorial-cmake" title="Permalink to this headline"></a></h1>
+<p>O CMake é uma ferramenta de construção multiplataforma, independente de linguagem, quem vem
+se tornando padrão, com grandes projetos usando-o para construir, testar e
+implantar suas bases de código. Neste tutorial você vai aprender como:</p>
+<ul class="simple">
+<li><p>Escrever um sistema de compilação CMake para projetos C, C++ e Fortran produzindo
+bibliotecas e/ou executáveis.</p></li>
+<li><p>Executar testes para seu código com CTest.</p></li>
+<li><p>Certificar-se de que seu sistema de compilação funciona em diferentes plataformas.</p></li>
+<li><p>Detectar e usar dependências externas em seu projeto.</p></li>
+<li><p>Construir com segurança e eficácia projetos de linguagem mista (Python+C/C++,
+Python+Fortran, Fortran+C/C++)</p></li>
+</ul>
+<div class="admonition-prerequisites prerequisites admonition" id="prerequisites-0">
+<p class="admonition-title">Prerequisites</p>
+<p>Antes de iniciar esse tutorial, certifique-se de ter acesso
+a um computador com um compilador para sua linguagem de programação favorita
+e uma versão recente do CMake.</p>
+<p>Se você ainda não tem ess ambiente instalado, recomendamos que você configure
+um ambiente de software isolado usando <code class="docutils literal notranslate"><span class="pre">conda</span></code>. Para computadores Windows, recomendamos usar o
+Subsistema para Linux (WSL). Instruções detalhadas podem ser encontradas
+na página <a class="reference internal" href="setup.html"><span class="doc">Configurando seu sistema</span></a>.</p>
+</div>
 <div class="toctree-wrapper compound">
 </div>
-</section>
-<section id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline"></a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<table class="colwidths-auto docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>30 min</p></td>
+<td><p><a class="reference internal" href="hello-cmake.html"><span class="doc">A01 - Dos fontes para os executáveis</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>30 min</p></td>
+<td><p><a class="reference internal" href="cmake-syntax.html"><span class="doc">A02 - Síntaxe CMake</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>30 min</p></td>
+<td><p><a class="reference internal" href="hello-ctest.html"><span class="doc">A03 - Criando e executando testes com o CTest</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>30 min</p></td>
+<td><p><a class="reference internal" href="environment.html"><span class="doc">A04 - Detectando seu ambiente</span></a></p></td>
+</tr>
+</tbody>
+</table>
+<div class="toctree-wrapper compound">
+</div>
+<section id="para-quem-este-curso-e-voltado">
+<span id="learner-personas"></span><h2>Para quem este curso é voltado?<a class="headerlink" href="#para-quem-este-curso-e-voltado" title="Permalink to this headline"></a></h2>
+<p>Este curso é voltado para estudantes  que ouviram falar do <a class="reference external" href="https://cmake.org/cmake/help/v3.19/">CMake</a> e querem
+aprender como usá-lo efetivamente em projetos que estão trabalhando.</p>
+<p>Este curso não pressupõe experiência anterior com <a class="reference external" href="https://cmake.org/cmake/help/v3.19/">CMake</a>. Você terá que estar
+familiarizado com as ferramentas comumente usadas para construir software
+na sua linguagem de escolha: C++, C, Fortran.
+Especificamente, esta lição pressupõe que os participantes tenham alguma experiência anterior
+ou algum conhecimento dos seguintes tópicos:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
-<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
-<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+<li><p>Compilar e vincular executáveis ​e bibliotecas.</p></li>
+<li><p>Diferenças entre bibliotecas compartilhadas e estáticas.</p></li>
+<li><p>Testes automatizados</p></li>
 </ul>
+</section>
+<section id="sobre-o-curso">
+<h2>Sobre o Curso<a class="headerlink" href="#sobre-o-curso" title="Permalink to this headline"></a></h2>
+<section id="graphical-and-text-conventions">
+<h3>Graphical and text conventions<a class="headerlink" href="#graphical-and-text-conventions" title="Permalink to this headline"></a></h3>
+<p>We adopt a few conventions which help organize the material.</p>
+<dl>
+<dt>Function signatures</dt><dd><p>These are shown in a text block marked with a wrench emoji:</p>
+<div class="admonition-cmake-minimum-required signature toggle-shown dropdown admonition" id="signature-0">
+<p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/cmake_minimum_required.html"><span class="xref std std-term"><code class="docutils literal notranslate">cmake_minimum_required</code></span></a></p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">&lt;min&gt;[...&lt;max&gt;]</span><span class="w"> </span><span class="s">[FATAL_ERROR]</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>The signature can be hidden by clicking the toggle.</p>
+</dd>
+<dt>Command parameters</dt><dd><p>The description of the command parameters will appear in a separate text
+box. It will be marked with a laptop emoji:</p>
+<div class="admonition-parameters parameters dropdown admonition" id="parameters-0">
+<p class="admonition-title">Parameters</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">VERSION</span></code></dt><dd><p>Minimum and, optionally, maximum version of CMake to use.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">FATAL_ERROR</span></code></dt><dd><p>Raise a fatal error if the version constraint is not satisfied. This
+option is ignored by CMake &gt;=2.6</p>
+</dd>
+</dl>
+</div>
+<p>The description is hidden and will be shown by clicking the toggle.</p>
+</dd>
+<dt>Type-along</dt><dd><p>The text and code for these activities are in a separate text box, marked with
+a keyboard emoji:</p>
+<div class="admonition-let-s-look-at-an-example typealong toggle-shown dropdown admonition" id="typealong-0">
+<p class="admonition-title">Let’s look at an example</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.16</span><span class="p">)</span>
+
+<span class="nb">project</span><span class="p">(</span><span class="s">Hello</span><span class="w"> </span><span class="s">LANGUAGES</span><span class="w"> </span><span class="s">CXX</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>The content can be hidden by clicking the toggle.</p>
+</dd>
+<dt>Exercises</dt><dd><p>Each exercise is presented in a separate text box, marked with a hand emoji. Each box introduces the exercise and describes the objectives:</p>
+<div class="admonition-exercise-10 exercise important admonition" id="exercise-0">
+<p class="admonition-title">Exercise 10</p>
+<p>We will use CMake to build a Fortran library.</p>
+</div>
+</dd>
+</dl>
+</section>
+</section>
+<section id="veja-tambem">
+<h2>Veja Também<a class="headerlink" href="#veja-tambem" title="Permalink to this headline"></a></h2>
+<p>Existem muitos fontes gratuitas on-line sobre o CMake:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://cmake.org/cmake/help/latest/command/cmake_minimum_required.html">Documentação CMake official</a>.</p></li>
+<li><p><a class="reference external" href="https://cmake.org/cmake/help/v3.19/guide/tutorial/index.html#guide:CMake%20Tutorial">CMake tutorial</a>.</p></li>
+<li><p>Curso de Treinamento do <a class="reference external" href="https://hsf-training.github.io/hsf-training-cmake-webpage/">HEP Software Foundation</a>.</p></li>
+</ul>
+<p>Você também pode consultar os seguintes livros:</p>
+<ul class="simple">
+<li><p><strong>Professional CMake: A Practical Guide</strong> por Craig Scott.</p></li>
+<li><p><strong>CMake Cookbook</strong> por Radovan Bast e Roberto Di Remigio que tem o  seguinte repositório  <a class="reference external" href="https://github.com/dev-cafe/cmake-cookbook">GitHub</a></p></li>
+</ul>
+</section>
+<section id="creditos">
+<h2>Créditos<a class="headerlink" href="#creditos" title="Permalink to this headline"></a></h2>
+<p>Este tutorial é baseado no material desenvolvido por <a class="reference external" href="https://enccs.se/">EuroCC National Competence Center
+Sweden (ENCCS)</a> e é licenciado sob a <a class="reference external" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons
+Attribution license (CC-BY-4.0)</a>.</p>
+<p>Este é um resumo (e não um substituto para) a licença
+Creative Commons Attribution 4.0 International (CC-BY-4.0).</p>
+<p>Você tem o direito de:</p>
+<ul class="simple">
+<li><p><strong>Compartilhar</strong> — copiar e redistribuir o material em qualquer suporte ou formato</p></li>
+<li><p><strong>Adaptar</strong> — remixar, transformar, e criar a partir do material para qualquer fim, mesmo que comercial.</p></li>
+</ul>
+<p>Esta licença é aceitável para Trabalhos Culturais Livres.</p>
+<p>O licenciante não pode revogar estes direitos desde que você respeite os termos da licença.</p>
+<p>De acordo com os termos seguintes:</p>
+<ul class="simple">
+<li><p><strong>Atribuição</strong> — Você deve dar o crédito apropriado, prover um link para a licença e indicar se mudanças foram feitas. Você deve fazê-lo em qualquer circunstância razoável, mas de nenhuma maneira que sugira que o licenciante apoia você ou o seu uso.</p></li>
+<li><p><strong>Sem restrições adicionais</strong> — Você não pode aplicar termos jurídicos ou medidas de caráter tecnológico que restrinjam legalmente outros de fazerem algo que a licença permita.</p></li>
+</ul>
+<section id="software">
+<h3>Software<a class="headerlink" href="#software" title="Permalink to this headline"></a></h3>
+<p>Os exemplos de código e exercícios nesta lição foram adaptados do
+GitHub <a class="reference external" href="https://github.com/dev-cafe/cmake-cookbook">CMake Cookbook</a>.</p>
+</section>
+</section>
 </section>
 
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="setup.html" class="btn btn-neutral float-right" title="Configurando seu sistema" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

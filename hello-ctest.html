@@ -67,6 +67,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="environment.html">A04 - Detectando seu ambiente</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probing.html">A05 - Compilação, vinculação e execução</a></li>
 </ul>
 
         </div>
@@ -104,11 +105,11 @@
 <div class="admonition-objectives objectives admonition" id="objectives-0">
 <p class="admonition-title">Objectives</p>
 <ul class="simple">
-<li><p>Aprenda a produzir executáveis de teste com cmake.</p></li>
+<li><p>Aprenda a produzir executáveis de teste com CMake.</p></li>
 <li><p>Aprenda a executar seus testes através do CTest.</p></li>
 </ul>
 </div>
-<p>O teste é uma atividade essencial no ciclo de desenvolvimento.Um conjunto de testes bem
+<p>O teste é uma atividade essencial no ciclo de desenvolvimento. Um conjunto de testes bem
 projetado irá ajudá-lo a detectar <em>bugs</em> e também pode facilitar a integração de novos
 desenvolvedores.</p>
 <figure class="align-center" id="id1">
@@ -146,7 +147,7 @@ o último configura o comando de execução.</p>
 <blockquote>
 <div><p>Vamos construir uma simples biblioteca para somar inteiros e um executável usando esta
 biblioteca.  Use o projeto base localizado na pasta
-<code class="docutils literal notranslate"><span class="pre">content/code/day-1/05_hello-ctest</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">source/code/day-1/05_hello-ctest</span></code>.</p>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.18</span><span class="p">)</span>
 
 <span class="nb">project</span><span class="p">(</span><span class="s">hello-ctest</span><span class="w"> </span><span class="s">LANGUAGES</span><span class="w"> </span><span class="s">CXX</span><span class="p">)</span>
@@ -188,7 +189,7 @@ $ ctest
 </pre></div>
 </div>
 </div></blockquote>
-<p>Uma solução está na subpasta <code class="docutils literal notranslate"><span class="pre">solução</span></code>.</p>
+<p>Uma solução está na subpasta <code class="docutils literal notranslate"><span class="pre">solution</span></code>.</p>
 </div>
 <div class="admonition-exercicio-6-executando-os-testes-atraves-de-um-script-shell exercise important admonition" id="exercise-0">
 <p class="admonition-title">Exercício 6: Executando os testes através de um script shell</p>
@@ -196,7 +197,7 @@ $ ctest
 <div><p>Qualquer comando pode ser usado para executar testes.
 Neste exercício, vamos estender o código cmake anterior para testar o executável principal
 dentro de um script de shell.
-Use o projeto base localizado na pasta <code class="docutils literal notranslate"><span class="pre">content/code/day-1/06_bash-ctest</span></code>.</p>
+Use o projeto base localizado na pasta <code class="docutils literal notranslate"><span class="pre">source/code/day-1/06_bash-ctest</span></code>.</p>
 <ol class="arabic">
 <li><p>Encontre o executável bash apropriado para executar <code class="docutils literal notranslate"><span class="pre">test.sh</span></code>.
 Você deve usar o comando <code class="docutils literal notranslate"><span class="pre">find_program</span></code> do CMake.</p>
@@ -226,7 +227,7 @@ executável: <code class="docutils literal notranslate"><span class="pre">$&lt;T
 <p>É muito mais comum hoje em dia usar python, em vez de scripts de shell.
 Neste exercício, adicionaremos mais dois testes ao nosso projeto.
 Esses novos testes executarão o programa principal por meio de um script Python.
-Use o projeto base localizado na pasta <code class="docutils literal notranslate"><span class="pre">content/code/day-1/07_python-ctest</span></code>.</p>
+Use o projeto base localizado na pasta <code class="docutils literal notranslate"><span class="pre">source/code/day-1/07_python-ctest</span></code>.</p>
 <p>#. Encontre o intérprete Python para executar <code class="docutils literal notranslate"><span class="pre">test.py</span></code>. Você deve usar
 o comando <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_package.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_package</code></span></a> do CMake:</p>
 <blockquote>
@@ -327,7 +328,7 @@ propriedades disponíveis.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">quick</span></code> para testes com um tempo de execução muito curto.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">long</span></code> para testes de benchmarking com um tempo de execução mais longo.</p></li>
 </ul>
-<p>Use o projeto base localizado na pasta <code class="docutils literal notranslate"><span class="pre">content/code/day-1/08_ctest-labels</span></code>.</p>
+<p>Use o projeto base localizado na pasta <code class="docutils literal notranslate"><span class="pre">source/code/day-1/08_ctest-labels</span></code>.</p>
 <div class="sphinx-tabs docutils container">
 <div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">Labeling</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">Bonus</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><ol class="arabic">
 <li><p>Encontre o interpretador Python:</p>
@@ -370,7 +371,7 @@ retorna com um código de saída diferente de zero. Use esta propriedade para te
 <blockquote>
 <div><div class="sphinx-tabs docutils container">
 <div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-1-1-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-1-1-0" name="1-0" role="tab" tabindex="0">WILL_FAIL</button><button aria-controls="panel-1-1-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-1-1-1" name="1-1" role="tab" tabindex="-1">COST</button><button aria-controls="panel-1-1-2" aria-selected="false" class="sphinx-tabs-tab" id="tab-1-1-2" name="1-2" role="tab" tabindex="-1">TIMEOUT</button></div><div aria-labelledby="tab-1-1-0" class="sphinx-tabs-panel" id="panel-1-1-0" name="1-0" role="tabpanel" tabindex="0"><p>Use o projeto base localizado na pasta
-<code class="docutils literal notranslate"><span class="pre">content/code/day-1/09_ctest-will-fail</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">source/code/day-1/09_ctest-will-fail</span></code>.</p>
 <ol class="arabic simple">
 <li><p>Crie um projeto sem uma linguagem.</p></li>
 <li><p>Encontre o interpretador Python.</p></li>
@@ -382,7 +383,7 @@ Agora defina a propriedade <code class="docutils literal notranslate"><span clas
 que muda ao executar os testes.</p>
 <p>Uma solução está na subpasta <code class="docutils literal notranslate"><span class="pre">solution</span></code>.</p>
 </div><div aria-labelledby="tab-1-1-1" class="sphinx-tabs-panel" hidden="true" id="panel-1-1-1" name="1-1" role="tabpanel" tabindex="0"><p>Use o projeto base localizado na pasta
-<code class="docutils literal notranslate"><span class="pre">content/code/day-1/10_ctest-cost</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">source/code/day-1/10_ctest-cost</span></code>.</p>
 <ol class="arabic simple">
 <li><p>Ativar testes no <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>.</p></li>
 <li><p>Adicionar testes em execução a cada um dos scripts na pasta <code class="docutils literal notranslate"><span class="pre">test</span></code>.</p></li>
@@ -392,7 +393,7 @@ que muda ao executar os testes.</p>
 </ol>
 <p>Uma solução está na subpasta <code class="docutils literal notranslate"><span class="pre">solution</span></code>.</p>
 </div><div aria-labelledby="tab-1-1-2" class="sphinx-tabs-panel" hidden="true" id="panel-1-1-2" name="1-2" role="tabpanel" tabindex="0"><p>Use o projeto base localizado na pasta
-<code class="docutils literal notranslate"><span class="pre">content/code/day-1/11_ctest-timeout</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">source/code/day-1/11_ctest-timeout</span></code>.</p>
 <ol class="arabic simple">
 <li><p>Crie um projeto sem uma linguagem.</p></li>
 <li><p>Encontre o interpretador Python.</p></li>

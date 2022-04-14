@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Finding and using dependencies &mdash; cmake-tutorial  documentation</title>
+  <title>Encontrando e usando dependências &mdash; cmake-tutorial  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/togglebutton.css" type="text/css" />
@@ -60,6 +60,7 @@
 <li class="toctree-l1"><a class="reference internal" href="cmake-syntax.html">A02 - Síntaxe CMake</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hello-ctest.html">A03 - Criando e executando testes com o CTest</a></li>
 <li class="toctree-l1"><a class="reference internal" href="environment.html">A04 - Detectando seu ambiente</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probing.html">A05 - Compilação, vinculação e execução</a></li>
 </ul>
 
         </div>
@@ -76,7 +77,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Finding and using dependencies</li>
+      <li>Encontrando e usando dependências</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/dependencies.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -86,40 +87,41 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="finding-and-using-dependencies">
-<span id="dependencies"></span><h1>Finding and using dependencies<a class="headerlink" href="#finding-and-using-dependencies" title="Permalink to this headline"></a></h1>
+  <section id="encontrando-e-usando-dependencias">
+<span id="dependencies"></span><h1>Encontrando e usando dependências<a class="headerlink" href="#encontrando-e-usando-dependencias" title="Permalink to this headline"></a></h1>
 <div class="admonition-questions questions admonition" id="questions-0">
 <p class="admonition-title">Questions</p>
 <ul class="simple">
-<li><p>How can I use CMake to detect and use the dependencies of my project?</p></li>
+<li><p>Como posso usar o CMake para detectar e usar as dependências do meu projeto?</p></li>
 </ul>
 </div>
 <div class="admonition-objectives objectives admonition" id="objectives-0">
 <p class="admonition-title">Objectives</p>
 <ul class="simple">
-<li><p>Learn how to use <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_package.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_package</code></span></a>.</p></li>
-<li><p>Learn what other detection alternatives exist.</p></li>
+<li><p>Aprender como usar <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_package.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_package</code></span></a>.</p></li>
+<li><p>Saiba quais outras alternativas de detecção existem.</p></li>
 </ul>
 </div>
-<p>The vast majority of software projects do not happen in a vacuum: they will have
-dependencies on existing frameworks and libraries.  Good documentation will
-instruct your users to ensure that these are satisfied in their programming
-environment. The build system is the appropriate place to check that these
-preconditions are met and that your project can be built correctly.
-In this episode, we will show you few examples of how to detect and use
-dependencies in your CMake build system.</p>
-<section id="finding-dependencies">
-<h2>Finding dependencies<a class="headerlink" href="#finding-dependencies" title="Permalink to this headline"></a></h2>
-<p>CMake offers a family of commands to find artifacts installed on your system:</p>
+<p>A grande maioria dos projetos de software não acontece no vácuo:
+eles terão dependências de frameworks e bibliotecas existentes.
+Uma boa documentação instruirá seus usuários a garantir que eles
+sejam satisfeitos em seu ambiente de programação.
+O sistema de compilação é o local apropriado para verificar se
+essas pré-condições são atendidas e se seu projeto pode ser construído
+corretamente. Neste episódio, mostraremos alguns exemplos de como
+detectar e usar dependências em seu sistema de compilação CMake.</p>
+<section id="encontrando-dependencias">
+<h2>Encontrando dependências<a class="headerlink" href="#encontrando-dependencias" title="Permalink to this headline"></a></h2>
+<p>O CMake oferece uma família de comandos para encontrar artefatos instalados em seu sistema:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_file.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_file</code></span></a> to retrieve the full path to a file.</p></li>
-<li><p><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_library.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_library</code></span></a> to find a library, shared or static.</p></li>
-<li><p><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_package.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_package</code></span></a> to find and load settings from an external project.</p></li>
-<li><p><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_path.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_path</code></span></a> to find the directory containing a file.</p></li>
-<li><p><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_program.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_program</code></span></a> to find an executable.</p></li>
+<li><p><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_file.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_file</code></span></a> para recuperar o caminho completo para um arquivo.</p></li>
+<li><p><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_library.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_library</code></span></a> para encontrar uma biblioteca, compartilhada ou estática.</p></li>
+<li><p><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_package.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_package</code></span></a> para encontrar e carregar configurações de um projeto externo.</p></li>
+<li><p><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_path.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_path</code></span></a> para encontrar o diretório que contém um arquivo.</p></li>
+<li><p><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_program.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_program</code></span></a> para encontrar um executável.</p></li>
 </ul>
-<p>The workhorse of dependency discovery is <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_package.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_package</code></span></a>, which will cover your
-needs in almost all use cases.</p>
+<p>A principal ferramenta para a descoberta de dependência é <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_package.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_package</code></span></a>,
+que cobrirá suas necessidades em quase todos os casos de uso.</p>
 <div class="admonition-find-package signature toggle-shown dropdown admonition" id="signature-0">
 <p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_package.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_package</code></span></a></p>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">find_package</span><span class="p">(</span><span class="s">&lt;PackageName&gt;</span><span class="w"> </span><span class="s">[version]</span><span class="w"> </span><span class="s">[EXACT]</span><span class="w"> </span><span class="s">[QUIET]</span><span class="w"> </span><span class="s">[MODULE]</span>
@@ -128,52 +130,51 @@ needs in almost all use cases.</p>
 <span class="w">       </span><span class="s">[NO_POLICY_SCOPE]</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>This command will attempt finding the package with name <code class="docutils literal notranslate"><span class="pre">&lt;PackageName&gt;</span></code> by
-searching in a number of <a class="reference external" href="https://cmake.org/cmake/help/latest/command/find_package.html?highlight=find_package#search-procedure">predefined folders</a>.
-It is possible to ask for a minimum or exact version. If <code class="docutils literal notranslate"><span class="pre">REQUIRED</span></code> is
-given, a failed search will trigger a fatal error.  The rules for the search
-are obtained from modules named <code class="docutils literal notranslate"><span class="pre">Find&lt;PackageName&gt;.cmake</span></code>.
-Packages can also have <em>components</em> and you can ask to detect just a handful of them.</p>
+<p>Este comando tentará encontrar o pacote com o nome <code class="docutils literal notranslate"><span class="pre">&lt;PackageName&gt;</span></code> pesquisando
+em várias <a class="reference external" href="https://cmake.org/cmake/help/latest/command/find_package.html?highlight=find_package#search-procedure">pastas predefinidas</a>.
+É possível solicitar uma versão mínima ou exata. Se <code class="docutils literal notranslate"><span class="pre">REQUIRED</span></code> for fornecido, uma pesquisa
+com falha acionará um erro fatal. As regras para a busca são obtidas em módulos chamados
+<code class="docutils literal notranslate"><span class="pre">Find&lt;PackageName&gt;.cmake</span></code>.
+Os pacotes também podem ter <em>componentes</em> e você pode pedir para detectar apenas alguns deles.</p>
 </div>
-<p>We cannot stress this enough: you should <strong>only</strong> use the other commands in the
-<code class="docutils literal notranslate"><span class="pre">find_</span></code> family in very special, very narrow circumstances.  Why so?</p>
+<p>você deve <strong>somente</strong> usar os outros comandos da família <code class="docutils literal notranslate"><span class="pre">find_</span></code>
+em circunstâncias muito especiais e restritas. Por quê?</p>
 <ol class="arabic">
-<li><p>For a large selection of common dependencies, the <code class="docutils literal notranslate"><span class="pre">Find&lt;PackageName&gt;.cmake</span></code>
-modules shipped with CMake work flawlessly and are maintained by the CMake
-developers. This lifts the burden of programming your own dependency
-detection tricks.</p></li>
-<li><p><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_package.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_package</code></span></a> will set up <strong>imported targets</strong>: targets defined <em>outside</em>
-your project that you can use with your own targets.  The properties on
-imported targets defines <em>usage requirements</em> for the dependencies. A command
-such as:</p>
+<li><p>Para uma grande variedade de dependências comuns, os módulos <code class="docutils literal notranslate"><span class="pre">Find&lt;PackageName&gt;.cmake</span></code> enviados
+com o CMake funcionam perfeitamente e são mantidos pelos desenvolvedores do CMake.
+Isso elimina o fardo de programar seus próprios modulos de detecção de dependência.</p></li>
+<li><p><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_package.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_package</code></span></a> irá configurar <strong>alvos importados</strong>: alvos definidos <em>fora</em> do
+seu projeto que podem ser usados com seus próprios alvos.
+As propriedades nos destinos importados definem <em>requisitos de uso</em> para as
+dependências. Um comando como:</p>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">your-target</span>
 <span class="w">  </span><span class="s">PUBLIC</span>
 <span class="w">    </span><span class="s">imported-target</span>
 <span class="w">  </span><span class="p">)</span>
 </pre></div>
 </div>
-<p>will set compiler flags, definitions, include directories, and link libraries
-from <code class="docutils literal notranslate"><span class="pre">imported-target</span></code> to <code class="docutils literal notranslate"><span class="pre">your-target</span></code> <em>and</em> to all other targets in
-your project that will use <code class="docutils literal notranslate"><span class="pre">your-target</span></code>.</p>
+<p>definirá <em>flags</em> de compilador, definições, diretórios de inclusão e bibliotecas de links de <code class="docutils literal notranslate"><span class="pre">imported-target</span></code> para <code class="docutils literal notranslate"><span class="pre">your-target</span></code> <em>e</em> para todos os outros destinos em seu projeto
+que usarão <code class="docutils literal notranslate"><span class="pre">your-target</span></code>.</p>
 </li>
 </ol>
-<p>These two points simplify <strong>enormously</strong> the burden of dependency detection and
-consistent usage within a multi-folder project.</p>
-<section id="using-find-package">
-<h3>Using <code class="docutils literal notranslate"><span class="pre">find_package</span></code><a class="headerlink" href="#using-find-package" title="Permalink to this headline"></a></h3>
-<p>When attempting dependency detection with <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_package.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_package</code></span></a>, you should make sure that:</p>
+<p>Esses dois pontos simplificam <strong>enormemente</strong> a
+detecção de dependência e uso consistente em um projeto de várias pastas.</p>
+<section id="usando-find-package">
+<h3>Usando <code class="docutils literal notranslate"><span class="pre">find_package</span></code><a class="headerlink" href="#usando-find-package" title="Permalink to this headline"></a></h3>
+<p>Ao tentar a detecção de dependência com <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_package.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_package</code></span></a>, você deve certificar-se de que:</p>
 <ul class="simple">
-<li><p>A <code class="docutils literal notranslate"><span class="pre">Find&lt;PackageName&gt;.cmake</span></code> module exists,</p></li>
-<li><p>Which components, if any, it provides, and</p></li>
-<li><p>What imported targets it will set up.</p></li>
+<li><p>Um modulo <code class="docutils literal notranslate"><span class="pre">Find&lt;PackageName&gt;.cmake</span></code> exista,</p></li>
+<li><p>Quais componentes, se houver, ele fornece e</p></li>
+<li><p>Quais destinos importados ele configurará.</p></li>
 </ul>
-<p>A complete list of <code class="docutils literal notranslate"><span class="pre">Find&lt;PackageName&gt;.cmake</span></code> can be found from the command-line interface:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --help-module-list <span class="p">|</span> grep <span class="s2">&quot;Find&quot;</span>
-</pre></div>
-</div>
-<div class="admonition-using-openmp typealong toggle-shown dropdown admonition" id="typealong-0">
-<p class="admonition-title">Using OpenMP</p>
-<p>We want to compile the following OpenMP sample code: <a class="footnote-reference brackets" href="#omp" id="id1">1</a></p>
+<p>Uma lista completa de <code class="docutils literal notranslate"><span class="pre">Find&lt;PackageName&gt;.cmake</span></code> pode ser encontrada na interface de linha de comando:
+.. code-block:: bash</p>
+<blockquote>
+<div><p>$ cmake –help-module-list | grep “Find”</p>
+</div></blockquote>
+<div class="admonition-usando-openmp typealong toggle-shown dropdown admonition" id="typealong-0">
+<p class="admonition-title">Usando OpenMP.</p>
+<p>Queremos compilar o seguinte código de exemplo do OpenMP: <a class="footnote-reference brackets" href="#omp" id="id1">1</a></p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// example adapted from</span>
 <span class="c1">// http://www.openmp.org/wp-content/uploads/openmp-examples-4.5.0.pdf page 85</span>
 
@@ -212,69 +213,73 @@ consistent usage within a multi-folder project.</p>
 <span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
-<p>Note the usage of the <code class="docutils literal notranslate"><span class="pre">taskloop</span></code> construct, which was introduced in OpenMP
-4.5: we need to make sure our C++ compiler is suitably compatible with <em>at
-least</em> that version of the standard.</p>
-<p>From the documentation of the <code class="docutils literal notranslate"><span class="pre">FindOpenMP.cmake</span></code> module:</p>
+<p>Observe o uso da construção <code class="docutils literal notranslate"><span class="pre">taskloop</span></code>, que foi introduzida no OpenMP 4.5:
+precisamos ter certeza de que nosso compilador C++ é compatível com <em>pelo menos</em>
+essa versão do padrão.</p>
+<p>Da documentação do módulo <code class="docutils literal notranslate"><span class="pre">FindOpenMP.cmake</span></code>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --help-module FindOpenMP <span class="p">|</span> less
 </pre></div>
 </div>
-<p>we find that the module provides the components <code class="docutils literal notranslate"><span class="pre">C</span></code>, <code class="docutils literal notranslate"><span class="pre">CXX</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">Fortran</span></code> and that <code class="docutils literal notranslate"><span class="pre">OpenMP::OpenMP_CXX</span></code> target will be provided, if
-detection is successful.
-Thus, we do the following:</p>
+<p>descobrimos que o módulo fornece os componentes <code class="docutils literal notranslate"><span class="pre">C</span></code>, <code class="docutils literal notranslate"><span class="pre">CXX</span></code> e <code class="docutils literal notranslate"><span class="pre">Fortran</span></code>
+e que o destino <code class="docutils literal notranslate"><span class="pre">OpenMP::OpenMP_CXX</span></code> será fornecido,
+se a detecção for bem sucedida. Assim, fazemos o seguinte:</p>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">find_package</span><span class="p">(</span><span class="s">OpenMP</span><span class="w"> </span><span class="s">4.5</span><span class="w"> </span><span class="s">REQUIRED</span><span class="w"> </span><span class="s">COMPONENTS</span><span class="w"> </span><span class="s">CXX</span><span class="p">)</span>
 
 <span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">task-loop</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">OpenMP::OpenMP_CXX</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>We can configure and build verbosely. <a class="footnote-reference brackets" href="#verbose" id="id2">2</a>
-Notice that compiler flags, include directories, and link libraries are properly resolved by CMake.</p>
-<p>You can find the complete working example in <code class="docutils literal notranslate"><span class="pre">content/code/day-2/22_taskloop/solution</span></code>.</p>
+<p>Podemos configurar e construir detalhadamente. <a class="footnote-reference brackets" href="#verbose" id="id2">2</a>
+Observe que os sinalizadores do compilador, diretórios de inclusão e
+bibliotecas de links são resolvidos corretamente pelo CMake.</p>
+<p>Você pode encontrar o exemplo completo de trabalho em <code class="docutils literal notranslate"><span class="pre">source/code/day-2/22_taskloop/solution</span></code>.</p>
 </div>
-<div class="admonition-exercise-23-using-mpi exercise important admonition" id="exercise-0">
-<p class="admonition-title">Exercise 23: Using MPI</p>
-<p>In this exercise, you will attempt compiling a “Hello, world” program that
-uses the message passing interface (MPI).</p>
+<div class="admonition-exercicio-23-usando-mpi exercise important admonition" id="exercise-0">
+<p class="admonition-title">Exercício 23: Usando MPI</p>
+<p>Neste exercício, você tentará compilar um programa “Hello, world”
+que usa a interface de passagem de mensagens (MPI).</p>
 <ol class="arabic simple">
-<li><p>Check whether a <code class="docutils literal notranslate"><span class="pre">FindMPI.cmake</span></code> module exists in the built-in module
-library.</p></li>
-<li><p>Get acquainted with its components and the variables and imported targets
-it defines.</p></li>
+<li><p>Verifique se existe um módulo <code class="docutils literal notranslate"><span class="pre">FindMPI.cmake</span></code> na biblioteca de módulos embutida.</p></li>
+<li><p>Familiarize-se com seus componentes e as variáveis e destinos
+importados que ele define.</p></li>
 </ol>
 <div class="sphinx-tabs docutils container">
-<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">C++</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">Fortran</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><p>The scaffold project is in <code class="docutils literal notranslate"><span class="pre">content/code/day-2/23_mpi-cxx</span></code>.</p>
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">C++</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">Fortran</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><p>O projeto base está em <code class="docutils literal notranslate"><span class="pre">source/code/day-2/23_mpi-cxx</span></code>.</p>
 <ol class="arabic simple">
-<li><p>Compile the source file to an executable.</p></li>
-<li><p>Link against the MPI imported target.</p></li>
-<li><p>Invoke a verbose build and observe how CMake compiles and links.</p></li>
+<li><p>Compile o arquivo de origem em um executável.</p></li>
+<li><p>Vincule para o destino importado MPI.</p></li>
+<li><p>Invoque uma compilação detalhada e observe como o CMake compila e vincula.</p></li>
 </ol>
-<p>A working example is in the <code class="docutils literal notranslate"><span class="pre">solution</span></code> subfolder.</p>
-</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><p>The scaffold project is in <code class="docutils literal notranslate"><span class="pre">content/code/day-2/23_mpi-f</span></code>.</p>
+<p>Um exemplo funcional está na subpasta <code class="docutils literal notranslate"><span class="pre">solution</span></code>.</p>
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><blockquote>
+<div><p>O projeto base está em <code class="docutils literal notranslate"><span class="pre">content/code/day-2/23_mpi-f</span></code>.</p>
+</div></blockquote>
 <ol class="arabic simple">
-<li><p>Compile the source file to an executable.</p></li>
-<li><p>Link against the MPI imported target.</p></li>
-<li><p>Invoke a verbose build and observe how CMake compiles and links.</p></li>
+<li><p>Compile o arquivo de origem em um executável.</p></li>
+<li><p>Vincule para o destino importado MPI.</p></li>
+<li><p>Invoque uma compilação detalhada e observe como o CMake compila e vincula</p></li>
 </ol>
-<p>A working example is in the <code class="docutils literal notranslate"><span class="pre">solution</span></code> subfolder.</p>
+<blockquote>
+<div><p>Um exemplo funcional está na subpasta <code class="docutils literal notranslate"><span class="pre">solution</span></code>.</p>
+</div></blockquote>
 </div></div>
 </div>
 </section>
-<section id="alternatives-config-scripts-and-pkg-config">
-<h3>Alternatives: <code class="docutils literal notranslate"><span class="pre">Config</span></code> scripts and <code class="docutils literal notranslate"><span class="pre">pkg-config</span></code><a class="headerlink" href="#alternatives-config-scripts-and-pkg-config" title="Permalink to this headline"></a></h3>
-<p>What to do when there is no built-in <code class="docutils literal notranslate"><span class="pre">Find&lt;PackageName&gt;.cmake</span></code> module for a package you depend on?
-The package developers might be already prepared to help you out:</p>
+<section id="alternativas-scripts-config-e-pkg-config">
+<h3>Alternativas: scripts <code class="docutils literal notranslate"><span class="pre">Config</span></code> e <code class="docutils literal notranslate"><span class="pre">pkg-config</span></code><a class="headerlink" href="#alternativas-scripts-config-e-pkg-config" title="Permalink to this headline"></a></h3>
+<p>O que fazer quando não há um módulo <code class="docutils literal notranslate"><span class="pre">Find&lt;PackageName&gt;.cmake</span></code> embutido para um pacote do qual você depende?
+Os desenvolvedores de pacotes podem já estar preparados para ajudá-lo:</p>
 <ul>
-<li><p>They ship the CMake-specific file <code class="docutils literal notranslate"><span class="pre">&lt;PackageName&gt;Config.cmake</span></code> which
-describes how the imported target should be made for their package.
-In this case, you need to point CMake to the folder containing the <code class="docutils literal notranslate"><span class="pre">Config</span></code> file using the
-special <code class="docutils literal notranslate"><span class="pre">&lt;PackageName&gt;_DIR</span></code> variable:</p>
+<li><p>Eles disponibilizam o arquivo específico do CMake <code class="docutils literal notranslate"><span class="pre">&lt;PackageName&gt;Config.cmake</span></code> que descreve
+como o destino importado deve ser usada pelo seu pacote. Neste caso, você precisa
+apontar o CMake para a pasta que contém o arquivo <code class="docutils literal notranslate"><span class="pre">Config</span></code> usando a variável
+especial <code class="docutils literal notranslate"><span class="pre">&lt;PackageName&gt;_DIR</span></code>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake -S. -Bbuild -D&lt;PackageName&gt;_DIR<span class="o">=</span>/folder/containing/&lt;PackageName&gt;Config.cmake
 </pre></div>
 </div>
 </li>
-<li><p>They include a <code class="docutils literal notranslate"><span class="pre">.pc</span></code> file, which, on Unix-like platforms, can be detected
-with the <code class="docutils literal notranslate"><span class="pre">pkg-config</span></code> utility. You can then leverage <code class="docutils literal notranslate"><span class="pre">pkg-config</span></code> through CMake:</p>
+<li><p>Eles incluem um arquivo <code class="docutils literal notranslate"><span class="pre">.pc</span></code>, que, em plataformas do tipo Unix, pode ser detectado
+com o utilitário <code class="docutils literal notranslate"><span class="pre">pkg-config</span></code>. Você pode então aproveitar o <code class="docutils literal notranslate"><span class="pre">pkg-config</span></code>
+através do CMake:</p>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="c"># find pkg-config</span>
 <span class="nb">find_package</span><span class="p">(</span><span class="s">PkgConfig</span><span class="w"> </span><span class="s">REQUIRED</span><span class="p">)</span>
 <span class="c"># ask pkg-config to find the UUID library and prepare an imported target</span>
@@ -285,32 +290,33 @@ with the <code class="docutils literal notranslate"><span class="pre">pkg-config
 <span class="nb">endif</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>This was the strategy adopted in <a class="reference internal" href="probing.html#probing"><span class="std std-ref">A05 - Compilação, vinculação e execução</span></a> when testing the use of the
-UUID library.</p>
 </li>
 </ul>
+<p>Esta foi a estratégia adotada em <a class="reference internal" href="probing.html#probing"><span class="std std-ref">A05 - Compilação, vinculação e execução</span></a> ao testar o uso da biblioteca UUID.</p>
 <div class="admonition-keypoints keypoints admonition" id="keypoints-0">
 <p class="admonition-title">Keypoints</p>
 <ul class="simple">
-<li><p>CMake has a rich ecosystem of modules for finding software dependencies. They are called <code class="docutils literal notranslate"><span class="pre">Find&lt;package&gt;.cmake</span></code>.</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">Find&lt;package&gt;.cmake</span></code> modules are used through <code class="docutils literal notranslate"><span class="pre">find_package(&lt;package&gt;)</span></code>.</p></li>
-<li><p>You can also use the classic Unix tool <code class="docutils literal notranslate"><span class="pre">pkg-config</span></code> to find software
-dependencies, but this is not as robust as the CMake-native
-<code class="docutils literal notranslate"><span class="pre">Find&lt;package&gt;</span></code> modules.</p></li>
+<li><p>O CMake possui um rico ecossistema de módulos para encontrar dependências de software. Eles são chamados de <code class="docutils literal notranslate"><span class="pre">Find&lt;package&gt;.cmake</span></code>.</p></li>
+<li><p>Os módulos <code class="docutils literal notranslate"><span class="pre">Find&lt;package&gt;.cmake</span></code> são usados através de <code class="docutils literal notranslate"><span class="pre">find_package(&lt;package&gt;)</span></code>.</p></li>
+<li><dl class="simple">
+<dt>Você também pode usar a ferramenta clássica do Unix <code class="docutils literal notranslate"><span class="pre">pkg-config</span></code></dt><dd><p>para encontrar dependências de software, mas isso não é tão robusto quanto os módulos <code class="docutils literal notranslate"><span class="pre">Find&lt;package&gt;</span></code> nativos do CMake.</p>
+</dd>
+</dl>
+</li>
 </ul>
 </div>
 <p class="rubric">Footnotes</p>
 <dl class="footnote brackets">
 <dt class="label" id="omp"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
-<dd><p>Example adapted from page 85 in <a class="reference external" href="http://www.openmp.org/wp-content/uploads/openmp-examples-4.5.0.pdf">OpenMP 4.5 examples</a>.</p>
+<dd><p>Exemplo adaptado da página 85 em <a class="reference external" href="http://www.openmp.org/wp-content/uploads/openmp-examples-4.5.0.pdf">OpenMP 4.5 examples</a>.</p>
 </dd>
 <dt class="label" id="verbose"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
-<dd><p>The way in which to trigger a verbose build depends on the native build tool you are using.
-For Unix Makefiles:</p>
+<dd><p>A maneira de acionar uma compilação detalhada depende da ferramenta de compilação nativa que você está usando.
+Para Makefiles Unix:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --build build -- <span class="nv">VERBOSE</span><span class="o">=</span><span class="m">1</span>
 </pre></div>
 </div>
-<p>For Ninja:</p>
+<p>Para Ninja:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --build build -- -v
 </pre></div>
 </div>

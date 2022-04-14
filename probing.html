@@ -31,7 +31,8 @@
         <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="A04 - Detectando seu ambiente" href="environment.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -54,11 +55,17 @@
 <li class="toctree-l1"><a class="reference internal" href="setup.html">Configurando seu sistema</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Atividades</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="hello-cmake.html">A01 - Dos fontes para os executáveis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cmake-syntax.html">A02 - Síntaxe CMake</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hello-ctest.html">A03 - Criando e executando testes com o CTest</a></li>
 <li class="toctree-l1"><a class="reference internal" href="environment.html">A04 - Detectando seu ambiente</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">A05 - Compilação, vinculação e execução</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#executando-comandos-personalizados">Executando comandos personalizados</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#comandos-personalizados-para-seus-alvos-targets">Comandos personalizados para seus alvos (<em>targets</em>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#testar-a-compilacao-vinculacao-e-execucao">Testar a compilação, vinculação e execução</a></li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -98,11 +105,11 @@
 <ul class="simple">
 <li><p>Aprenda como e quando usar <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/execute_process.html"><span class="xref std std-term"><code class="docutils literal notranslate">execute_process</code></span></a></p></li>
 <li><p>Aprenda a usar <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/add_custom_command.html"><span class="xref std std-term"><code class="docutils literal notranslate">add_custom_command</code></span></a> com alvos.</p></li>
-<li><p>Aprenda a testar a compilação, vinculação e execução.</p></li>
+<li><p>Aprenda a testar a compilação, a vinculação e a execução.</p></li>
 </ul>
 </div>
-<p>CMAKE permite que você execute comandos arbitrários em qualquer estágio no ciclo de vida do projeto.
-Este é mais um mecanismo de personalização e discutiremos algumas das
+<p>CMake permite que você execute comandos arbitrários em qualquer estágio no ciclo de vida
+do projeto. Este é mais um mecanismo de personalização e discutiremos algumas das
 opções neste tutorial.</p>
 <section id="executando-comandos-personalizados">
 <h2>Executando comandos personalizados<a class="headerlink" href="#executando-comandos-personalizados" title="Permalink to this headline"></a></h2>
@@ -134,8 +141,8 @@ são registrados nas variáveis <code class="docutils literal notranslate"><span
 respectivamente. O resultado do último processo é salvo em
 <code class="docutils literal notranslate"><span class="pre">RESULT_VARIABLE</span></code>.</p>
 </div>
-<p>É importante notar que qualquer comando invocado <code class="docutils literal notranslate"><span class="pre">execute_process</span></code>
-só será executado na execução do <code class="docutils literal notranslate"><span class="pre">cmake</span></code>.  *</p>
+<p>É importante notar que qualquer comando invocado pelo <code class="docutils literal notranslate"><span class="pre">execute_process</span></code>
+só será executado na execução do <code class="docutils literal notranslate"><span class="pre">cmake</span></code>.</p>
 <div class="admonition-exercicio-17-encontre-um-modulo-python exercise important admonition" id="exercise-0">
 <p class="admonition-title">Exercício 17: Encontre um módulo Python</p>
 <p>Neste exercício, usaremos <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/execute_process.html"><span class="xref std std-term"><code class="docutils literal notranslate">execute_process</code></span></a> para verificar se o módulo Python <a class="reference external" href="https://cffi.readthedocs.io/en/latest/index.html">cffi</a>
@@ -145,7 +152,7 @@ está instalado em seu ambiente. Na linha de comando, você faria:</p>
 </pre></div>
 </div>
 <p>Seu objetivo é replicar o mesmo no CMake. O código base está em
-<code class="docutils literal notranslate"><span class="pre">content/code/day-1/17_find_cffi</span></code>.
+<code class="docutils literal notranslate"><span class="pre">source/code/day-1/17_find_cffi</span></code>.
 Você terá que modificar a chamada de <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/execute_process.html"><span class="xref std std-term"><code class="docutils literal notranslate">execute_process</code></span></a> para executar
 o comando acima.</p>
 <p>Um exemplo funcional está na subpasta <code class="docutils literal notranslate"><span class="pre">solution</span></code>.</p>
@@ -159,17 +166,17 @@ sua documentação com:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --help-module FindPython <span class="p">|</span> more
 </pre></div>
 </div>
-<p>Revisitaremos os usos de <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_package.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_package</code></span></a> mais tarde em <a class="reference internal" href="dependencies.html#dependencies"><span class="std std-ref">Finding and using dependencies</span></a>.</p>
+<p>Revisitaremos os usos de <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_package.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_package</code></span></a> mais tarde em <a class="reference internal" href="dependencies.html#dependencies"><span class="std std-ref">Encontrando e usando dependências</span></a>.</p>
 </section>
 <section id="comandos-personalizados-para-seus-alvos-targets">
 <h2>Comandos personalizados para seus alvos (<em>targets</em>)<a class="headerlink" href="#comandos-personalizados-para-seus-alvos-targets" title="Permalink to this headline"></a></h2>
 <p>Como mencionado, o principal problema de <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/execute_process.html"><span class="xref std std-term"><code class="docutils literal notranslate">execute_process</code></span></a> é que vai rodar
-um comando quando o comando <code class="docutils literal notranslate"><span class="pre">cmake</span></code> é invocado pela primeira vez.
+o processo somente quando o comando <code class="docutils literal notranslate"><span class="pre">cmake</span></code> é invocado pela primeira vez.
 Portanto, <em>não</em> é uma alternativa viável se pretendermos realizar algumas
 ações específicas dependendo dos alvos ou tornar o resultado dos comandos
 personalizados uma dependência para outros alvos.</p>
-<p>Ambos os casos têm exemplos do mundo real, como ao usar código gerado automaticamente. O comando CMake <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/add_custom_command.html"><span class="xref std std-term"><code class="docutils literal notranslate">add_custom_command</code></span></a>
-pode ser usado em alguns desses casos.</p>
+<p>Ambos os casos têm exemplos do mundo real, como ao usar código gerado automaticamente.
+O comando CMake <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/add_custom_command.html"><span class="xref std std-term"><code class="docutils literal notranslate">add_custom_command</code></span></a> pode ser usado em alguns desses casos.</p>
 <div class="admonition-add-custom-command signature toggle-shown dropdown admonition" id="signature-1">
 <p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/add_custom_command.html"><span class="xref std std-term"><code class="docutils literal notranslate">add_custom_command</code></span></a></p>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">add_custom_command</span><span class="p">(</span><span class="s">TARGET</span><span class="w"> </span><span class="s">&lt;target&gt;</span>
@@ -183,7 +190,7 @@ pode ser usado em alguns desses casos.</p>
 </pre></div>
 </div>
 <p>Adicione um ou mais comandos customizados a um destino, como uma biblioteca ou um executável.
-Os comandos podem ser executados antes de vincular (com <code class="docutils literal notranslate"><span class="pre">PRE_BUILD</span></code> e <code class="docutils literal notranslate"><span class="pre">PRE_LINK</span></code>)
+Os comandos podem ser executados antes da vinculaçao (com <code class="docutils literal notranslate"><span class="pre">PRE_BUILD</span></code> e <code class="docutils literal notranslate"><span class="pre">PRE_LINK</span></code>)
 ou depois (com <code class="docutils literal notranslate"><span class="pre">POST_BUILD</span></code>)</p>
 </div>
 <div class="admonition-exercicio-18-antes-e-depois-da-montagem exercise important admonition" id="exercise-1">
@@ -207,8 +214,8 @@ em mente o nome que você deu ao alvo.</p></li>
 <p>Um exemplo funcional está na subpasta <code class="docutils literal notranslate"><span class="pre">solution</span></code>.</p>
 </div>
 </section>
-<section id="testar-compilacao-vinculacao-e-execucao">
-<h2>Testar compilação, vinculação e execução<a class="headerlink" href="#testar-compilacao-vinculacao-e-execucao" title="Permalink to this headline"></a></h2>
+<section id="testar-a-compilacao-vinculacao-e-execucao">
+<h2>Testar a compilação, vinculação e execução<a class="headerlink" href="#testar-a-compilacao-vinculacao-e-execucao" title="Permalink to this headline"></a></h2>
 <p>Também queremos poder executar verificações em nossos compiladores e
 vinculadores. Ou verificar se uma determinada biblioteca pode ser usada
 corretamente antes de tentar construir nossos próprios artefatos.
@@ -236,7 +243,7 @@ O CMake fornece módulos e comandos para estes fins:</p>
 <p>Compilers evolve: they add and/or remove flags and sometimes you will face
 the need to test whether some flags are available before using them in your
 build.</p>
-<p>The scaffold code is in <code class="docutils literal notranslate"><span class="pre">content/code/day-1/19_check_compiler_flag</span></code>.</p>
+<p>The scaffold code is in <code class="docutils literal notranslate"><span class="pre">source/code/day-1/19_check_compiler_flag</span></code>.</p>
 <ol class="arabic">
 <li><p>Implement a <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> to build an executable from the
 <code class="docutils literal notranslate"><span class="pre">asan-example.cpp</span></code> source file.</p></li>
@@ -296,7 +303,9 @@ library: use the <code class="docutils literal notranslate"><span class="pre">Pk
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="environment.html" class="btn btn-neutral float-left" title="A04 - Detectando seu ambiente" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
 
   <hr/>
 

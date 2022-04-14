@@ -68,6 +68,7 @@
 <li class="toctree-l1"><a class="reference internal" href="cmake-syntax.html">A02 - Síntaxe CMake</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hello-ctest.html">A03 - Criando e executando testes com o CTest</a></li>
 <li class="toctree-l1"><a class="reference internal" href="environment.html">A04 - Detectando seu ambiente</a></li>
+<li class="toctree-l1"><a class="reference internal" href="probing.html">A05 - Compilação, vinculação e execução</a></li>
 </ul>
 
         </div>
@@ -98,41 +99,42 @@
 <span id="hello-cmake"></span><h1>A01 - Dos fontes para os executáveis<a class="headerlink" href="#a01-dos-fontes-para-os-executaveis" title="Permalink to this headline"></a></h1>
 <div class="admonition-questions questions admonition" id="questions-0">
 <p class="admonition-title">Questions</p>
-<p>-Como usamos o CMAKE para compilar arquivos fontes para gerar executáveis?</p>
+<p>-Como podemos usar o CMAKE para compilar arquivos fontes para gerar executáveis?</p>
 </div>
 <div class="admonition-objectives objectives admonition" id="objectives-0">
 <p class="admonition-title">Objectives</p>
 <ul class="simple">
-<li><p>Aprenda ferramentas disponíveis na suíte Cmake.</p></li>
-<li><p>Aprenda a escrever um simples <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>.</p></li>
-<li><p>Aprenda a diferença entre <em>build systems</em>, <em>build tools</em>, e <em>build system generator</em>.</p></li>
-<li><p>Aprenda a distinguir entre tempos de <em>configuração</em>, <em>geração</em>, and <em>construção</em>.</p></li>
+<li><p>Aprender sobre as ferramentas disponíveis na suíte Cmake.</p></li>
+<li><p>Aprender a escrever um script <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> simples.</p></li>
+<li><p>Aprender a diferença entre <em>build systems</em>, <em>build tools</em>, e <em>build system generator</em>.</p></li>
+<li><p>Aprender a distinguir entre tempos de <em>configuração</em>, <em>geração</em>, and <em>construção</em>.</p></li>
 </ul>
 </div>
 <section id="o-que-e-cmake-e-por-que-voce-deveria-se-importar">
 <h2>O que é CMAKE e por que você deveria se importar?<a class="headerlink" href="#o-que-e-cmake-e-por-que-voce-deveria-se-importar" title="Permalink to this headline"></a></h2>
-<p>Sempre que você executar um software, qualquer que seja, desde aplicativos de calendário
+<p>Sempre que você executa um software, qualquer que seja, desde aplicativos de calendário
 até programas de computação intensivos, haverá um sistema de construção envolvido na
-transformação do código-fonte de texto simples em arquivos binários que podem ser
+transformação do código-fonte em arquivos binários que podem ser
 executados nos dispositivos que você esteja usando.</p>
-<p>Cmake é uma ferramenta open-source que permite gerar automaticamente scripts de construção de aplicação em diferentes plataformas.
-Ele fornece uma família de ferramentas e um <em>linguagem</em> para <strong>descrever</strong> um o sistema de compilação quando
-as ferramentas de construção apropriadas são invocadas.</p>
+<p>CMake é uma ferramenta open-source que permite gerar automaticamente scripts de construção de aplicação
+em diferentes plataformas. Ele fornece uma família de ferramentas e um <em>linguagem</em> para
+<strong>descrever</strong> um o sistema de compilação quando  as ferramentas de construção apropriadas
+são invocadas.</p>
 <p>A linguagem independe da plataforma <em>e</em> do compilador: você pode reutilizar o mesmo
-scripts CMAKE para obter <em>sistemas de construção nativos</em> em qualquer plataforma.</p>
+scripts CMake para obter <em>sistemas de construção nativos</em> em qualquer plataforma.</p>
 <figure class="align-center" id="id2">
 <img alt="_images/build-systems.svg" src="_images/build-systems.svg" /><figcaption>
-<p><span class="caption-text">Em sistemas GNU/Linux,O sistema de construção nativo será uma coleção de <code class="docutils literal notranslate"><span class="pre">Makefile</span></code>-s.
+<p><span class="caption-text">Em sistemas GNU/Linux, o sistema de construção nativo será uma coleção de <code class="docutils literal notranslate"><span class="pre">Makefile</span></code>-s.
 A ferramenta de construção <code class="docutils literal notranslate"><span class="pre">make</span></code> usa estes <code class="docutils literal notranslate"><span class="pre">Makefile</span></code>-s para transformar fontes em
 executáveis e bibliotecas.
-CMAke abstrai o processo de gerar o <code class="docutils literal notranslate"><span class="pre">Makefile</span></code>-s em um script genérico.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+CMake abstrai o processo de gerar o <code class="docutils literal notranslate"><span class="pre">Makefile</span></code>-s em um script genérico.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>Um sistema de compilação baseado em CMAKE:</p>
 <ul class="simple">
 <li><p>Pode trazer seu software mais perto de ser independente de plataforma <em>e</em> do compilador.</p></li>
-<li><p>tem um bom suporte em muitos ambientes de desenvolvimento integrados (IDES).</p></li>
-<li><p>rastreia automaticamente e propaga dependências internas em seu projeto.</p></li>
+<li><p>Tem um bom suporte em muitos ambientes de desenvolvimento integrados (IDES).</p></li>
+<li><p>Pode rastreiar automaticamente e propagar dependências internas em seu projeto.</p></li>
 </ul>
 </section>
 <section id="id1">
@@ -143,7 +145,7 @@ CMAke abstrai o processo de gerar o <code class="docutils literal notranslate"><
 sua língua favorita e comece a digitar!</p>
 <div class="sphinx-tabs docutils container">
 <div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">C++</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">Fortran</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><p>Você pode encontrar o arquivo com o código-fonte completo na pasta
-<code class="docutils literal notranslate"><span class="pre">content/code/day-1/00_hello-cxx</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">source/code/day-1/00_hello-cxx</span></code>.</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdlib&gt;</span><span class="cp"></span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
 
@@ -156,7 +158,7 @@ sua língua favorita e comece a digitar!</p>
 </div>
 <p>Uma solução está na subpasta <code class="docutils literal notranslate"><span class="pre">solution</span></code>.</p>
 </div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><blockquote>
-<div><p>Você pode encontrar o arquivo com o código-fonte completo na pasta <code class="docutils literal notranslate"><span class="pre">content/code/day-1/00_hello-f</span></code>.</p>
+<div><p>Você pode encontrar o arquivo com o código-fonte completo na pasta <code class="docutils literal notranslate"><span class="pre">source/code/day-1/00_hello-f</span></code>.</p>
 </div></blockquote>
 <div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="k">pure function </span><span class="n">say_hello</span><span class="p">()</span><span class="w"> </span><span class="k">result</span><span class="p">(</span><span class="n">message</span><span class="p">)</span><span class="w"></span>
 
@@ -399,7 +401,7 @@ Vamos esclarecer esses conceitos em <span class="xref std std-ref">targets</span
 <blockquote>
 <div><div class="sphinx-tabs docutils container">
 <div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-1-1-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-1-1-0" name="1-0" role="tab" tabindex="0">C++</button><button aria-controls="panel-1-1-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-1-1-1" name="1-1" role="tab" tabindex="-1">Fortran</button></div><div aria-labelledby="tab-1-1-0" class="sphinx-tabs-panel" id="panel-1-1-0" name="1-0" role="tabpanel" tabindex="0"><p>Você pode encontrar um projeto base na pasta
-<code class="docutils literal notranslate"><span class="pre">content/code/day-1/01_libraries-cxx</span></code> .</p>
+<code class="docutils literal notranslate"><span class="pre">source/code/day-1/01_libraries-cxx</span></code> .</p>
 <ol class="arabic simple">
 <li><p>Escreva um <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> para compilar os códigos-fontes
 <code class="docutils literal notranslate"><span class="pre">Message.hpp</span></code> e  <code class="docutils literal notranslate"><span class="pre">Message.cpp</span></code> como uma bibliotecas.
@@ -409,7 +411,7 @@ Não especifique o tipo de biblioteca, compartilhada ou estática, explicitament
 </ol>
 <p>Uma solução está na subpasta <code class="docutils literal notranslate"><span class="pre">solution</span></code>.</p>
 </div><div aria-labelledby="tab-1-1-1" class="sphinx-tabs-panel" hidden="true" id="panel-1-1-1" name="1-1" role="tabpanel" tabindex="0"><dl>
-<dt>Você pode encontrar um projeto base na pasta</dt><dd><p><code class="docutils literal notranslate"><span class="pre">content/code/day-1/01_libraries-f</span></code> folder.</p>
+<dt>Você pode encontrar um projeto base na pasta</dt><dd><p><code class="docutils literal notranslate"><span class="pre">source/code/day-1/01_libraries-f</span></code> folder.</p>
 <ol class="arabic simple">
 <li><p>Escreva um  <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> para compilar o código-fonte <code class="docutils literal notranslate"><span class="pre">message.f90</span></code> como uma bibliotecas.
 Não especifique o tipo de biblioteca, compartilhada ou estática, explicitamente.</p></li>

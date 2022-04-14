@@ -6,45 +6,46 @@ A01 - Dos fontes para os executáveis
 
 .. questions::
 
-   -Como usamos o CMAKE para compilar arquivos fontes para gerar executáveis?
+   -Como podemos usar o CMAKE para compilar arquivos fontes para gerar executáveis?
 
 .. objectives::
 
-   - Aprenda ferramentas disponíveis na suíte Cmake.
-   - Aprenda a escrever um simples ``CMakeLists.txt``.
-   - Aprenda a diferença entre *build systems*, *build tools*, e *build system generator*.
-   - Aprenda a distinguir entre tempos de *configuração*, *geração*, and *construção*.
+   - Aprender sobre as ferramentas disponíveis na suíte Cmake.
+   - Aprender a escrever um script ``CMakeLists.txt`` simples.
+   - Aprender a diferença entre *build systems*, *build tools*, e *build system generator*.
+   - Aprender a distinguir entre tempos de *configuração*, *geração*, and *construção*.
 
 
 O que é CMAKE e por que você deveria se importar?
 ---------------------------------------------------
 
-Sempre que você executar um software, qualquer que seja, desde aplicativos de calendário 
+Sempre que você executa um software, qualquer que seja, desde aplicativos de calendário 
 até programas de computação intensivos, haverá um sistema de construção envolvido na 
-transformação do código-fonte de texto simples em arquivos binários que podem ser 
+transformação do código-fonte em arquivos binários que podem ser 
 executados nos dispositivos que você esteja usando.
 
-Cmake é uma ferramenta open-source que permite gerar automaticamente scripts de construção de aplicação em diferentes plataformas.
-Ele fornece uma família de ferramentas e um *linguagem* para **descrever** um o sistema de compilação quando 
-as ferramentas de construção apropriadas são invocadas.
+CMake é uma ferramenta open-source que permite gerar automaticamente scripts de construção de aplicação 
+em diferentes plataformas. Ele fornece uma família de ferramentas e um *linguagem* para 
+**descrever** um o sistema de compilação quando  as ferramentas de construção apropriadas 
+são invocadas.
 
 A linguagem independe da plataforma *e* do compilador: você pode reutilizar o mesmo 
-scripts CMAKE para obter *sistemas de construção nativos* em qualquer plataforma.
+scripts CMake para obter *sistemas de construção nativos* em qualquer plataforma.
 
 
 .. figure:: img/build-systems.svg
    :align: center
 
-   Em sistemas GNU/Linux,O sistema de construção nativo será uma coleção de ``Makefile``-s.
+   Em sistemas GNU/Linux, o sistema de construção nativo será uma coleção de ``Makefile``-s.
    A ferramenta de construção ``make`` usa estes ``Makefile``-s para transformar fontes em
    executáveis e bibliotecas.
-   CMAke abstrai o processo de gerar o ``Makefile``-s em um script genérico.
+   CMake abstrai o processo de gerar o ``Makefile``-s em um script genérico.
 
 Um sistema de compilação baseado em CMAKE:
 
 - Pode trazer seu software mais perto de ser independente de plataforma *e* do compilador.
-- tem um bom suporte em muitos ambientes de desenvolvimento integrados (IDES).
-- rastreia automaticamente e propaga dependências internas em seu projeto.
+- Tem um bom suporte em muitos ambientes de desenvolvimento integrados (IDES).
+- Pode rastreiar automaticamente e propagar dependências internas em seu projeto.
 
 Hello, CMake!
 -------------
@@ -59,7 +60,7 @@ Hello, CMake!
       .. tab:: C++
 
          Você pode encontrar o arquivo com o código-fonte completo na pasta
-         ``content/code/day-1/00_hello-cxx``.
+         ``source/code/day-1/00_hello-cxx``.
 
          .. literalinclude:: code/day-1/00_hello-cxx/hello.cpp
             :language: c++
@@ -68,7 +69,7 @@ Hello, CMake!
 
       .. tab:: Fortran
 
-          Você pode encontrar o arquivo com o código-fonte completo na pasta ``content/code/day-1/00_hello-f``.
+          Você pode encontrar o arquivo com o código-fonte completo na pasta ``source/code/day-1/00_hello-f``.
 
          .. literalinclude:: code/day-1/00_hello-f/hello.f90
             :language: fortran
@@ -318,7 +319,7 @@ Você pode vincular bibliotecas em executáveis com |target_link_libraries|:
       .. tab:: C++
 
          Você pode encontrar um projeto base na pasta
-         ``content/code/day-1/01_libraries-cxx`` .
+         ``source/code/day-1/01_libraries-cxx`` .
 
          #. Escreva um ``CMakeLists.txt`` para compilar os códigos-fontes
             ``Message.hpp`` e  ``Message.cpp`` como uma bibliotecas. 
@@ -331,7 +332,7 @@ Você pode vincular bibliotecas em executáveis com |target_link_libraries|:
       .. tab:: Fortran
 
         Você pode encontrar um projeto base na pasta
-         ``content/code/day-1/01_libraries-f`` folder.
+         ``source/code/day-1/01_libraries-f`` folder.
 
          #. Escreva um  ``CMakeLists.txt`` para compilar o código-fonte ``message.f90`` como uma bibliotecas.   
             Não especifique o tipo de biblioteca, compartilhada ou estática, explicitamente.

@@ -1,39 +1,40 @@
 .. _dependencies:
 
 
-Finding and using dependencies
-==============================
+Encontrando e usando dependências
+===================================
 
 .. questions::
 
-   - How can I use CMake to detect and use the dependencies of my project?
+   - Como posso usar o CMake para detectar e usar as dependências do meu projeto?
 
 .. objectives::
 
-   - Learn how to use |find_package|.
-   - Learn what other detection alternatives exist.
+   - Aprender como usar |find_package|.
+   - Saiba quais outras alternativas de detecção existem.
 
-The vast majority of software projects do not happen in a vacuum: they will have
-dependencies on existing frameworks and libraries.  Good documentation will
-instruct your users to ensure that these are satisfied in their programming
-environment. The build system is the appropriate place to check that these
-preconditions are met and that your project can be built correctly.
-In this episode, we will show you few examples of how to detect and use
-dependencies in your CMake build system.
+A grande maioria dos projetos de software não acontece no vácuo: 
+eles terão dependências de frameworks e bibliotecas existentes. 
+Uma boa documentação instruirá seus usuários a garantir que eles 
+sejam satisfeitos em seu ambiente de programação. 
+O sistema de compilação é o local apropriado para verificar se 
+essas pré-condições são atendidas e se seu projeto pode ser construído 
+corretamente. Neste episódio, mostraremos alguns exemplos de como 
+detectar e usar dependências em seu sistema de compilação CMake.
 
-Finding dependencies
---------------------
+Encontrando dependências
+--------------------------
 
-CMake offers a family of commands to find artifacts installed on your system:
+O CMake oferece uma família de comandos para encontrar artefatos instalados em seu sistema:
 
-- |find_file| to retrieve the full path to a file.
-- |find_library| to find a library, shared or static.
-- |find_package| to find and load settings from an external project.
-- |find_path| to find the directory containing a file.
-- |find_program| to find an executable.
+- |find_file| para recuperar o caminho completo para um arquivo.
+- |find_library| para encontrar uma biblioteca, compartilhada ou estática.
+- |find_package| para encontrar e carregar configurações de um projeto externo.
+- |find_path| para encontrar o diretório que contém um arquivo.
+- |find_program| para encontrar um executável.
 
-The workhorse of dependency discovery is |find_package|, which will cover your
-needs in almost all use cases.
+A principal ferramenta para a descoberta de dependência é |find_package|, 
+que cobrirá suas necessidades em quase todos os casos de uso.
 
 .. signature:: |find_package|
 
@@ -44,26 +45,23 @@ needs in almost all use cases.
              [OPTIONAL_COMPONENTS components...]
              [NO_POLICY_SCOPE])
 
-   This command will attempt finding the package with name ``<PackageName>`` by
-   searching in a number of `predefined folders
-   <https://cmake.org/cmake/help/latest/command/find_package.html?highlight=find_package#search-procedure>`_.
-   It is possible to ask for a minimum or exact version. If ``REQUIRED`` is
-   given, a failed search will trigger a fatal error.  The rules for the search
-   are obtained from modules named ``Find<PackageName>.cmake``.
-   Packages can also have *components* and you can ask to detect just a handful of them.
+   Este comando tentará encontrar o pacote com o nome ``<PackageName>`` pesquisando 
+   em várias `pastas predefinidas <https://cmake.org/cmake/help/latest/command/find_package.html?highlight=find_package#search-procedure>`_.
+   É possível solicitar uma versão mínima ou exata. Se ``REQUIRED`` for fornecido, uma pesquisa 
+   com falha acionará um erro fatal. As regras para a busca são obtidas em módulos chamados 
+   ``Find<PackageName>.cmake``.
+   Os pacotes também podem ter *componentes* e você pode pedir para detectar apenas alguns deles. 
 
+você deve **somente** usar os outros comandos da família ``find_`` 
+em circunstâncias muito especiais e restritas. Por quê?
 
-We cannot stress this enough: you should **only** use the other commands in the
-``find_`` family in very special, very narrow circumstances.  Why so?
-
-1. For a large selection of common dependencies, the ``Find<PackageName>.cmake``
-   modules shipped with CMake work flawlessly and are maintained by the CMake
-   developers. This lifts the burden of programming your own dependency
-   detection tricks.
-2. |find_package| will set up **imported targets**: targets defined *outside*
-   your project that you can use with your own targets.  The properties on
-   imported targets defines *usage requirements* for the dependencies. A command
-   such as:
+1. Para uma grande variedade de dependências comuns, os módulos ``Find<PackageName>.cmake`` enviados 
+   com o CMake funcionam perfeitamente e são mantidos pelos desenvolvedores do CMake. 
+   Isso elimina o fardo de programar seus próprios modulos de detecção de dependência.
+2. |find_package| irá configurar **alvos importados**: alvos definidos *fora* do
+   seu projeto que podem ser usados com seus próprios alvos. 
+   As propriedades nos destinos importados definem *requisitos de uso* para as 
+   dependências. Um comando como:
 
    .. code-block:: cmake
 
@@ -72,52 +70,50 @@ We cannot stress this enough: you should **only** use the other commands in the
           imported-target
         )
 
-   will set compiler flags, definitions, include directories, and link libraries
-   from ``imported-target`` to ``your-target`` *and* to all other targets in
-   your project that will use ``your-target``.
+
+   definirá *flags* de compilador, definições, diretórios de inclusão e bibliotecas de links de ``imported-target`` para ``your-target`` *e* para todos os outros destinos em seu projeto 
+   que usarão ``your-target``.
 
 
-These two points simplify **enormously** the burden of dependency detection and
-consistent usage within a multi-folder project.
+Esses dois pontos simplificam **enormemente** a
+detecção de dependência e uso consistente em um projeto de várias pastas.
 
 
-Using ``find_package``
-++++++++++++++++++++++
+Usando ``find_package``
+++++++++++++++++++++++++
 
-When attempting dependency detection with |find_package|, you should make sure that:
+Ao tentar a detecção de dependência com |find_package|, você deve certificar-se de que:
 
-- A ``Find<PackageName>.cmake`` module exists,
-- Which components, if any, it provides, and
-- What imported targets it will set up.
+- Um modulo ``Find<PackageName>.cmake`` exista,
+- Quais componentes, se houver, ele fornece e
+- Quais destinos importados ele configurará.
 
-A complete list of ``Find<PackageName>.cmake`` can be found from the command-line interface:
-
+Uma lista completa de ``Find<PackageName>.cmake`` pode ser encontrada na interface de linha de comando:
 .. code-block:: bash
 
    $ cmake --help-module-list | grep "Find"
 
-.. typealong:: Using OpenMP
+.. typealong:: Usando OpenMP.
 
-   We want to compile the following OpenMP sample code: [#omp]_
+   Queremos compilar o seguinte código de exemplo do OpenMP: [#omp]_
 
 
    .. literalinclude:: code/day-2/22_taskloop/solution/taskloop.cpp
       :language: c++
 
-   Note the usage of the ``taskloop`` construct, which was introduced in OpenMP
-   4.5: we need to make sure our C++ compiler is suitably compatible with *at
-   least* that version of the standard.
+   Observe o uso da construção ``taskloop``, que foi introduzida no OpenMP 4.5: 
+   precisamos ter certeza de que nosso compilador C++ é compatível com *pelo menos* 
+   essa versão do padrão.
 
-   From the documentation of the ``FindOpenMP.cmake`` module:
+   Da documentação do módulo ``FindOpenMP.cmake``:
 
    .. code-block:: bash
 
       $ cmake --help-module FindOpenMP | less
 
-   we find that the module provides the components ``C``, ``CXX``, and
-   ``Fortran`` and that ``OpenMP::OpenMP_CXX`` target will be provided, if
-   detection is successful.
-   Thus, we do the following:
+   descobrimos que o módulo fornece os componentes ``C``, ``CXX`` e ``Fortran`` 
+   e que o destino ``OpenMP::OpenMP_CXX`` será fornecido, 
+   se a detecção for bem sucedida. Assim, fazemos o seguinte:
 
    .. code-block:: cmake
 
@@ -125,61 +121,62 @@ A complete list of ``Find<PackageName>.cmake`` can be found from the command-lin
 
       target_link_libraries(task-loop PRIVATE OpenMP::OpenMP_CXX)
 
-   We can configure and build verbosely. [#verbose]_
-   Notice that compiler flags, include directories, and link libraries are properly resolved by CMake.
+   Podemos configurar e construir detalhadamente. [#verbose]_
+   Observe que os sinalizadores do compilador, diretórios de inclusão e 
+   bibliotecas de links são resolvidos corretamente pelo CMake.
+   
+   Você pode encontrar o exemplo completo de trabalho em ``source/code/day-2/22_taskloop/solution``.
 
-   You can find the complete working example in ``content/code/day-2/22_taskloop/solution``.
+.. exercise:: Exercício 23: Usando MPI
 
-.. exercise:: Exercise 23: Using MPI
+   Neste exercício, você tentará compilar um programa "Hello, world" 
+   que usa a interface de passagem de mensagens (MPI).
 
-   In this exercise, you will attempt compiling a "Hello, world" program that
-   uses the message passing interface (MPI).
-
-   1. Check whether a ``FindMPI.cmake`` module exists in the built-in module
-      library.
-   2. Get acquainted with its components and the variables and imported targets
-      it defines.
+   1. Verifique se existe um módulo ``FindMPI.cmake`` na biblioteca de módulos embutida.
+   2. Familiarize-se com seus componentes e as variáveis e destinos 
+      importados que ele define.
 
    .. tabs::
 
       .. tab:: C++
 
-         The scaffold project is in ``content/code/day-2/23_mpi-cxx``.
+         O projeto base está em ``source/code/day-2/23_mpi-cxx``.
 
-         #. Compile the source file to an executable.
-         #. Link against the MPI imported target.
-         #. Invoke a verbose build and observe how CMake compiles and links.
+         #. Compile o arquivo de origem em um executável.
+         #. Vincule para o destino importado MPI.
+         #. Invoque uma compilação detalhada e observe como o CMake compila e vincula.
 
-         A working example is in the ``solution`` subfolder.
+         Um exemplo funcional está na subpasta ``solution``.
 
       .. tab:: Fortran
 
-         The scaffold project is in ``content/code/day-2/23_mpi-f``.
+          O projeto base está em ``content/code/day-2/23_mpi-f``.
 
-         #. Compile the source file to an executable.
-         #. Link against the MPI imported target.
-         #. Invoke a verbose build and observe how CMake compiles and links.
+         #. Compile o arquivo de origem em um executável.
+         #. Vincule para o destino importado MPI.
+         #. Invoque uma compilação detalhada e observe como o CMake compila e vincula
 
-         A working example is in the ``solution`` subfolder.
+          Um exemplo funcional está na subpasta ``solution``.
 
 
-Alternatives: ``Config`` scripts and ``pkg-config``
+Alternativas: scripts ``Config`` e ``pkg-config``
 +++++++++++++++++++++++++++++++++++++++++++++++++++
 
-What to do when there is no built-in ``Find<PackageName>.cmake`` module for a package you depend on?
-The package developers might be already prepared to help you out:
+O que fazer quando não há um módulo ``Find<PackageName>.cmake`` embutido para um pacote do qual você depende?
+Os desenvolvedores de pacotes podem já estar preparados para ajudá-lo:
 
-- They ship the CMake-specific file ``<PackageName>Config.cmake`` which
-  describes how the imported target should be made for their package.
-  In this case, you need to point CMake to the folder containing the ``Config`` file using the
-  special ``<PackageName>_DIR`` variable:
+- Eles disponibilizam o arquivo específico do CMake ``<PackageName>Config.cmake`` que descreve 
+  como o destino importado deve ser usada pelo seu pacote. Neste caso, você precisa 
+  apontar o CMake para a pasta que contém o arquivo ``Config`` usando a variável 
+  especial ``<PackageName>_DIR``:
 
   .. code-block:: bash
 
      $ cmake -S. -Bbuild -D<PackageName>_DIR=/folder/containing/<PackageName>Config.cmake
 
-- They include a ``.pc`` file, which, on Unix-like platforms, can be detected
-  with the ``pkg-config`` utility. You can then leverage ``pkg-config`` through CMake:
+- Eles incluem um arquivo ``.pc``, que, em plataformas do tipo Unix, pode ser detectado 
+  com o utilitário ``pkg-config``. Você pode então aproveitar o ``pkg-config`` 
+  através do CMake:
 
   .. code-block:: cmake
 
@@ -192,17 +189,14 @@ The package developers might be already prepared to help you out:
        message(STATUS "Found libuuid")
      endif()
 
-  This was the strategy adopted in :ref:`probing` when testing the use of the
-  UUID library.
-
+Esta foi a estratégia adotada em :ref:`probing` ao testar o uso da biblioteca UUID.
 
 .. keypoints::
 
-   - CMake has a rich ecosystem of modules for finding software dependencies. They are called ``Find<package>.cmake``.
-   - The ``Find<package>.cmake`` modules are used through ``find_package(<package>)``.
-   - You can also use the classic Unix tool ``pkg-config`` to find software
-     dependencies, but this is not as robust as the CMake-native
-     ``Find<package>`` modules.
+   - O CMake possui um rico ecossistema de módulos para encontrar dependências de software. Eles são chamados de ``Find<package>.cmake``.
+   - Os módulos ``Find<package>.cmake`` são usados através de ``find_package(<package>)``.
+   - Você também pode usar a ferramenta clássica do Unix ``pkg-config`` 
+      para encontrar dependências de software, mas isso não é tão robusto quanto os módulos ``Find<package>`` nativos do CMake.
 
 
 
@@ -210,19 +204,19 @@ The package developers might be already prepared to help you out:
 
 .. [#omp]
 
-   Example adapted from page 85 in `OpenMP 4.5 examples
+   Exemplo adaptado da página 85 em `OpenMP 4.5 examples
    <http://www.openmp.org/wp-content/uploads/openmp-examples-4.5.0.pdf>`_.
 
 .. [#verbose]
 
-   The way in which to trigger a verbose build depends on the native build tool you are using.
-   For Unix Makefiles:
+   A maneira de acionar uma compilação detalhada depende da ferramenta de compilação nativa que você está usando.
+   Para Makefiles Unix:
 
    .. code-block:: bash
 
       $ cmake --build build -- VERBOSE=1
 
-   For Ninja:
+   Para Ninja:
 
    .. code-block:: bash
 

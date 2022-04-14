@@ -32,6 +32,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="A05 - Compilação, vinculação e execução" href="probing.html" />
     <link rel="prev" title="A03 - Criando e executando testes com o CTest" href="hello-ctest.html" /> 
 </head>
 
@@ -64,6 +65,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#codigo-fonte-dependente-da-plataforma-e-do-compilador">Código-fonte dependente da plataforma e do compilador</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="probing.html">A05 - Compilação, vinculação e execução</a></li>
 </ul>
 
         </div>
@@ -95,7 +97,7 @@
 <div class="admonition-questions questions admonition" id="questions-0">
 <p class="admonition-title">Questions</p>
 <ul class="simple">
-<li><p>Como o CMAKE interage com o ambiente?</p></li>
+<li><p>Como o CMake interage com o ambiente?</p></li>
 </ul>
 </div>
 <div class="admonition-objectives objectives admonition" id="objectives-0">
@@ -125,7 +127,7 @@ pois permite customizar a criação de artefatos em tempo real.</p>
 estamos interessados apenas em relatar qual sistema operacional o
 CMake descobre e isso é independente da linguagem de programação.</p>
 <p>Você pode encontrar o exemplo completo e funcional em
-<code class="docutils literal notranslate"><span class="pre">content/code/day-1/12_OS/solution</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">source/code/day-1/12_OS/solution</span></code>.</p>
 </div>
 <section id="descobrindo-o-processador">
 <h2>Descobrindo o processador<a class="headerlink" href="#descobrindo-o-processador" title="Permalink to this headline"></a></h2>
@@ -145,13 +147,13 @@ sistema host com o comando built-in <a class="reference internal" href="https://
 Estamos interessados apenas em relatar o que o CMake descobre
 sobre o sistema host e isso é independente da linguagem de programação.</p>
 <p>Você pode encontrar o exemplo completo e funcional em
-<code class="docutils literal notranslate"><span class="pre">content/code/day-1/13_processor/solution</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">source/code/day-1/13_processor/solution</span></code>.</p>
 </div>
 <div class="admonition-exercicio-14-conheca-o-seu-host exercise important admonition" id="exercise-0">
 <p class="admonition-title">Exercício 14: Conheça o seu host</p>
 <blockquote>
 <div><p>O projeto é baseado no modelo anterior e pode ser encontrado na pasta
-<code class="docutils literal notranslate"><span class="pre">content/code/day-1/14_host_system_information</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">source/code/day-1/14_host_system_information</span></code>.</p>
 <ol class="arabic">
 <li><p>Abra a página de ajuda para <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/cmake_host_system_information.html"><span class="xref std std-term"><code class="docutils literal notranslate">cmake_host_system_information</code></span></a>.
 Tanto no navegador quanto na linha de comando:</p>
@@ -185,7 +187,7 @@ com base em constantes de tempo de compilação:</p>
 </div>
 <p>Podemos conseguir isso com o CMake com uma combinação de introspecção
 do sistema host com o comando <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/target_compile_definitions.html"><span class="xref std std-term"><code class="docutils literal notranslate">target_compile_definitions</code></span></a>.</p>
-<p>Uma solução funcional está na subpasta <code class="docutils literal notranslate"><span class="pre">content/code/day-1/15_sys_preproc/solution</span></code>.</p>
+<p>Uma solução funcional está na subpasta <code class="docutils literal notranslate"><span class="pre">source/code/day-1/15_sys_preproc/solution</span></code>.</p>
 </div></blockquote>
 </div>
 <div class="admonition-target-compile-definitions signature toggle-shown dropdown admonition" id="signature-1">
@@ -281,6 +283,7 @@ está no <em>caminho de inclusão</em>. Podemos corrigir isso com:</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="hello-ctest.html" class="btn btn-neutral float-left" title="A03 - Criando e executando testes com o CTest" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="probing.html" class="btn btn-neutral float-right" title="A05 - Compilação, vinculação e execução" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

@@ -1,0 +1,6 @@
+#pragma once
+
+#define NUMBER_OF_PHYSICAL_CORES  @_NUMBER_OF_PHYSICAL_CORES@
+#define TOTAL_PHYSICAL_MEMORY     @_TOTAL_PHYSICAL_MEMORY@
+#define OS_NAME                  "@_OS_NAME@"
+#define OS_PLATFORM              "@_OS_PLATFORM@"

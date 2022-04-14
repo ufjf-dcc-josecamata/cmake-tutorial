@@ -1,0 +1,30 @@
+name: Build Notebook Container
+
+on:
+  push:
+  workflow_dispatch:
+
+concurrency:
+  group: latest-repo2docker-group
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Run repo2docker
+    steps:
+
+    - name: checkout files in repo
+      uses: actions/checkout@v2
+
+    - name: update jupyter dependencies with repo2docker
+      uses: jupyterhub/repo2docker-action@master
+      with:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        DOCKER_REGISTRY: ghcr.io
+        MYBINDERORG_TAG: ${{ github.event.ref }}
+        IMAGE_NAME: ${{ github.repository }}
+        PUBLIC_REGISTRY_CHECK: true
+
+        

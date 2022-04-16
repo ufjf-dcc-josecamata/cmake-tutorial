@@ -1,20 +1,20 @@
 .. _tips-and-tricks:
 
-Using CMake: tips and tricks
-============================
+Usando CMake: tips and tricks
+==============================
 
 .. objectives::
 
-   - Learn what tools exist to structure projects as they grow.
-   - Discuss the value of localizing scope and avoiding side effects.
-   - Recognize more maintainable and less maintainable patterns.
+   - Saiba quais ferramentas existem para estruturar projetos à medida que eles crescem.
+   - Discutir o valor de localizar o escopo e evitar efeitos colaterais.
+   - Reconhecer padrões de mais fácil manutenção.
 
-
-As projects grow, things get more complicated: more possibilities, more corner
-cases, more options to the user, and more developers who are contributing and
-may not oversee the entire CMake structure. In this episode we will mention a
-couple of tools to bring some structure and flow-control into larger projects. [#adapt]_
-
+À medida que os projetos crescem, as coisas ficam mais complicadas: mais 
+possibilidades, mais casos de exceções, mais opções para o usuário e 
+mais desenvolvedores que estão contribuindo e que podem não supervisionar 
+toda a estrutura do CMake. Neste episódio vamos citar
+algumas ferramentas para trazer alguma estrutura e controle de fluxo 
+para projetos maiores. [#adapt]_
 
 Listing sources or globbing them
 --------------------------------

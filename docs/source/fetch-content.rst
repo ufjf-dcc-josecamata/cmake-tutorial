@@ -1,52 +1,55 @@
 .. _fetch-content:
 
 
-Automated dependency handling with ``FetchContent``
-===================================================
+Manipulação de dependência automatizada com ``FetchContent``
+=============================================================
 
 .. questions::
 
-   - Is there a way to automatically satisfy the dependencies of our code?
+   - Existe uma maneira de satisfazer automaticamente as dependências do nosso código?
 
 .. objectives::
 
-   - Learn how to download your dependencies at configure-time with ``FetchContent``.
-   - Learn how fetched content can be used natively within your build system.
+   - Aprenda como baixar suas dependências em tempo de configuração com ``FetchContent``.
+   - Saiba como o conteúdo buscado pode ser usado de forma nativa em 
+     seu sistema de compilação.
 
 
-CMake offers **two modules** to satisfy missing dependencies on-the-fly:
-the ``ExternalProject`` and ``FetchContent`` modules.
+O CMake oferece **dois módulos** para satisfazer as dependências ausentes 
+em tempo real: os módulos ``ExternalProject`` e ``FetchContent``.
 
-Using ``ExternalProject``
-    - The download step happens at `project build-time
+Usando ``ExternalProject``
+    - A etapa de download acontece em `tempo de construção do projeto
       <https://cmake.org/cmake/help/latest/module/ExternalProject.html>`_.
-    - You can handle dependencies that **do not** use CMake.
-    - You need to rewrite your whole build system as a `superbuild
+    - Você pode lidar com dependências que **não** usam o CMake.
+    - Você precisa reescrever todo o seu sistema de compilação como um `superbuild
       <https://github.com/dev-cafe/cmake-cookbook/blob/master/chapter-08/README.md>`_.
-Using ``FetchContent``
-    - The download step happens at `project configure-time
+Usando ``FetchContent``
+    - A etapa de download acontece em `tempo de configuração do projeto
       <https://cmake.org/cmake/help/latest/module/FetchContent.html>`_.
-    - You can only manage dependencies that use CMake.
-    - It's an well-delimited change to an existing CMake build system.
-
-Both are extremely powerful mechanisms, but you should use them with care.
-Often, comprehensive documentation will suffice to help users set up their
-environment to build your code successfully!  In this episode, we will discuss
-the ``FetchContent`` module.
+    - Você só pode gerenciar dependências que usam CMake.
+    - É uma alteração bem delimitada em um sistema de compilação CMake existente.
 
 
-The ``FetchContent`` module
+Ambos são mecanismos extremamente poderosos, mas você deve usá-los com cuidado. 
+Muitas vezes, uma documentação abrangente será suficiente para ajudar os usuários 
+a configurar seu ambiente para construir seu código com sucesso! Nesta atividade, 
+discutiremos o módulo ``FetchContent``.
+
+
+O modulo ``FetchContent`` 
 ---------------------------
 
-To fetch dependencies on-the-fly at configure-time you will include the built-in
-CMake module ``FetchContent``.  This module has been part of CMake since its
-3.11 version and has been steadily improved since then.
+Para buscar dependências dinamicamente no momento da configuração, 
+você incluirá o módulo interno do CMake ``FetchContent``. Este módulo 
+faz parte do CMake desde sua versão 3.11 e vem sendo aprimorado constantemente 
+desde então.
 
-There are two steps in a ``FetchContent``-based workflow:
+Há duas etapas em um fluxo de trabalho baseado em ``FetchContent``:
 
-#. **Declaring** the content to fetch with |FetchContent_Declare|. This can be a
-   tarball (local or remote), a local folder, or a version control repository
-   (Git, SVN, etc.).
+#. **Declarando** o conteúdo a ser buscado com |FetchContent_Declare|. 
+     Pode ser um tarball (local ou remoto), uma pasta local ou um 
+     repositório de controle de versão (Git, SVN, etc.).
 
    .. signature:: |FetchContent_Declare|
 
@@ -54,21 +57,22 @@ There are two steps in a ``FetchContent``-based workflow:
 
          FetchContent_Declare(<name> <contentOptions>...)
 
-      The command accepts as ``<contentOptions>`` the same options one would give
-      to ``ExternalProject_Add`` in the *download* and *update/patch* `steps
-      <https://cmake.org/cmake/help/latest/module/ExternalProject.html#command:externalproject_add>`_.
+      O comando aceita como ``<contentOptions>`` as mesmas opções que daria 
+      para ``ExternalProject_Add`` nas etapas *download* e 
+      *update/patch*. veja mais em https://cmake.org/cmake/help/latest/module/ExternalProject.html#command:externalproject_add.
 
-      To download code from a Git repository, you would set the following:
+      Para baixar o código de um repositório Git, você deve definir o seguinte:
 
-      - ``GIT_REPOSITORY``, the location of the repository.
-      - ``GIT_TAG``, the revision (tag, branch name, commit hash) to check out.
+      - ``GIT_REPOSITORY``, a localização do repositório.
+      - ``GIT_TAG``, a versão (tag, branch, commit hash) para o check out.
 
-      whereas to download a tarball you only need set:
+      Considerando que para baixar um tarball você só precisa definir:
 
-      - ``URL``, the online location of the tarball.
+      - ``URL``, a localização online do tarball.
 
-#. **Populating** the content with |FetchContent_MakeAvailable|. This commands
-   *adds* the targets declared in the external content to your build system.
+#. **Populando** o conteúdo com |FetchContent_MakeAvailable|. 
+     Este comando *adiciona* os alvos declarados no conteúdo externo ao 
+     seu sistema de compilação.
 
    .. signature:: |FetchContent_MakeAvailable|
 
@@ -76,77 +80,77 @@ There are two steps in a ``FetchContent``-based workflow:
 
          FetchContent_MakeAvailable( <name1> [<name2>...] )
 
-   Since targets from the external project are added to your own project, you
-   will be able to use them in the same way you would when obtaining them
-   through a call to |find_package|: you can use *found* and *fetched* content
-   in the same exact way.
-   If you need to set options for building the external project, you will set
-   them as CMake variables *before* calling |FetchContent_MakeAvailable|.
 
-Unit testing with Catch2
-++++++++++++++++++++++++
+   Como os alvos do projeto externo são adicionados ao seu próprio projeto, 
+   você poderá usá-los da mesma maneira que faria ao obtê-los por meio de uma 
+   chamada para |find_package|: você pode usar o conteúdo *found* e *fetched* 
+   na mesma maneira. Se você precisa definir opções para criar o projeto externo, 
+   você as definirá como variáveis CMake *antes* de chamar 
+   |FetchContent_MakeAvailable|.
 
-Unit testing is a valuable technique in software engineering: it can help
-identify functional regressions with a very fine level of control, since each
-unit test is meant to exercise isolated components in your codebase.
-Equipping your codebase with integration *and* unit tests is very good practice.
+Testes unitários com Catch2
++++++++++++++++++++++++++++++
 
-There are many unit testing frameworks for the C++ language. Each of them
-stresses a slightly different approach to unit testing and comes with its own
-peculiarities in set up and usage.
-In this episode, we will show how to use `Catch2
-<https://github.com/catchorg/Catch2>`_ a very popular unit testing framework
-which emphasizes a test-driven development workflow.
-Catch2 is distributed as a single header file, which is one of its most
-appealing features: it can easily be included in any project. Rather than
-download the header file and adding it to our codebase, we can use
-``FetchContent`` to satisfy this dependency for us when needed.
+O teste de unidade é uma técnica valiosa em engenharia de software: 
+ele pode ajudar a identificar regressões funcionais com um nível muito fino de 
+controle, pois cada teste de unidade destina-se a exercitar componentes 
+isolados em sua base de código. Equipar sua base de código com 
+integração *e* testes de unidade é uma prática muito boa.
+
+Existem muitas estruturas de teste de unidade para a linguagem C++. 
+Cada um deles enfatiza uma abordagem ligeiramente diferente para 
+testes de unidade e vem com suas próprias peculiaridades na 
+configuração e uso.
+
+Nesta atividade, mostraremos como usar `Catch2
+<https://github.com/catchorg/Catch2>`_ uma estrutura de teste de unidade 
+muito popular que enfatiza um fluxo de trabalho de desenvolvimento orientado 
+a testes. Catch2 é distribuído como um arquivo de cabeçalho único, que é uma 
+de suas características mais atraentes: pode ser facilmente incluído em 
+qualquer projeto. Em vez de baixar o arquivo de cabeçalho e adicioná-lo à 
+nossa base de código, podemos usar ``FetchContent`` para satisfazer essa 
+dependência para nós quando necessário.
 
 
-.. exercise:: Exercise 26: Catch2 reloaded
+.. exercise:: Exercício 26: Catch2 recarregado
 
-   We want to use the Catch2 unit testing framework for our code.  In this
-   exercise, we will download the Catch2 project at configure-time from its
-   `GitHub repository <https://github.com/catchorg/Catch2>`_.
+   Queremos usar a estrutura de teste de unidade Catch2 em nosso código. 
+   Neste exercício, faremos o download do projeto Catch2 no momento da 
+   configuração de seu `repositório GitHub <https://github.com/catchorg/Catch2>`_.
 
-   A scaffold for the project is in ``content/code/day-2/26_more-catch2``.
+   O projeto base está em ``source/code/day-2/26_more-catch2``.
 
-   #. Create a C++ project.
-   #. Set the C++ standard to C++14. Catch2 will work with C++11 too.
-   #. Create a library from the ``sum_integers.cpp`` source file.
-   #. Link the library into a ``sum_up`` executable.
-   #. Include the ``FetchContent`` module and declare the ``Catch2`` content. We
-      want to download the ``v2.13.4`` tag from the `official Git repository <https://github.com/catchorg/Catch2>`_.
-   #. Make the ``Catch2`` content available.
-   #. Create the ``cpp_test`` executable.
-   #. Enable testing and add a test. You will have to check how to call a Catch2
-      executable in the `documentation
-      <https://github.com/catchorg/Catch2/blob/v2.x/docs/command-line.md#specifying-which-tests-to-run>`_.
-   #. Try running your tests.
+   #. Crie um projeto C++.
+   #. Defina o padrão C++ para C++14. Catch2 também funcionará com C++11.
+   #. Crie uma biblioteca a partir do arquivo fonte ``sum_integers.cpp``.
+   #. Vincule a biblioteca em um executável ``sum_up``.
+   #. Inclua o módulo ``FetchContent`` e declare o conteúdo ``Catch2``. 
+      Queremos baixar a tag ``v2.13.4`` do `repositório oficial do Git <https://github.com/catchorg/Catch2>`_.
+   #. Faça o conteúdo ``Catch2`` disponível.
+   #. Crie o executável ``cpp_test``.
+   #. Habilite o teste e adicione um teste. 
+      Você terá que verificar como chamar um executável Catch2 na `documentação <https://github.com/catchorg/Catch2/blob/v2.x/docs/command-line.md#specifying-which-tests-to- executar>`_.
+   #. Tente rodar seus testes.
 
-   - What differences do you note in the configuration step?
-   - What happens if you forget to issue the |FetchContent_MakeAvailable| command?
-   - What targets are built in the project? Which ones are from Catch2? You can
-     use the following command to obtain a list of all available targets:
+   - Que diferenças você observa na etapa de configuração?
+   - O que acontece se você esquecer de emitir o comando |FetchContent_MakeAvailable|?
+   - Quais alvos são construídos no projeto? Quais são do Catch2?  Você pode usar o seguinte comando para obter uma lista de todos os destinos disponíveis:
 
      .. code-block:: bash
 
         $ cmake --build build --target help
 
-   A working solution is in the ``solution`` subfolder.
-
+   Uma solução funcional está na subpasta ``solution``.
 
 .. warning::
 
-   ``FetchContent`` is a powerful module in your CMake toolbox. **Beware!**
-   Satisfying *every* dependency of your code in this way will make the duration
-   of both the configuration and build stages balloon.
+   ``FetchContent`` é um módulo poderoso em sua caixa de ferramentas CMake. 
+   **Cuidado!** Satisfazer *todas* as dependências do seu código dessa forma 
+   fará com que a duração dos estágios de configuração e construção aumentem.
 
 
 .. keypoints::
 
-   - CMake lets you satisfy dependencies *on-the-fly*.
-   - You can do so at build-time with ``ExternalProject``, but you need to adopt
-     a superbuild framework.
-   - At configure-time, you can use the ``FetchContent`` module: it can only be
-     applied with dependencies that also use CMake.
+   - CMake permite que você satisfaça dependências *on-the-fly*.
+   - Você pode fazer isso em tempo de compilação com ``ExternalProject``, mas você precisa adotar um framework superbuild.
+   - No momento da configuração, você pode usar o módulo ``FetchContent``: ele só pode ser aplicado com dependências que também usam CMake.

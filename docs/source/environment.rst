@@ -4,11 +4,11 @@
 A04 - Detectando seu ambiente
 ==================================
 
-.. questions::
+.. questions:: Questão
 
    - Como o CMake interage com o ambiente?
 
-.. objectives::
+.. objectives:: Objetivos
 
    - Aprenda como descobrir o sistema operacional.
    - Aprenda a descobrir características do processador.
@@ -195,7 +195,7 @@ de tempo de compilação necessárias.
    Uma solução funcional está na subpasta ``solution``.
 
 
-.. keypoints::
+.. keypoints:: Resumo
 
    - O CMake pode *introspectar* o sistema host.
    - Você pode compilar o código-fonte de forma diferente, com base no sistema operacional, no processador,  no compilador ou em qualquer combinação deles.

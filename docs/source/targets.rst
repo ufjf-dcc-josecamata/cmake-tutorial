@@ -4,12 +4,12 @@
 A06 -Sistemas de compilação baseados em alvos com CMake
 =========================================================
 
-.. questions::
+.. questions:: Questões
 
    - Como podemos lidar com projetos mais complexos com o CMake?
    - O que exatamente são **alvos (targets)** na linguagem específica de domínio (DSL) do CMake?
 
-.. objectives::
+.. objectives:: Objetivos
 
    - Aprenda que os elementos básicos no CMake *não* são  variáveis, *mas* alvos.
    - Saiba mais sobre as propriedades dos alvos e como usá-los.
@@ -391,7 +391,7 @@ Você pode visualizar as dependências entre os alvos em seu projeto com o Graph
      As dependências entre alvos no projeto de autômatos celulares.
 
 
-.. keypoints::
+.. keypoints:: Resumo
 
    - Usando alvos, você pode obter controle granular sobre como os 
      artefatos são criados e como suas dependências são tratadas.

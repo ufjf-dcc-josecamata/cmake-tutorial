@@ -4,11 +4,11 @@
 A05 - Compilação, vinculação e execução
 ===========================================
 
-.. questions::
+.. questions:: Questão
 
    - Como você pode adicionar etapas personalizadas ao seu sistema de compilação com CMake?
 
-.. objectives::
+.. objectives:: Objetivos
 
    - Aprenda como e quando usar |execute_process|
    - Aprenda a usar |add_custom_command| com alvos.
@@ -216,7 +216,7 @@ In all cases, ``<LANG>`` can be one of ``CXX``, ``C`` or ``Fortran``.
    A working example is in the ``solution`` subfolder.
 
 
-.. keypoints::
+.. keypoints:: Resumo
 
    - You can customize the build system by executing custom commands.
    - CMake offers commands to probe compilation, linking, and execution.

@@ -4,11 +4,11 @@
 A01 - Dos fontes para os executáveis
 =====================================
 
-.. questions::
+.. questions:: Questão
 
    -Como podemos usar o CMAKE para compilar arquivos fontes para gerar executáveis?
 
-.. objectives::
+.. objectives:: Objetivos
 
    - Aprender sobre as ferramentas disponíveis na suíte Cmake.
    - Aprender a escrever um script ``CMakeLists.txt`` simples.
@@ -343,7 +343,7 @@ Você pode vincular bibliotecas em executáveis com |target_link_libraries|:
 
   Que tipo de biblioteca você conseguiu?Estático ou compartilhado?
 
-.. keypoints::
+.. keypoints:: Resumo
 
    - O CMAKE é um **gerador de sistema de contrução**, e não sistema de compilação.
    - Escrevemos o script ``CMakeLists.txt`` para descrever como as ferramentas de construção criarão artefatos de código-fontes.

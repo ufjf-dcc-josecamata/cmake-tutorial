@@ -104,14 +104,14 @@
              
   <section id="a08-manipulacao-de-dependencia-automatizada-com-fetchcontent">
 <span id="fetch-content"></span><h1>A08 - Manipulação de dependência automatizada com <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code><a class="headerlink" href="#a08-manipulacao-de-dependencia-automatizada-com-fetchcontent" title="Permalink to this headline"></a></h1>
-<div class="admonition-questions questions admonition" id="questions-0">
-<p class="admonition-title">Questions</p>
+<div class="admonition-questao questions admonition" id="questions-0">
+<p class="admonition-title">Questão</p>
 <ul class="simple">
 <li><p>Existe uma maneira de satisfazer automaticamente as dependências do nosso código?</p></li>
 </ul>
 </div>
-<div class="admonition-objectives objectives admonition" id="objectives-0">
-<p class="admonition-title">Objectives</p>
+<div class="admonition-objetivos objectives admonition" id="objectives-0">
+<p class="admonition-title">Objetivos</p>
 <ul class="simple">
 <li><p>Aprenda como baixar suas dependências em tempo de configuração com <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code>.</p></li>
 <li><p>Saiba como o conteúdo buscado pode ser usado de forma nativa em
@@ -239,12 +239,13 @@ Você terá que verificar como chamar um executável Catch2 na <a class="referen
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
+<p>Atençao</p>
 <p><code class="docutils literal notranslate"><span class="pre">FetchContent</span></code> é um módulo poderoso em sua caixa de ferramentas CMake.
 <strong>Cuidado!</strong> Satisfazer <em>todas</em> as dependências do seu código dessa forma
 fará com que a duração dos estágios de configuração e construção aumentem.</p>
 </div>
-<div class="admonition-keypoints keypoints admonition" id="keypoints-0">
-<p class="admonition-title">Keypoints</p>
+<div class="admonition-resumo keypoints admonition" id="keypoints-0">
+<p class="admonition-title">Resumo</p>
 <ul class="simple">
 <li><p>CMake permite que você satisfaça dependências <em>on-the-fly</em>.</p></li>
 <li><p>Você pode fazer isso em tempo de compilação com <code class="docutils literal notranslate"><span class="pre">ExternalProject</span></code>, mas você precisa adotar um framework superbuild.</p></li>

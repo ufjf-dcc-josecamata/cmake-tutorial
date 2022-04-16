@@ -4,11 +4,11 @@
 A07 - Encontrando e usando dependências
 =========================================
 
-.. questions::
+.. questions:: Questão
 
    - Como posso usar o CMake para detectar e usar as dependências do meu projeto?
 
-.. objectives::
+.. objectives:: Objetivos
 
    - Aprender como usar |find_package|.
    - Saiba quais outras alternativas de detecção existem.
@@ -191,7 +191,7 @@ Os desenvolvedores de pacotes podem já estar preparados para ajudá-lo:
 
 Esta foi a estratégia adotada em :ref:`probing` ao testar o uso da biblioteca UUID.
 
-.. keypoints::
+.. keypoints:: Resumo
 
    - O CMake possui um rico ecossistema de módulos para encontrar dependências de software. Eles são chamados de ``Find<package>.cmake``.
    - Os módulos ``Find<package>.cmake`` são usados através de ``find_package(<package>)``.

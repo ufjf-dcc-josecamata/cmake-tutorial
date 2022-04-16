@@ -2,13 +2,13 @@
 
 
 A08 - Manipulação de dependência automatizada com ``FetchContent``
-=============================================================
+===================================================================
 
-.. questions::
+.. questions:: Questão
 
    - Existe uma maneira de satisfazer automaticamente as dependências do nosso código?
 
-.. objectives::
+.. objectives:: Objetivos
 
    - Aprenda como baixar suas dependências em tempo de configuração com ``FetchContent``.
    - Saiba como o conteúdo buscado pode ser usado de forma nativa em 
@@ -142,14 +142,14 @@ dependência para nós quando necessário.
 
    Uma solução funcional está na subpasta ``solution``.
 
-.. warning::
+.. warning:: Atençao
 
    ``FetchContent`` é um módulo poderoso em sua caixa de ferramentas CMake. 
    **Cuidado!** Satisfazer *todas* as dependências do seu código dessa forma 
    fará com que a duração dos estágios de configuração e construção aumentem.
 
 
-.. keypoints::
+.. keypoints:: Resumo
 
    - CMake permite que você satisfaça dependências *on-the-fly*.
    - Você pode fazer isso em tempo de compilação com ``ExternalProject``, mas você precisa adotar um framework superbuild.

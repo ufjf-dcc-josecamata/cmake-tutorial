@@ -4,11 +4,11 @@
 A03 - Criando e executando testes com o CTest
 ==============================================
 
-.. questions::
+.. questions:: Questão
 
    - Como podemos lidar com o estágio de testes do nosso projeto com CMake?
 
-.. objectives::
+.. objectives:: Objetivos
 
    - Aprenda a produzir executáveis de teste com CMake.
    - Aprenda a executar seus testes através do CTest.

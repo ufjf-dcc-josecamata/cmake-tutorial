@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Using CMake: tips and tricks &mdash; cmake-tutorial  documentation</title>
+  <title>Usando CMake: tips and tricks &mdash; cmake-tutorial  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/togglebutton.css" type="text/css" />
@@ -62,6 +62,7 @@
 <li class="toctree-l1"><a class="reference internal" href="probing.html">A05 - Compilação, vinculação e execução</a></li>
 <li class="toctree-l1"><a class="reference internal" href="targets.html">A06 -Sistemas de compilação baseados em alvos com CMake</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dependencies.html">A07 - Encontrando e usando dependências</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fetch-content.html">Manipulação de dependência automatizada com <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code></a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Referências</span></p>
 <ul>
@@ -83,7 +84,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Using CMake: tips and tricks</li>
+      <li>Usando CMake: tips and tricks</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/tips-and-tricks.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -93,20 +94,22 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="using-cmake-tips-and-tricks">
-<span id="tips-and-tricks"></span><h1>Using CMake: tips and tricks<a class="headerlink" href="#using-cmake-tips-and-tricks" title="Permalink to this headline"></a></h1>
+  <section id="usando-cmake-tips-and-tricks">
+<span id="tips-and-tricks"></span><h1>Usando CMake: tips and tricks<a class="headerlink" href="#usando-cmake-tips-and-tricks" title="Permalink to this headline"></a></h1>
 <div class="admonition-objectives objectives admonition" id="objectives-0">
 <p class="admonition-title">Objectives</p>
 <ul class="simple">
-<li><p>Learn what tools exist to structure projects as they grow.</p></li>
-<li><p>Discuss the value of localizing scope and avoiding side effects.</p></li>
-<li><p>Recognize more maintainable and less maintainable patterns.</p></li>
+<li><p>Saiba quais ferramentas existem para estruturar projetos à medida que eles crescem.</p></li>
+<li><p>Discutir o valor de localizar o escopo e evitar efeitos colaterais.</p></li>
+<li><p>Reconhecer padrões de mais fácil manutenção.</p></li>
 </ul>
 </div>
-<p>As projects grow, things get more complicated: more possibilities, more corner
-cases, more options to the user, and more developers who are contributing and
-may not oversee the entire CMake structure. In this episode we will mention a
-couple of tools to bring some structure and flow-control into larger projects. <a class="footnote-reference brackets" href="#adapt" id="id1">1</a></p>
+<p>À medida que os projetos crescem, as coisas ficam mais complicadas: mais
+possibilidades, mais casos de exceções, mais opções para o usuário e
+mais desenvolvedores que estão contribuindo e que podem não supervisionar
+toda a estrutura do CMake. Neste episódio vamos citar
+algumas ferramentas para trazer alguma estrutura e controle de fluxo
+para projetos maiores. <a class="footnote-reference brackets" href="#adapt" id="id1">1</a></p>
 <section id="listing-sources-or-globbing-them">
 <h2>Listing sources or globbing them<a class="headerlink" href="#listing-sources-or-globbing-them" title="Permalink to this headline"></a></h2>
 <p>In all our examples we have listed all sources when defining targets.</p>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Automated dependency handling with FetchContent &mdash; cmake-tutorial  documentation</title>
+  <title>Manipulação de dependência automatizada com FetchContent &mdash; cmake-tutorial  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/togglebutton.css" type="text/css" />
@@ -31,7 +31,9 @@
         <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Referência rápida" href="quick-reference.html" />
+    <link rel="prev" title="A07 - Encontrando e usando dependências" href="dependencies.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -54,7 +56,7 @@
 <li class="toctree-l1"><a class="reference internal" href="setup.html">Configurando seu sistema</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Atividades</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="hello-cmake.html">A01 - Dos fontes para os executáveis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cmake-syntax.html">A02 - Síntaxe CMake</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hello-ctest.html">A03 - Criando e executando testes com o CTest</a></li>
@@ -62,6 +64,13 @@
 <li class="toctree-l1"><a class="reference internal" href="probing.html">A05 - Compilação, vinculação e execução</a></li>
 <li class="toctree-l1"><a class="reference internal" href="targets.html">A06 -Sistemas de compilação baseados em alvos com CMake</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dependencies.html">A07 - Encontrando e usando dependências</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Manipulação de dependência automatizada com <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#o-modulo-fetchcontent">O modulo <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#testes-unitarios-com-catch2">Testes unitários com Catch2</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Referências</span></p>
 <ul>
@@ -83,7 +92,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Automated dependency handling with <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code></li>
+      <li>Manipulação de dependência automatizada com <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code></li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/fetch-content.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -93,145 +102,153 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="automated-dependency-handling-with-fetchcontent">
-<span id="fetch-content"></span><h1>Automated dependency handling with <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code><a class="headerlink" href="#automated-dependency-handling-with-fetchcontent" title="Permalink to this headline"></a></h1>
+  <section id="manipulacao-de-dependencia-automatizada-com-fetchcontent">
+<span id="fetch-content"></span><h1>Manipulação de dependência automatizada com <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code><a class="headerlink" href="#manipulacao-de-dependencia-automatizada-com-fetchcontent" title="Permalink to this headline"></a></h1>
 <div class="admonition-questions questions admonition" id="questions-0">
 <p class="admonition-title">Questions</p>
 <ul class="simple">
-<li><p>Is there a way to automatically satisfy the dependencies of our code?</p></li>
+<li><p>Existe uma maneira de satisfazer automaticamente as dependências do nosso código?</p></li>
 </ul>
 </div>
 <div class="admonition-objectives objectives admonition" id="objectives-0">
 <p class="admonition-title">Objectives</p>
 <ul class="simple">
-<li><p>Learn how to download your dependencies at configure-time with <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code>.</p></li>
-<li><p>Learn how fetched content can be used natively within your build system.</p></li>
+<li><p>Aprenda como baixar suas dependências em tempo de configuração com <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code>.</p></li>
+<li><p>Saiba como o conteúdo buscado pode ser usado de forma nativa em
+seu sistema de compilação.</p></li>
 </ul>
 </div>
-<p>CMake offers <strong>two modules</strong> to satisfy missing dependencies on-the-fly:
-the <code class="docutils literal notranslate"><span class="pre">ExternalProject</span></code> and <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code> modules.</p>
+<p>O CMake oferece <strong>dois módulos</strong> para satisfazer as dependências ausentes
+em tempo real: os módulos <code class="docutils literal notranslate"><span class="pre">ExternalProject</span></code> e <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code>.</p>
 <dl class="simple">
-<dt>Using <code class="docutils literal notranslate"><span class="pre">ExternalProject</span></code></dt><dd><ul class="simple">
-<li><p>The download step happens at <a class="reference external" href="https://cmake.org/cmake/help/latest/module/ExternalProject.html">project build-time</a>.</p></li>
-<li><p>You can handle dependencies that <strong>do not</strong> use CMake.</p></li>
-<li><p>You need to rewrite your whole build system as a <a class="reference external" href="https://github.com/dev-cafe/cmake-cookbook/blob/master/chapter-08/README.md">superbuild</a>.</p></li>
+<dt>Usando <code class="docutils literal notranslate"><span class="pre">ExternalProject</span></code></dt><dd><ul class="simple">
+<li><p>A etapa de download acontece em <a class="reference external" href="https://cmake.org/cmake/help/latest/module/ExternalProject.html">tempo de construção do projeto</a>.</p></li>
+<li><p>Você pode lidar com dependências que <strong>não</strong> usam o CMake.</p></li>
+<li><p>Você precisa reescrever todo o seu sistema de compilação como um <a class="reference external" href="https://github.com/dev-cafe/cmake-cookbook/blob/master/chapter-08/README.md">superbuild</a>.</p></li>
 </ul>
 </dd>
-<dt>Using <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code></dt><dd><ul class="simple">
-<li><p>The download step happens at <a class="reference external" href="https://cmake.org/cmake/help/latest/module/FetchContent.html">project configure-time</a>.</p></li>
-<li><p>You can only manage dependencies that use CMake.</p></li>
-<li><p>It’s an well-delimited change to an existing CMake build system.</p></li>
+<dt>Usando <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code></dt><dd><ul class="simple">
+<li><p>A etapa de download acontece em <a class="reference external" href="https://cmake.org/cmake/help/latest/module/FetchContent.html">tempo de configuração do projeto</a>.</p></li>
+<li><p>Você só pode gerenciar dependências que usam CMake.</p></li>
+<li><p>É uma alteração bem delimitada em um sistema de compilação CMake existente.</p></li>
 </ul>
 </dd>
 </dl>
-<p>Both are extremely powerful mechanisms, but you should use them with care.
-Often, comprehensive documentation will suffice to help users set up their
-environment to build your code successfully!  In this episode, we will discuss
-the <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code> module.</p>
-<section id="the-fetchcontent-module">
-<h2>The <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code> module<a class="headerlink" href="#the-fetchcontent-module" title="Permalink to this headline"></a></h2>
-<p>To fetch dependencies on-the-fly at configure-time you will include the built-in
-CMake module <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code>.  This module has been part of CMake since its
-3.11 version and has been steadily improved since then.</p>
-<p>There are two steps in a <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code>-based workflow:</p>
+<p>Ambos são mecanismos extremamente poderosos, mas você deve usá-los com cuidado.
+Muitas vezes, uma documentação abrangente será suficiente para ajudar os usuários
+a configurar seu ambiente para construir seu código com sucesso! Nesta atividade,
+discutiremos o módulo <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code>.</p>
+<section id="o-modulo-fetchcontent">
+<h2>O modulo <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code><a class="headerlink" href="#o-modulo-fetchcontent" title="Permalink to this headline"></a></h2>
+<p>Para buscar dependências dinamicamente no momento da configuração,
+você incluirá o módulo interno do CMake <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code>. Este módulo
+faz parte do CMake desde sua versão 3.11 e vem sendo aprimorado constantemente
+desde então.</p>
+<p>Há duas etapas em um fluxo de trabalho baseado em <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code>:</p>
 <ol class="arabic">
-<li><p><strong>Declaring</strong> the content to fetch with <a class="reference internal" href="https://cmake.org/cmake/help/latest/module/FetchContent.html"><span class="xref std std-term"><code class="docutils literal notranslate">FetchContent_Declare</code></span></a>. This can be a
-tarball (local or remote), a local folder, or a version control repository
-(Git, SVN, etc.).</p>
+<li><dl class="simple">
+<dt><strong>Declarando</strong> o conteúdo a ser buscado com <a class="reference internal" href="https://cmake.org/cmake/help/latest/module/FetchContent.html"><span class="xref std std-term"><code class="docutils literal notranslate">FetchContent_Declare</code></span></a>.</dt><dd><p>Pode ser um tarball (local ou remoto), uma pasta local ou um
+repositório de controle de versão (Git, SVN, etc.).</p>
+</dd>
+</dl>
 <div class="admonition-fetchcontent-declare signature toggle-shown dropdown admonition" id="signature-0">
 <p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/module/FetchContent.html"><span class="xref std std-term"><code class="docutils literal notranslate">FetchContent_Declare</code></span></a></p>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">FetchContent_Declare</span><span class="p">(</span><span class="s">&lt;name&gt;</span><span class="w"> </span><span class="s">&lt;contentOptions&gt;...</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The command accepts as <code class="docutils literal notranslate"><span class="pre">&lt;contentOptions&gt;</span></code> the same options one would give
-to <code class="docutils literal notranslate"><span class="pre">ExternalProject_Add</span></code> in the <em>download</em> and <em>update/patch</em> <a class="reference external" href="https://cmake.org/cmake/help/latest/module/ExternalProject.html#command:externalproject_add">steps</a>.</p>
-<p>To download code from a Git repository, you would set the following:</p>
+<p>O comando aceita como <code class="docutils literal notranslate"><span class="pre">&lt;contentOptions&gt;</span></code> as mesmas opções que daria
+para <code class="docutils literal notranslate"><span class="pre">ExternalProject_Add</span></code> nas etapas <em>download</em> e
+<em>update/patch</em>. veja mais em <a class="reference external" href="https://cmake.org/cmake/help/latest/module/ExternalProject.html#command:externalproject_add">https://cmake.org/cmake/help/latest/module/ExternalProject.html#command:externalproject_add</a>.</p>
+<p>Para baixar o código de um repositório Git, você deve definir o seguinte:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">GIT_REPOSITORY</span></code>, the location of the repository.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">GIT_TAG</span></code>, the revision (tag, branch name, commit hash) to check out.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GIT_REPOSITORY</span></code>, a localização do repositório.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GIT_TAG</span></code>, a versão (tag, branch, commit hash) para o check out.</p></li>
 </ul>
-<p>whereas to download a tarball you only need set:</p>
+<p>Considerando que para baixar um tarball você só precisa definir:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">URL</span></code>, the online location of the tarball.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">URL</span></code>, a localização online do tarball.</p></li>
 </ul>
 </div>
 </li>
-<li><p><strong>Populating</strong> the content with <a class="reference internal" href="https://cmake.org/cmake/help/latest/module/FetchContent.html"><span class="xref std std-term"><code class="docutils literal notranslate">FetchContent_MakeAvailable</code></span></a>. This commands
-<em>adds</em> the targets declared in the external content to your build system.</p>
+<li><dl class="simple">
+<dt><strong>Populando</strong> o conteúdo com <a class="reference internal" href="https://cmake.org/cmake/help/latest/module/FetchContent.html"><span class="xref std std-term"><code class="docutils literal notranslate">FetchContent_MakeAvailable</code></span></a>.</dt><dd><p>Este comando <em>adiciona</em> os alvos declarados no conteúdo externo ao
+seu sistema de compilação.</p>
+</dd>
+</dl>
 <div class="admonition-fetchcontent-makeavailable signature toggle-shown dropdown admonition" id="signature-1">
 <p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/module/FetchContent.html"><span class="xref std std-term"><code class="docutils literal notranslate">FetchContent_MakeAvailable</code></span></a></p>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">FetchContent_MakeAvailable</span><span class="p">(</span><span class="w"> </span><span class="s">&lt;name1&gt;</span><span class="w"> </span><span class="s">[&lt;name2&gt;...]</span><span class="w"> </span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<p>Since targets from the external project are added to your own project, you
-will be able to use them in the same way you would when obtaining them
-through a call to <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_package.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_package</code></span></a>: you can use <em>found</em> and <em>fetched</em> content
-in the same exact way.
-If you need to set options for building the external project, you will set
-them as CMake variables <em>before</em> calling <a class="reference internal" href="https://cmake.org/cmake/help/latest/module/FetchContent.html"><span class="xref std std-term"><code class="docutils literal notranslate">FetchContent_MakeAvailable</code></span></a>.</p>
+<p>Como os alvos do projeto externo são adicionados ao seu próprio projeto,
+você poderá usá-los da mesma maneira que faria ao obtê-los por meio de uma
+chamada para <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_package.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_package</code></span></a>: você pode usar o conteúdo <em>found</em> e <em>fetched</em>
+na mesma maneira. Se você precisa definir opções para criar o projeto externo,
+você as definirá como variáveis CMake <em>antes</em> de chamar
+<a class="reference internal" href="https://cmake.org/cmake/help/latest/module/FetchContent.html"><span class="xref std std-term"><code class="docutils literal notranslate">FetchContent_MakeAvailable</code></span></a>.</p>
 </li>
 </ol>
-<section id="unit-testing-with-catch2">
-<h3>Unit testing with Catch2<a class="headerlink" href="#unit-testing-with-catch2" title="Permalink to this headline"></a></h3>
-<p>Unit testing is a valuable technique in software engineering: it can help
-identify functional regressions with a very fine level of control, since each
-unit test is meant to exercise isolated components in your codebase.
-Equipping your codebase with integration <em>and</em> unit tests is very good practice.</p>
-<p>There are many unit testing frameworks for the C++ language. Each of them
-stresses a slightly different approach to unit testing and comes with its own
-peculiarities in set up and usage.
-In this episode, we will show how to use <a class="reference external" href="https://github.com/catchorg/Catch2">Catch2</a> a very popular unit testing framework
-which emphasizes a test-driven development workflow.
-Catch2 is distributed as a single header file, which is one of its most
-appealing features: it can easily be included in any project. Rather than
-download the header file and adding it to our codebase, we can use
-<code class="docutils literal notranslate"><span class="pre">FetchContent</span></code> to satisfy this dependency for us when needed.</p>
-<div class="admonition-exercise-26-catch2-reloaded exercise important admonition" id="exercise-0">
-<p class="admonition-title">Exercise 26: Catch2 reloaded</p>
-<p>We want to use the Catch2 unit testing framework for our code.  In this
-exercise, we will download the Catch2 project at configure-time from its
-<a class="reference external" href="https://github.com/catchorg/Catch2">GitHub repository</a>.</p>
-<p>A scaffold for the project is in <code class="docutils literal notranslate"><span class="pre">content/code/day-2/26_more-catch2</span></code>.</p>
+<section id="testes-unitarios-com-catch2">
+<h3>Testes unitários com Catch2<a class="headerlink" href="#testes-unitarios-com-catch2" title="Permalink to this headline"></a></h3>
+<p>O teste de unidade é uma técnica valiosa em engenharia de software:
+ele pode ajudar a identificar regressões funcionais com um nível muito fino de
+controle, pois cada teste de unidade destina-se a exercitar componentes
+isolados em sua base de código. Equipar sua base de código com
+integração <em>e</em> testes de unidade é uma prática muito boa.</p>
+<p>Existem muitas estruturas de teste de unidade para a linguagem C++.
+Cada um deles enfatiza uma abordagem ligeiramente diferente para
+testes de unidade e vem com suas próprias peculiaridades na
+configuração e uso.</p>
+<p>Nesta atividade, mostraremos como usar <a class="reference external" href="https://github.com/catchorg/Catch2">Catch2</a> uma estrutura de teste de unidade
+muito popular que enfatiza um fluxo de trabalho de desenvolvimento orientado
+a testes. Catch2 é distribuído como um arquivo de cabeçalho único, que é uma
+de suas características mais atraentes: pode ser facilmente incluído em
+qualquer projeto. Em vez de baixar o arquivo de cabeçalho e adicioná-lo à
+nossa base de código, podemos usar <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code> para satisfazer essa
+dependência para nós quando necessário.</p>
+<div class="admonition-exercicio-26-catch2-recarregado exercise important admonition" id="exercise-0">
+<p class="admonition-title">Exercício 26: Catch2 recarregado</p>
+<p>Queremos usar a estrutura de teste de unidade Catch2 em nosso código.
+Neste exercício, faremos o download do projeto Catch2 no momento da
+configuração de seu <a class="reference external" href="https://github.com/catchorg/Catch2">repositório GitHub</a>.</p>
+<p>O projeto base está em <code class="docutils literal notranslate"><span class="pre">source/code/day-2/26_more-catch2</span></code>.</p>
 <ol class="arabic simple">
-<li><p>Create a C++ project.</p></li>
-<li><p>Set the C++ standard to C++14. Catch2 will work with C++11 too.</p></li>
-<li><p>Create a library from the <code class="docutils literal notranslate"><span class="pre">sum_integers.cpp</span></code> source file.</p></li>
-<li><p>Link the library into a <code class="docutils literal notranslate"><span class="pre">sum_up</span></code> executable.</p></li>
-<li><p>Include the <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code> module and declare the <code class="docutils literal notranslate"><span class="pre">Catch2</span></code> content. We
-want to download the <code class="docutils literal notranslate"><span class="pre">v2.13.4</span></code> tag from the <a class="reference external" href="https://github.com/catchorg/Catch2">official Git repository</a>.</p></li>
-<li><p>Make the <code class="docutils literal notranslate"><span class="pre">Catch2</span></code> content available.</p></li>
-<li><p>Create the <code class="docutils literal notranslate"><span class="pre">cpp_test</span></code> executable.</p></li>
-<li><p>Enable testing and add a test. You will have to check how to call a Catch2
-executable in the <a class="reference external" href="https://github.com/catchorg/Catch2/blob/v2.x/docs/command-line.md#specifying-which-tests-to-run">documentation</a>.</p></li>
-<li><p>Try running your tests.</p></li>
+<li><p>Crie um projeto C++.</p></li>
+<li><p>Defina o padrão C++ para C++14. Catch2 também funcionará com C++11.</p></li>
+<li><p>Crie uma biblioteca a partir do arquivo fonte <code class="docutils literal notranslate"><span class="pre">sum_integers.cpp</span></code>.</p></li>
+<li><p>Vincule a biblioteca em um executável <code class="docutils literal notranslate"><span class="pre">sum_up</span></code>.</p></li>
+<li><p>Inclua o módulo <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code> e declare o conteúdo <code class="docutils literal notranslate"><span class="pre">Catch2</span></code>.
+Queremos baixar a tag <code class="docutils literal notranslate"><span class="pre">v2.13.4</span></code> do <a class="reference external" href="https://github.com/catchorg/Catch2">repositório oficial do Git</a>.</p></li>
+<li><p>Faça o conteúdo <code class="docutils literal notranslate"><span class="pre">Catch2</span></code> disponível.</p></li>
+<li><p>Crie o executável <code class="docutils literal notranslate"><span class="pre">cpp_test</span></code>.</p></li>
+<li><p>Habilite o teste e adicione um teste.
+Você terá que verificar como chamar um executável Catch2 na <a class="reference external" href="https://github.com/catchorg/Catch2/blob/v2.x/docs/command-line.md#specifying-which-tests-to-executar">documentação</a>.</p></li>
+<li><p>Tente rodar seus testes.</p></li>
 </ol>
 <ul>
-<li><p>What differences do you note in the configuration step?</p></li>
-<li><p>What happens if you forget to issue the <a class="reference internal" href="https://cmake.org/cmake/help/latest/module/FetchContent.html"><span class="xref std std-term"><code class="docutils literal notranslate">FetchContent_MakeAvailable</code></span></a> command?</p></li>
-<li><p>What targets are built in the project? Which ones are from Catch2? You can
-use the following command to obtain a list of all available targets:</p>
+<li><p>Que diferenças você observa na etapa de configuração?</p></li>
+<li><p>O que acontece se você esquecer de emitir o comando <a class="reference internal" href="https://cmake.org/cmake/help/latest/module/FetchContent.html"><span class="xref std std-term"><code class="docutils literal notranslate">FetchContent_MakeAvailable</code></span></a>?</p></li>
+<li><p>Quais alvos são construídos no projeto? Quais são do Catch2?  Você pode usar o seguinte comando para obter uma lista de todos os destinos disponíveis:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --build build --target <span class="nb">help</span>
 </pre></div>
 </div>
 </li>
 </ul>
-<p>A working solution is in the <code class="docutils literal notranslate"><span class="pre">solution</span></code> subfolder.</p>
+<p>Uma solução funcional está na subpasta <code class="docutils literal notranslate"><span class="pre">solution</span></code>.</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p><code class="docutils literal notranslate"><span class="pre">FetchContent</span></code> is a powerful module in your CMake toolbox. <strong>Beware!</strong>
-Satisfying <em>every</em> dependency of your code in this way will make the duration
-of both the configuration and build stages balloon.</p>
+<p><code class="docutils literal notranslate"><span class="pre">FetchContent</span></code> é um módulo poderoso em sua caixa de ferramentas CMake.
+<strong>Cuidado!</strong> Satisfazer <em>todas</em> as dependências do seu código dessa forma
+fará com que a duração dos estágios de configuração e construção aumentem.</p>
 </div>
 <div class="admonition-keypoints keypoints admonition" id="keypoints-0">
 <p class="admonition-title">Keypoints</p>
 <ul class="simple">
-<li><p>CMake lets you satisfy dependencies <em>on-the-fly</em>.</p></li>
-<li><p>You can do so at build-time with <code class="docutils literal notranslate"><span class="pre">ExternalProject</span></code>, but you need to adopt
-a superbuild framework.</p></li>
-<li><p>At configure-time, you can use the <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code> module: it can only be
-applied with dependencies that also use CMake.</p></li>
+<li><p>CMake permite que você satisfaça dependências <em>on-the-fly</em>.</p></li>
+<li><p>Você pode fazer isso em tempo de compilação com <code class="docutils literal notranslate"><span class="pre">ExternalProject</span></code>, mas você precisa adotar um framework superbuild.</p></li>
+<li><p>No momento da configuração, você pode usar o módulo <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code>: ele só pode ser aplicado com dependências que também usam CMake.</p></li>
 </ul>
 </div>
 </section>
@@ -241,7 +258,10 @@ applied with dependencies that also use CMake.</p></li>
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="dependencies.html" class="btn btn-neutral float-left" title="A07 - Encontrando e usando dependências" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="quick-reference.html" class="btn btn-neutral float-right" title="Referência rápida" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

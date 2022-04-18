@@ -99,13 +99,13 @@ Hello, CMake!
 
          add_executable(hello hello.cpp)
 
-   5. Estamos prontos para chamar CMAke e obter o nosso sistema de construção:
+   5. Estamos prontos para chamar CMake e obter o nosso sistema de construção:
 
       .. code-block:: bash
 
          $ cmake -S. -Bbuild
 
-   6. E finalmente construimos nosso executável:
+   6. E finalmente construímos nosso executável:
 
       .. code-block:: bash
 
@@ -128,7 +128,7 @@ Há poucas coisas para notar aqui:
           Versão mínima e, opcionalmente, máxima do CMake que deve ser usado.
       ``FATAL_ERROR``
           Levanta um erro fatal se a restrição de versão não estiver satisfeita. Esta 
-          ppção é ignorada para versões do CMAKE >= 2.6
+          opção é ignorada para versões do CMAKE >= 2.6
 
 
    .. signature:: |project|
@@ -148,7 +148,7 @@ Há poucas coisas para notar aqui:
       ``LANGUAGES``
          Linguagem de programação do projeto.
 
-2. Não diferença nos Comandos e variáveis Cmake escritos em minuscúlo ou maiúsculas. 
+2. Não diferença nos Comandos e variáveis CMake escritos em minúsculo ou maiúsculas. 
    No entanto, os arquivos de scripts  **devem ser
    Chamado exatamente** ``CMakeLists.txt``!
 3. O comando para adicionar executáveis ao sistema de compilação é, sem surpresa, |add_executable|:

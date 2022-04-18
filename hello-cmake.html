@@ -212,12 +212,12 @@ compilar e vincular nosso arquivo-fonte a um executável:</p>
 </pre></div>
 </div>
 </li>
-<li><p>Estamos prontos para chamar CMAke e obter o nosso sistema de construção:</p>
+<li><p>Estamos prontos para chamar CMake e obter o nosso sistema de construção:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake -S. -Bbuild
 </pre></div>
 </div>
 </li>
-<li><p>E finalmente construimos nosso executável:</p>
+<li><p>E finalmente construímos nosso executável:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --build build
 </pre></div>
 </div>
@@ -239,7 +239,7 @@ compilar e vincular nosso arquivo-fonte a um executável:</p>
 <dt><code class="docutils literal notranslate"><span class="pre">VERSION</span></code></dt><dd><p>Versão mínima e, opcionalmente, máxima do CMake que deve ser usado.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">FATAL_ERROR</span></code></dt><dd><p>Levanta um erro fatal se a restrição de versão não estiver satisfeita. Esta
-ppção é ignorada para versões do CMAKE &gt;= 2.6</p>
+opção é ignorada para versões do CMAKE &gt;= 2.6</p>
 </dd>
 </dl>
 </div>
@@ -263,7 +263,7 @@ ppção é ignorada para versões do CMAKE &gt;= 2.6</p>
 </dl>
 </div>
 </li>
-<li><p>Não diferença nos Comandos e variáveis Cmake escritos em minuscúlo ou maiúsculas.
+<li><p>Não diferença nos Comandos e variáveis CMake escritos em minúsculo ou maiúsculas.
 No entanto, os arquivos de scripts  <strong>devem ser
 Chamado exatamente</strong> <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>!</p></li>
 <li><p>O comando para adicionar executáveis ao sistema de compilação é, sem surpresa, <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/add_executable.html"><span class="xref std std-term"><code class="docutils literal notranslate">add_executable</code></span></a>:</p>

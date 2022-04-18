@@ -242,43 +242,44 @@ O CMake fornece módulos e comandos para estes fins:</p>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">Check&lt;LANG&gt;SourceRuns</span></code> providing the <code class="docutils literal notranslate"><span class="pre">check_&lt;LANG&gt;_source_runs</span></code>, to make</dt><dd><p>sure that a given source snippet compiles, links, and runs.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">Check&lt;LANG&gt;SourceRuns</span></code> fornece a função <code class="docutils literal notranslate"><span class="pre">check_&lt;LANG&gt;_source_runs</span></code> que certifica se</dt><dd><p>um determinado trecho de origem compila, vincula e executa.</p>
 </dd>
 </dl>
 </li>
 </ul>
-<p>In all cases, <code class="docutils literal notranslate"><span class="pre">&lt;LANG&gt;</span></code> can be one of <code class="docutils literal notranslate"><span class="pre">CXX</span></code>, <code class="docutils literal notranslate"><span class="pre">C</span></code> or <code class="docutils literal notranslate"><span class="pre">Fortran</span></code>.</p>
-<div class="admonition-exercise-19-check-that-a-compiler-accepts-a-compiler-flag exercise important admonition" id="exercise-2">
-<p class="admonition-title">Exercise 19: Check that a compiler accepts a compiler flag</p>
-<p>Compilers evolve: they add and/or remove flags and sometimes you will face
-the need to test whether some flags are available before using them in your
-build.</p>
-<p>The scaffold code is in <code class="docutils literal notranslate"><span class="pre">source/code/day-1/19_check_compiler_flag</span></code>.</p>
+<p>Em todos os casos, <code class="docutils literal notranslate"><span class="pre">&lt;LANG&gt;</span></code> pode ser um de <code class="docutils literal notranslate"><span class="pre">CXX</span></code>, <code class="docutils literal notranslate"><span class="pre">C</span></code> ou <code class="docutils literal notranslate"><span class="pre">Fortran</span></code>.</p>
+<div class="admonition-exercicio-19-verifique-se-um-compilador-aceita-uma-flag-de-compilador exercise important admonition" id="exercise-2">
+<p class="admonition-title">Exercício 19: Verifique se um compilador aceita uma flag de compilador</p>
+<blockquote>
+<div><p>Os compiladores evoluem: eles adicionam e/ou removem sinalizadores e às
+vezes você terá que testar se alguns sinalizadores estão disponíveis antes
+de usá-los em sua compilação.</p>
+<p>O código base está em <code class="docutils literal notranslate"><span class="pre">source/code/day-1/19_check_compiler_flag</span></code>.</p>
 <ol class="arabic">
-<li><p>Implement a <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> to build an executable from the
-<code class="docutils literal notranslate"><span class="pre">asan-example.cpp</span></code> source file.</p></li>
-<li><p>Check that the address sanitizer flags are available with
-<a class="reference internal" href="https://cmake.org/cmake/help/latest/module/CheckCXXCompilerFlag.html"><span class="xref std std-term"><code class="docutils literal notranslate">check_cxx_compiler_flag</code></span></a>. The flags to check are <code class="docutils literal notranslate"><span class="pre">-fsanitize=address</span>
-<span class="pre">-fno-omit-frame-pointer</span></code>. Find the command signature with:</p>
+<li><p>Implemente um <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> para construir um executável a partir do arquivo fonte <code class="docutils literal notranslate"><span class="pre">asan-example.cpp</span></code>.</p></li>
+<li><p>Verifique se os sinalizadores de limpeza de endereço estão disponíveis
+com <a class="reference internal" href="https://cmake.org/cmake/help/latest/module/CheckCXXCompilerFlag.html"><span class="xref std std-term"><code class="docutils literal notranslate">check_cxx_compiler_flag</code></span></a>. As flags a serem verificadas
+são <code class="docutils literal notranslate"><span class="pre">-fsanitize=address</span> <span class="pre">-fno-omit-frame-pointer</span></code>.
+Encontre a assinatura do comando com:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --help-module CMakeCXXCompilerFlag
 </pre></div>
 </div>
 </li>
-<li><p>If the flags do work, add them to the those used to compile the executable
-target with <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/target_compile_options.html"><span class="xref std std-term"><code class="docutils literal notranslate">target_compile_options</code></span></a>.</p></li>
+<li><p>Se as flags funcionarem, adicione-os aos usados para compilar o destino
+executável com <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/target_compile_options.html"><span class="xref std std-term"><code class="docutils literal notranslate">target_compile_options</code></span></a>.</p></li>
 </ol>
-<p>A working example is in the <code class="docutils literal notranslate"><span class="pre">solution</span></code> subfolder.</p>
+</div></blockquote>
+<p>Um exemplo funcional está na subpasta <code class="docutils literal notranslate"><span class="pre">solution</span></code>.</p>
 </div>
-<div class="admonition-exercise-20-testing-runtime-capabilities exercise important admonition" id="exercise-3">
-<p class="admonition-title">Exercise 20: Testing runtime capabilities</p>
-<p>Testing that some features will work properly for your code requires not only
-compiling an object files, but also linking an executable and running it
-successfully.</p>
-<p>The scaffold code is in <code class="docutils literal notranslate"><span class="pre">source/code/day-1/20_check_source_runs</span></code>.</p>
+<div class="admonition-exercicio-20-testando-recursos-de-tempo-de-execucao exercise important admonition" id="exercise-3">
+<p class="admonition-title">Exercício 20: Testando recursos de tempo de execução</p>
+<p>Testar se alguns recursos funcionarão corretamente para seu código requer não apenas
+compilar um arquivo de objeto, mas também vincular um executável e executá-lo com êxito.</p>
+<p>O código base está em <code class="docutils literal notranslate"><span class="pre">source/code/day-1/20_check_source_runs</span></code>.</p>
 <ol class="arabic">
-<li><p>Create an executable target from the source file <code class="docutils literal notranslate"><span class="pre">use-uuid.cpp</span></code>.</p></li>
-<li><p>Add a check that linking against the library produces working executables.
-Use the following C code as test:</p>
+<li><p>Crie um destino executável a partir do arquivo fonte <code class="docutils literal notranslate"><span class="pre">use-uuid.cpp</span></code>.</p></li>
+<li><p>Adicione uma verificação de que a vinculação à biblioteca produz executáveis
+funcionais. Use o seguinte código C como teste:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;uuid/uuid.h&gt;</span><span class="cp"></span>
 
 <span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
@@ -288,23 +289,23 @@ Use the following C code as test:</p>
 <span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
-<p><a class="reference internal" href="https://cmake.org/cmake/help/latest/module/CheckCSourceRuns.html"><span class="xref std std-term"><code class="docutils literal notranslate">check_c_source_runs</code></span></a> requires the test source code to be passed in as
-a <em>string</em>. Find the command signature with:</p>
+<dl class="simple">
+<dt><a class="reference internal" href="https://cmake.org/cmake/help/latest/module/CheckCSourceRuns.html"><span class="xref std std-term"><code class="docutils literal notranslate">check_c_source_runs</code></span></a> requer que o código-fonte de teste seja passado como</dt><dd><p>uma <em>string</em>. Encontre a assinatura do comando com:</p>
+</dd>
+</dl>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --help-module CheckCSourceRuns
 </pre></div>
 </div>
 </li>
-<li><p>If the test is successful, link executable target against the UUID
-library: use the <code class="docutils literal notranslate"><span class="pre">PkgConfig::UUID</span></code> target as argument to
-<a class="reference internal" href="https://cmake.org/cmake/help/latest/command/target_link_libraries.html"><span class="xref std std-term"><code class="docutils literal notranslate">target_link_libraries</code></span></a>.</p></li>
 </ol>
-<p>A working example is in the <code class="docutils literal notranslate"><span class="pre">solution</span></code> subfolder.</p>
+<p>#.Se o teste for bem-sucedido, vincule o destino executável à biblioteca UUID: use o destino <code class="docutils literal notranslate"><span class="pre">PkgConfig::UUID</span></code> como argumento para <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/target_link_libraries.html"><span class="xref std std-term"><code class="docutils literal notranslate">target_link_libraries</code></span></a>.</p>
+<p>Um exemplo funcional está na subpasta <code class="docutils literal notranslate"><span class="pre">solution</span></code>.</p>
 </div>
 <div class="admonition-resumo keypoints admonition" id="keypoints-0">
 <p class="admonition-title">Resumo</p>
 <ul class="simple">
-<li><p>You can customize the build system by executing custom commands.</p></li>
-<li><p>CMake offers commands to probe compilation, linking, and execution.</p></li>
+<li><p>Você pode personalizar o sistema de compilação executando comandos personalizados.</p></li>
+<li><p>O CMake oferece comandos para testar a compilação, vinculação e execução.</p></li>
 </ul>
 </div>
 </section>

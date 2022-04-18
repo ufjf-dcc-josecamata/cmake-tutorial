@@ -57,7 +57,7 @@ em circunstâncias muito especiais e restritas. Por quê?
 
 1. Para uma grande variedade de dependências comuns, os módulos ``Find<PackageName>.cmake`` enviados 
    com o CMake funcionam perfeitamente e são mantidos pelos desenvolvedores do CMake. 
-   Isso elimina o fardo de programar seus próprios modulos de detecção de dependência.
+   Isso elimina o fardo de programar seus próprios módulos de detecção de dependência.
 2. |find_package| irá configurar **alvos importados**: alvos definidos *fora* do
    seu projeto que podem ser usados com seus próprios alvos. 
    As propriedades nos destinos importados definem *requisitos de uso* para as 

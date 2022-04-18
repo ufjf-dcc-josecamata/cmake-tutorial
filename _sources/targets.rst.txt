@@ -233,9 +233,9 @@ uma **raiz** e muitas **folhas**.
        └── parser
            └── CMakeLists.txt   <--- Leaf at level 2
 
-O script ``CMakeLists.txt`` raiz conterá a invocação do comando |project|: 
-variáveis e alvos declarados na raiz têm escopo efetivamente global. 
-Lembre-se também que |PROJECT_SOURCE_DIR| apontará para a pasta que contém o ``CMakeLists.txt``raiz.
+
+O script ``CMakeLists.txt`` raiz conterá a invocação do comando |project|: variáveis e alvos declarados na raiz têm escopo efetivamente global. 
+Lembre-se também que |PROJECT_SOURCE_DIR| apontará para a pasta que contém o ``CMakeLists.txt`` raiz.
 Para mover-se entre a raiz e uma folha ou entre folhas, 
 você usará o comando |add_subdirectory|:
 

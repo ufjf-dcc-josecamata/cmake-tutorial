@@ -6,8 +6,8 @@ Python e CMake.  Veremos algumas instruções de como instalar os pré-requisito
 em seu próprio computador. Veremos também como usar o `Binder
 <https://mybinder.org>`_ para rodar na nuvem.
 
-Estas instruções são baseadas na instalação de compiladores e CMake através do `Conda
-gerenciador de pacotes e ambientes Conda <https://docs.conda.io/en/latest/>`_, uma vez que
+Estas instruções são baseadas na instalação de compiladores e CMake através 
+do `gerenciador de pacotes e ambientes Conda <https://docs.conda.io/en/latest/>`_, uma vez que
 fornece uma maneira conveniente para instalar pacotes binários em um ambiente de software isolado.
 
 Para usuários Windows
@@ -24,7 +24,7 @@ documentado abaixo.
 Para usuários Linux e MacOs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Usuários MacOS e Linux podem simplesmente abrir um terminal terminal e instalar o
+Usuários MacOS e Linux podem simplesmente abrir um terminal e instalar o
 `Miniconda <https://docs.conda.io/en/latest/miniconda.html>`_:
   
 - Para MacOS veja https://docs.conda.io/en/latest/miniconda.html#macosx-installers
@@ -46,13 +46,13 @@ Você então precisa ativar o novo ambiente::
   conda activate cmake-tutorial
 
 
-Agora você deve ter o CMake, compiladores, Python e alguns outros pacotes instalados!
+Agora você terá o CMake, compiladores, Python e alguns outros pacotes instalados!
 
 
 Usando Binder
 ^^^^^^^^^^^^^^
 
-`MyBinder <https://mybinder.org/>`_ oferece um ambiente de computação em nuvem personalizável gratuito. 
+`MyBinder <https://mybinder.org/>`_ oferece um ambiente de computação em nuvem personalizável e gratuito. 
 Você pode fazer os exercícios do tutorial CMake na nuvem clicando no botão 
 "launch binder" na parte superior do arquivo README exibido em https://github.com/ufjf-dcc-josecamata/cmake-tutorial.
 
@@ -78,17 +78,17 @@ Um vez carregado, voce verá o painel do Jupyter Notebook que estará rodando na
    :align: center
 
 
-Para abrir um terminal, clique no icone Terminal.
+Para abrir um terminal, clique no ícone Terminal.
 
 
 Voce pode navegar pelo conteúdo do tutorial com ``ls docs``. Os códigos dos
-exercicios estão em ``docs/source/code``.
+exercícios estão em ``docs/source/code``.
 
 .. figure:: img/terminal_and_contents.png
    :scale: 50%
    :alt: A cloud terminal
    :align: center
 
-Voce pode abrir um editor de texto (para código, scripts CMake, etc) clicando em "New" and
-selecionando Text File. Se preferir um editor no terminal, voce pode usar ``nano`` ou
+Você pode abrir um editor de texto (para código, scripts CMake, etc) clicando em "New" e
+selecionar *Text File*. Se preferir um editor no terminal, você pode usar ``nano`` ou
 ``vim`` ou ``emacs``.

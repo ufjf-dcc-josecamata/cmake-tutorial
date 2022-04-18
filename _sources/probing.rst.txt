@@ -151,46 +151,45 @@ O CMake fornece módulos e comandos para estes fins:
    verificar se um sinalizador do compilador é válido para o compilador em uso.
 - ``Check<LANG>SourceCompiles`` fornece a função ``check_<LANG>_source_compiles`` a qual verifica 
    se um determinado arquivo de origem compila com o compilador em uso.
-- ``Check<LANG>SourceRuns`` providing the ``check_<LANG>_source_runs``, to make
-   sure that a given source snippet compiles, links, and runs.
+- ``Check<LANG>SourceRuns`` fornece a função ``check_<LANG>_source_runs`` que certifica se 
+    um determinado trecho de origem compila, vincula e executa.
 
-In all cases, ``<LANG>`` can be one of ``CXX``, ``C`` or ``Fortran``.
+Em todos os casos, ``<LANG>`` pode ser um de ``CXX``, ``C`` ou ``Fortran``.
 
-.. exercise:: Exercise 19: Check that a compiler accepts a compiler flag
+.. exercise:: Exercício 19: Verifique se um compilador aceita uma flag de compilador
 
-   Compilers evolve: they add and/or remove flags and sometimes you will face
-   the need to test whether some flags are available before using them in your
-   build.
+   Os compiladores evoluem: eles adicionam e/ou removem sinalizadores e às 
+   vezes você terá que testar se alguns sinalizadores estão disponíveis antes 
+   de usá-los em sua compilação.
 
-   The scaffold code is in ``source/code/day-1/19_check_compiler_flag``.
+   O código base está em ``source/code/day-1/19_check_compiler_flag``.
 
-   #. Implement a ``CMakeLists.txt`` to build an executable from the
-      ``asan-example.cpp`` source file.
-   #. Check that the address sanitizer flags are available with
-      |check_cxx_compiler_flag|. The flags to check are ``-fsanitize=address
-      -fno-omit-frame-pointer``. Find the command signature with:
+   #. Implemente um ``CMakeLists.txt`` para construir um executável a partir do arquivo fonte ``asan-example.cpp``.
+   #. Verifique se os sinalizadores de limpeza de endereço estão disponíveis 
+      com |check_cxx_compiler_flag|. As flags a serem verificadas 
+      são ``-fsanitize=address -fno-omit-frame-pointer``. 
+      Encontre a assinatura do comando com:
 
       .. code-block:: bash
 
          $ cmake --help-module CMakeCXXCompilerFlag
 
-   #. If the flags do work, add them to the those used to compile the executable
-      target with |target_compile_options|.
+   #. Se as flags funcionarem, adicione-os aos usados para compilar o destino 
+      executável com |target_compile_options|.
 
-   A working example is in the ``solution`` subfolder.
+  Um exemplo funcional está na subpasta ``solution``.
 
 
-.. exercise:: Exercise 20: Testing runtime capabilities
+.. exercise:: Exercício 20: Testando recursos de tempo de execução
 
-   Testing that some features will work properly for your code requires not only
-   compiling an object files, but also linking an executable and running it
-   successfully.
+   Testar se alguns recursos funcionarão corretamente para seu código requer não apenas 
+   compilar um arquivo de objeto, mas também vincular um executável e executá-lo com êxito.
 
-   The scaffold code is in ``source/code/day-1/20_check_source_runs``.
+   O código base está em ``source/code/day-1/20_check_source_runs``.
 
-   #. Create an executable target from the source file ``use-uuid.cpp``.
-   #. Add a check that linking against the library produces working executables.
-      Use the following C code as test:
+   #. Crie um destino executável a partir do arquivo fonte ``use-uuid.cpp``.
+   #. Adicione uma verificação de que a vinculação à biblioteca produz executáveis 
+      funcionais. Use o seguinte código C como teste:
 
       .. code-block:: c
 
@@ -202,21 +201,19 @@ In all cases, ``<LANG>`` can be one of ``CXX``, ``C`` or ``Fortran``.
            return 0;
          }
 
-      |check_c_source_runs| requires the test source code to be passed in as
-      a *string*. Find the command signature with:
+      |check_c_source_runs| requer que o código-fonte de teste seja passado como 
+        uma *string*. Encontre a assinatura do comando com:
 
       .. code-block:: bash
 
          $ cmake --help-module CheckCSourceRuns
 
-   #. If the test is successful, link executable target against the UUID
-      library: use the ``PkgConfig::UUID`` target as argument to
-      |target_link_libraries|.
+   #.Se o teste for bem-sucedido, vincule o destino executável à biblioteca UUID: use o destino ``PkgConfig::UUID`` como argumento para |target_link_libraries|.
 
-   A working example is in the ``solution`` subfolder.
+   Um exemplo funcional está na subpasta ``solution``.
 
 
 .. keypoints:: Resumo
 
-   - You can customize the build system by executing custom commands.
-   - CMake offers commands to probe compilation, linking, and execution.
+  - Você pode personalizar o sistema de compilação executando comandos personalizados.
+  - O CMake oferece comandos para testar a compilação, vinculação e execução.

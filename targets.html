@@ -144,13 +144,13 @@ no projeto. <a class="footnote-reference brackets" href="#custom-targets" id="id
 Qualquer destino tem uma coleção de <strong>propriedades</strong>, que definem <em>como</em> o
 artefato de compilação deve ser produzido <strong>e</strong> <em>como</em> ele deve ser usado
 por outros destinos dependentes no projeto.</p>
-<figure class="align-center" id="id4">
+<figure class="align-center" id="id2">
 <img alt="_images/target.svg" src="_images/target.svg" /><figcaption>
 <p><span class="caption-text">Um alvo é o elemento básico no CMake DSL. Cada destino possui <em>propriedades</em>,
 que podem ser lidas com <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/get_target_property.html"><span class="xref std std-term"><code class="docutils literal notranslate">get_target_property</code></span></a> e modificado
 com <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/set_target_properties.html"><span class="xref std std-term"><code class="docutils literal notranslate">set_target_properties</code></span></a>. Opções de compilação, definições,
 diretórios de inclusão, arquivos de origem, bibliotecas de links e
-opções de links são propriedades dos alvos.</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
+opções de links são propriedades dos alvos.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>É muito mais robusto usar alvos e propriedades do que usar variáveis.
@@ -184,10 +184,10 @@ que consuma <code class="docutils literal notranslate"><span class="pre">tgtA</s
 </dl>
 </li>
 </ul>
-<figure class="align-center" id="id5">
+<figure class="align-center" id="id3">
 <img alt="_images/target_inheritance.svg" src="_images/target_inheritance.svg" /><figcaption>
 <p><span class="caption-text">As propriedades dos alvos têm <strong>níveis de visibilidade</strong> que determinam
-como o CMake deve propagá-las entre alvos interdependentes.</span><a class="headerlink" href="#id5" title="Permalink to this image"></a></p>
+como o CMake deve propagá-las entre alvos interdependentes.</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>Os cinco comandos mais usados para lidar com alvos são:</p>
@@ -324,9 +324,8 @@ uma <strong>raiz</strong> e muitas <strong>folhas</strong>.</p>
         └── CMakeLists.txt   &lt;--- Leaf at level 2
 </pre></div>
 </div>
-<p>O script <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> raiz conterá a invocação do comando <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/project.html"><span class="xref std std-term"><code class="docutils literal notranslate">project</code></span></a>:
-variáveis e alvos declarados na raiz têm escopo efetivamente global.
-Lembre-se também que <a class="reference internal" href="https://cmake.org/cmake/help/latest/variable/PROJECT_SOURCE_DIR.html"><span class="xref std std-term"><code class="docutils literal notranslate">PROJECT_SOURCE_DIR</code></span></a> apontará para a pasta que contém o <a href="#id2"><span class="problematic" id="id3">``</span></a>CMakeLists.txt``raiz.
+<p>O script <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> raiz conterá a invocação do comando <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/project.html"><span class="xref std std-term"><code class="docutils literal notranslate">project</code></span></a>: variáveis e alvos declarados na raiz têm escopo efetivamente global.
+Lembre-se também que <a class="reference internal" href="https://cmake.org/cmake/help/latest/variable/PROJECT_SOURCE_DIR.html"><span class="xref std std-term"><code class="docutils literal notranslate">PROJECT_SOURCE_DIR</code></span></a> apontará para a pasta que contém o <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> raiz.
 Para mover-se entre a raiz e uma folha ou entre folhas,
 você usará o comando <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/add_subdirectory.html"><span class="xref std std-term"><code class="docutils literal notranslate">add_subdirectory</code></span></a>:</p>
 <div class="admonition-add-subdirectory signature toggle-shown dropdown admonition" id="signature-7">
@@ -459,9 +458,9 @@ $ cmake --graphviz<span class="o">=</span>project.dot ..
 $ dot -T svg project.dot -o project.svg
 </pre></div>
 </div>
-<figure class="align-center" id="id6">
+<figure class="align-center" id="id4">
 <img alt="_images/project.svg" src="_images/project.svg" /><figcaption>
-<p><span class="caption-text">As dependências entre alvos no projeto de autômatos celulares.</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+<p><span class="caption-text">As dependências entre alvos no projeto de autômatos celulares.</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 </div></blockquote>

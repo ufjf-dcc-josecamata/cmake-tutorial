@@ -1,59 +1,55 @@
 .. _python-bindings:
 
+A09 - Misturando Python e linguagens compiladas
+================================================
 
-Mixing Python and compiled languages
-====================================
+.. questions:: Questão
 
-.. questions::
+   - Como podemos lidar com projetos multilinguagens com CMake?
 
-   - How can we handle multi-language projects with CMake?
+.. objectives:: Objetivos
 
-.. objectives::
+   - Aprenda a construir ligações Python pybind11.
+   - Aprenda a construir ligações CFFI Python.
 
-   - Learn how to build pybind11 Python bindings.
-   - Learn how to build CFFI Python bindings.
+Python é uma linguagem de programação dinâmica flexível. 
+Como o próprio Python é escrito na linguagem de programação C, é possível 
+escrever módulos de *extensão* em uma linguagem compilada. 
+Obtém-se toda a flexibilidade evitando as penalidades de desempenho 
+inerentes às linguagens interpretadas. Muitos frameworks estão disponíveis 
+para preencher a lacuna entre linguagens compiladas e
+Python. Todos eles contam com alguma forma de geração automática de código:
 
+- `SWIG <http://swig.org/>`_. Possivelmente o framework com a história mais longa.
+- `CFFI <https://cffi.readthedocs.io/en/latest/index.html>`_. Funciona com C e Fortran.
+- `Cython <https://cython.org/>`_. Funciona com C e pode exigir muito esforço.
 
-Python is a flexible dynamic programming language. Since Python
-itself is written in the C programming language, it is possible to write
-*extension* modules in a compiled language. One gets all the flexibility, while
-avoiding performance penalties inherent to interpreted languages.
-Many frameworks are available to bridge the gap between compiled languages and
-Python. All of them rely on some form of automatic code generation:
+Misturando C++ e Python com pybind11
+++++++++++++++++++++++++++++++++++++++
 
-- `SWIG <http://swig.org/>`_. Possibly the framework with the longest history.
-- `CFFI <https://cffi.readthedocs.io/en/latest/index.html>`_. Works with C and
-  Fortran.
-- `Cython <https://cython.org/>`_. Works with C and can require a lot of effort.
-
-Mixing C++ and Python with pybind11
-+++++++++++++++++++++++++++++++++++
-
-If you are writing C++, you have even more choice of binding frameworks:
+Se você está escrevendo C++, você tem ainda mais opções de frameworks de vinculação:
 
 - `Boost.Python
   <https://www.boost.org/doc/libs/1_75_0/libs/python/doc/html/index.html>`_.
-  Tailored for C++ and relies on template metaprogramming to generate bindings
-  at compile-time.
-- `pybind11 <https://pybind11.readthedocs.io/en/stable/index.html>`_. Same
-  philosophy as Boost.Python, but designed for C++11 and beyond.
+  Adaptado para C++ e conta com metaprogramação de modelo para gerar ligações em tempo de compilação.
 
-If you write *modern C++*, pybind11 should be your framework of choice:
+- `pybind11 <https://pybind11.readthedocs.io/en/stable/index.html>`_. Mesma filosofia do Boost.Python, mas projetado para C++11 e além.
 
-- It is a header-only library and thus a rather easy dependency to satisfy.
-- The binding code will be quite compact: you won't have to maintain an
-  excessively large codebase.
-- It has excellent integration with CMake.
+Se você escrever *modern C++*, pybind11 deve ser sua estrutura de escolha:
+
+- É uma biblioteca somente de cabeçalho e, portanto, uma dependência bastante fácil de satisfazer.
+- O código de ligação será bastante compacto: você não terá que manter uma base de código excessivamente grande.
+- Possui excelente integração com o CMake.
 
 
-.. exercise:: Exercise 27: Banking code with C++ and Python
+.. exercise:: Exercício 27: Código bancário com C++ e Python
 
-   Our goal is to compile Python wrappers to a small C++ library simulating a
-   bank account. The pybind11 dependency will be satisfied at configure-time
-   using ``FetchContent``.
+   Nosso objetivo é compilar wrappers Python para uma pequena 
+   biblioteca C++ simulando uma conta bancária. A dependência pybind11 
+   será satisfeita no momento da configuração usando ``FetchContent``.
 
-   A scaffold for the project is in ``content/code/day-2/27_cxx-pybind11``.
-   The source tree is as follows:
+   O projeto base está em ``source/code/day-2/27_cxx-pybind11``.
+   A estrutura da pasta é a seguinte:
 
    .. code-block:: text
 
@@ -63,63 +59,65 @@ If you write *modern C++*, pybind11 should be your framework of choice:
           ├── account.hpp
           └── test.py
 
-   #. Create a ``CMakeLists.txt`` in the root of the program, with minimum CMake
-      requirement and project.
-   #. Find the Python with |find_package|. Request at least version 3.6 with the
-      ``REQUIRED`` keyword and the interpreter and development headers with the
-      ``COMPONENTS`` keyword. Refer to the documentation:
+   #. Crie um ``CMakeLists.txt`` na raiz do programa, com 
+      requisito e projeto mínimo do CMake.
+   #. Encontre o Python com |find_package|. Solicite pelo menos a versão 
+      3.6 com a palavra-chave ``REQUIRED`` e o interpretador e 
+      os cabeçalhos de desenvolvimento com a palavra-chave 
+      ``COMPONENTS``. Consulte a documentação:
 
       .. code-block:: bash
 
          $ cmake --help-module FindPython | less
 
-   #. Enable testing and add the ``account`` folder.
-   #. Complete the scaffold ``CMakeLists.txt`` in the ``account`` folder,
-      following the ``FIXME`` prompts. We want to download the released tarball
-      for version 2.6.2 of pybind11.
-   #. Configure, build, and run the test.
+   #. Habilite o teste e adicione a pasta ``account``.
+   #. Preencha o ``CMakeLists.txt`` base na pasta ``account``, 
+      seguindo os prompts do ``FIXME``. Queremos baixar o tarball 
+      lançado para a versão 2.6.2 do pybind11.
+   #. Configure, construa e execute o teste.
 
-   A working solution is in the ``solution`` subfolder.
+  Uma solução funcional está na subpasta ``solution``.
 
    .. note::
 
-      - The ``pybind11_add_module`` function is a convenience wrapper to
-        |add_library| to generate Python extension modules. It is offered by
-        pybind11 and you can read more about it `here
+      - A função ``pybind11_add_module`` é um wrapper de conveniência para |add_library| para 
+        gerar módulos de extensão Python. É oferecido por pybind11 e você 
+        pode ler mais sobre isso `aqui
         <https://pybind11.readthedocs.io/en/stable/compiling.html#pybind11-add-module>`_.
-      - The special syntax used in the definition of the test command will set
-        the location of the Python extension as an environment variable.
+      - A sintaxe especial usada na definição do comando test definirá o local da 
+        extensão Python como uma variável de ambiente.
 
 
-Mixing C/Fortran and Python with CFFI
-+++++++++++++++++++++++++++++++++++++
+Misturando C/Fortran e Python com CFFI
++++++++++++++++++++++++++++++++++++++++
 
-`CFFI <https://cffi.readthedocs.io/en/latest/index.html>`_, short for "C Foreign
-Function Interface", is a Python module that helps with creating Python
-interfaces for C-interoperable projects.
-Using CFFI can be slightly more low-level than working with pybind11. However,
-it allows you to create Python interfaces for Fortran projects more
-straightforwardly than with Cython or SWIG.
-This requires a few steps:
+`CFFI <https://cffi.readthedocs.io/en/latest/index.html>`_, abreviação de "C Foreign Function Interface", é um módulo Python que 
+ajuda na criação de interfaces Python para projetos C-interoperáveis.
+Usar CFFI pode ser um pouco mais simples do que trabalhar com pybind11. 
+No entanto, ele permite que você crie interfaces Python para projetos 
+Fortran de forma mais direta do que com Cython ou SWIG.
+Isso requer alguns passos:
 
-#. writing a C header file defining the application programming
-   interface (API) of your code.
-#. invoking CFFI to parse the API header file and produce the corresponding C
-   wrapper code.
-#. compiling the generated wrapper code into a Python module.
+#. escrever um arquivo de cabeçalho C definindo a 
+   interface de programação de aplicativos (API) do seu código.
+#. invocando CFFI para analisar o arquivo de cabeçalho da API e 
+   produzir o código de wrapper C correspondente.
+#. compilando o código wrapper gerado em um módulo Python.
 
-While step 1 will depend on the code you want to provide Python bindings code
-for, steps 2 and 3 can be automated within a CMake build system.
+Embora a etapa 1 dependa do código para o qual você deseja fornecer o 
+código de vinculações do Python, as etapas 2 e 3 podem ser automatizadas 
+em um sistema de compilação CMake.
 
-.. exercise:: Exercise 28: Banking code using CFFI
+.. exercise:: Exercício 28: Código bancário usando CFFI
 
-   Our goal is to compile Python wrappers to a small library simulating a bank
-   account. The sample code already has an API header file: this exercise will
-   show how to accomplish steps 2 and 3 above:
+   Nosso objetivo é compilar wrappers Python para uma pequena biblioteca simulando uma conta bancária. 
+   O código de exemplo já tem um arquivo de cabeçalho da API.
+   Este exercício mostrará como realizar as etapas 2 e 3 acima:
 
-   - The ``cffi_builder.py`` Python script parses the API header file and will
-     generate the ``_pyaccount.c`` source file at *build time*. We achieve this
-     in CMake using a custom command, paired with a custom target.
+   - O script Python ``cffi_builder.py`` analisa o arquivo de cabeçalho da 
+      API e irá gerar o arquivo fonte ``_pyaccount.c`` no 
+      *tempo de compilação*. Conseguimos isso no CMake usando um 
+      comando personalizado, emparelhado com um destino personalizado.
 
      .. code-block:: cmake
 
@@ -143,11 +141,11 @@ for, steps 2 and 3 can be automated within a CMake build system.
             ${PROJECT_BINARY_DIR}/generated/_pyaccount.c
           )
 
-     This ensures that the file in regenerated whenever the API header changes.
+   Isso garante que o arquivo seja regenerado sempre que o cabeçalho da API for alterado.
 
-   - Once ``_pyaccount.c`` is available, we build it as a Python module, using
-     the ``Python_add_library`` function, provided in the ``FindPython`` module
-     of CMake.
+   - Uma vez que o ``_pyaccount.c`` esteja disponível, nós o construímos 
+      como um módulo Python, usando a função ``Python_add_library``, 
+      fornecida no módulo ``FindPython`` do CMake.
 
      .. code-block:: cmake
 
@@ -164,8 +162,8 @@ for, steps 2 and 3 can be automated within a CMake build system.
 
       .. tab:: Fortran
 
-         A scaffold for the project is in ``content/code/day-2/28_fortran-cffi``.
-         The source tree is as follows:
+         Um projeto base está em ``source/code/day-2/28_fortran-cffi``.
+         A estrutura do código é a seguinte:
 
          .. code-block:: text
 
@@ -179,29 +177,29 @@ for, steps 2 and 3 can be automated within a CMake build system.
             │   └── test.py
             └── CMakeLists.txt
 
-         Follow the ``FIXME`` prompts in ``CMakeLists.txt`` to get the project
-         to compile.
+         Siga os prompts do ``FIXME`` em ``CMakeLists.txt`` para fazer o projeto compilar.
 
-         #. Declare a project using C and Fortran.
-         #. Find the Python with |find_package|. Request at least version 3.6 with the
-            ``REQUIRED`` keyword and the interpreter and development headers with the
-            ``COMPONENTS`` keyword. Refer to the documentation:
+         #. Declare um projeto usando C e Fortran.
+         #. Encontre o Python com |find_package|. 
+            Solicite pelo menos a versão 3.6 com a palavra-chave 
+            ``REQUIRED`` e o interpretador e os cabeçalhos de 
+            desenvolvimento com a palavra-chave ``COMPONENTS``. 
+            Consulte a documentação:
 
             .. code-block:: bash
 
                $ cmake --help-module FindPython | less
 
-         #. Add the ``account`` folder and enable testing.
-         #. Complete the scaffold ``CMakeLists.txt`` in the ``account`` folder,
-            following the ``FIXME`` prompts.
-         #. Configure, build, and run the test.
+         #. Adicione a pasta ``account`` e ative o teste.
+         #. Preencha ``CMakeLists.txt`` na pasta ``account``, seguindo os prompts do ``FIXME``.
+         #. Configure, construa e execute o teste.
 
-         A working solution is in the ``solution`` subfolder.
+        Uma solução funcional está na subpasta ``solution``.
 
       .. tab:: C++
 
-         A scaffold for the project is in ``content/code/day-2/28_cxx-cffi``.
-         The source tree is as follows:
+         Um projeto base está em  ``content/code/day-2/28_cxx-cffi``.
+         A estrutura do código é a seguinte:
 
          .. code-block:: text
 
@@ -217,23 +215,24 @@ for, steps 2 and 3 can be automated within a CMake build system.
             │   └── test.py
             └── CMakeLists.txt
 
-         #. Declare a project using C++.
-         #. Find the Python with |find_package|. Request at least version 3.6 with the
-            ``REQUIRED`` keyword and the interpreter and development headers with the
-            ``COMPONENTS`` keyword. Refer to the documentation:
+         #. Declare o projeto C++.
+         #. FEncontre o Python com |find_package|. 
+            Solicite pelo menos a versão 3.6 com a palavra-chave 
+            ``REQUIRED`` e o interpretador e os cabeçalhos de 
+            desenvolvimento com a palavra-chave ``COMPONENTS``. 
+            Consulte a documentação:
 
             .. code-block:: bash
 
                $ cmake --help-module FindPython | less
 
-         #. Add the ``account`` folder and enable testing.
-         #. Complete the scaffold ``CMakeLists.txt`` in the ``account`` folder,
-            following the ``FIXME`` prompts.
-         #. Configure, build, and run the test.
+         #. Adicione a pasta ``account`` e ative o teste.
+         #. Preencha ``CMakeLists.txt`` na pasta ``account``, seguindo os prompts do ``FIXME``.
+         #. Configure, construa e execute o teste.
 
-         A working solution is in the ``solution`` subfolder.
+         A estrutura do código é a seguinte:
 
 
-.. keypoints::
+.. keypoints:: Resumo
 
-   - CMake can simplify the build system for complex, multi-language projects.
+   - O CMake pode simplificar o sistema de compilação para projetos complexos e multilíngues.

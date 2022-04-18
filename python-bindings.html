@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mixing Python and compiled languages &mdash; cmake-tutorial  documentation</title>
+  <title>A09 - Misturando Python e linguagens compiladas &mdash; cmake-tutorial  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/togglebutton.css" type="text/css" />
@@ -32,7 +32,9 @@
         <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Referência rápida" href="quick-reference.html" />
+    <link rel="prev" title="A08 - Manipulação de dependência automatizada com FetchContent" href="fetch-content.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -55,7 +57,7 @@
 <li class="toctree-l1"><a class="reference internal" href="setup.html">Configurando seu sistema</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Atividades</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="hello-cmake.html">A01 - Dos fontes para os executáveis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cmake-syntax.html">A02 - Síntaxe CMake</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hello-ctest.html">A03 - Criando e executando testes com o CTest</a></li>
@@ -64,6 +66,11 @@
 <li class="toctree-l1"><a class="reference internal" href="targets.html">A06 -Sistemas de compilação baseados em alvos com CMake</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dependencies.html">A07 - Encontrando e usando dependências</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fetch-content.html">A08 - Manipulação de dependência automatizada com <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">A09 - Misturando Python e linguagens compiladas</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#misturando-c-e-python-com-pybind11">Misturando C++ e Python com pybind11</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#misturando-c-fortran-e-python-com-cffi">Misturando C/Fortran e Python com CFFI</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Referências</span></p>
 <ul>
@@ -85,7 +92,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Mixing Python and compiled languages</li>
+      <li>A09 - Misturando Python e linguagens compiladas</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/python-bindings.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -95,57 +102,55 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="mixing-python-and-compiled-languages">
-<span id="python-bindings"></span><h1>Mixing Python and compiled languages<a class="headerlink" href="#mixing-python-and-compiled-languages" title="Permalink to this headline"></a></h1>
-<div class="admonition-questions questions admonition" id="questions-0">
-<p class="admonition-title">Questions</p>
+  <section id="a09-misturando-python-e-linguagens-compiladas">
+<span id="python-bindings"></span><h1>A09 - Misturando Python e linguagens compiladas<a class="headerlink" href="#a09-misturando-python-e-linguagens-compiladas" title="Permalink to this headline"></a></h1>
+<div class="admonition-questao questions admonition" id="questions-0">
+<p class="admonition-title">Questão</p>
 <ul class="simple">
-<li><p>How can we handle multi-language projects with CMake?</p></li>
+<li><p>Como podemos lidar com projetos multilinguagens com CMake?</p></li>
 </ul>
 </div>
-<div class="admonition-objectives objectives admonition" id="objectives-0">
-<p class="admonition-title">Objectives</p>
+<div class="admonition-objetivos objectives admonition" id="objectives-0">
+<p class="admonition-title">Objetivos</p>
 <ul class="simple">
-<li><p>Learn how to build pybind11 Python bindings.</p></li>
-<li><p>Learn how to build CFFI Python bindings.</p></li>
+<li><p>Aprenda a construir ligações Python pybind11.</p></li>
+<li><p>Aprenda a construir ligações CFFI Python.</p></li>
 </ul>
 </div>
-<p>Python is a flexible dynamic programming language. Since Python
-itself is written in the C programming language, it is possible to write
-<em>extension</em> modules in a compiled language. One gets all the flexibility, while
-avoiding performance penalties inherent to interpreted languages.
-Many frameworks are available to bridge the gap between compiled languages and
-Python. All of them rely on some form of automatic code generation:</p>
+<p>Python é uma linguagem de programação dinâmica flexível.
+Como o próprio Python é escrito na linguagem de programação C, é possível
+escrever módulos de <em>extensão</em> em uma linguagem compilada.
+Obtém-se toda a flexibilidade evitando as penalidades de desempenho
+inerentes às linguagens interpretadas. Muitos frameworks estão disponíveis
+para preencher a lacuna entre linguagens compiladas e
+Python. Todos eles contam com alguma forma de geração automática de código:</p>
 <ul class="simple">
-<li><p><a class="reference external" href="http://swig.org/">SWIG</a>. Possibly the framework with the longest history.</p></li>
-<li><p><a class="reference external" href="https://cffi.readthedocs.io/en/latest/index.html">CFFI</a>. Works with C and
-Fortran.</p></li>
-<li><p><a class="reference external" href="https://cython.org/">Cython</a>. Works with C and can require a lot of effort.</p></li>
+<li><p><a class="reference external" href="http://swig.org/">SWIG</a>. Possivelmente o framework com a história mais longa.</p></li>
+<li><p><a class="reference external" href="https://cffi.readthedocs.io/en/latest/index.html">CFFI</a>. Funciona com C e Fortran.</p></li>
+<li><p><a class="reference external" href="https://cython.org/">Cython</a>. Funciona com C e pode exigir muito esforço.</p></li>
 </ul>
-<section id="mixing-c-and-python-with-pybind11">
-<h2>Mixing C++ and Python with pybind11<a class="headerlink" href="#mixing-c-and-python-with-pybind11" title="Permalink to this headline"></a></h2>
-<p>If you are writing C++, you have even more choice of binding frameworks:</p>
+<section id="misturando-c-e-python-com-pybind11">
+<h2>Misturando C++ e Python com pybind11<a class="headerlink" href="#misturando-c-e-python-com-pybind11" title="Permalink to this headline"></a></h2>
+<p>Se você está escrevendo C++, você tem ainda mais opções de frameworks de vinculação:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.boost.org/doc/libs/1_75_0/libs/python/doc/html/index.html">Boost.Python</a>.
-Tailored for C++ and relies on template metaprogramming to generate bindings
-at compile-time.</p></li>
-<li><p><a class="reference external" href="https://pybind11.readthedocs.io/en/stable/index.html">pybind11</a>. Same
-philosophy as Boost.Python, but designed for C++11 and beyond.</p></li>
+Adaptado para C++ e conta com metaprogramação de modelo para gerar ligações em tempo de compilação.</p></li>
+<li><p><a class="reference external" href="https://pybind11.readthedocs.io/en/stable/index.html">pybind11</a>. Mesma filosofia do Boost.Python, mas projetado para C++11 e além.</p></li>
 </ul>
-<p>If you write <em>modern C++</em>, pybind11 should be your framework of choice:</p>
+<p>Se você escrever <em>modern C++</em>, pybind11 deve ser sua estrutura de escolha:</p>
 <ul class="simple">
-<li><p>It is a header-only library and thus a rather easy dependency to satisfy.</p></li>
-<li><p>The binding code will be quite compact: you won’t have to maintain an
-excessively large codebase.</p></li>
-<li><p>It has excellent integration with CMake.</p></li>
+<li><p>É uma biblioteca somente de cabeçalho e, portanto, uma dependência bastante fácil de satisfazer.</p></li>
+<li><p>O código de ligação será bastante compacto: você não terá que manter uma base de código excessivamente grande.</p></li>
+<li><p>Possui excelente integração com o CMake.</p></li>
 </ul>
-<div class="admonition-exercise-27-banking-code-with-c-and-python exercise important admonition" id="exercise-0">
-<p class="admonition-title">Exercise 27: Banking code with C++ and Python</p>
-<p>Our goal is to compile Python wrappers to a small C++ library simulating a
-bank account. The pybind11 dependency will be satisfied at configure-time
-using <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code>.</p>
-<p>A scaffold for the project is in <code class="docutils literal notranslate"><span class="pre">content/code/day-2/27_cxx-pybind11</span></code>.
-The source tree is as follows:</p>
+<div class="admonition-exercicio-27-codigo-bancario-com-c-e-python exercise important admonition" id="exercise-0">
+<p class="admonition-title">Exercício 27: Código bancário com C++ e Python</p>
+<blockquote>
+<div><p>Nosso objetivo é compilar wrappers Python para uma pequena
+biblioteca C++ simulando uma conta bancária. A dependência pybind11
+será satisfeita no momento da configuração usando <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code>.</p>
+<p>O projeto base está em <code class="docutils literal notranslate"><span class="pre">source/code/day-2/27_cxx-pybind11</span></code>.
+A estrutura da pasta é a seguinte:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>27_cxx-pybind11
 └── account
     ├── account.cpp
@@ -154,61 +159,68 @@ The source tree is as follows:</p>
 </pre></div>
 </div>
 <ol class="arabic">
-<li><p>Create a <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> in the root of the program, with minimum CMake
-requirement and project.</p></li>
-<li><p>Find the Python with <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_package.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_package</code></span></a>. Request at least version 3.6 with the
-<code class="docutils literal notranslate"><span class="pre">REQUIRED</span></code> keyword and the interpreter and development headers with the
-<code class="docutils literal notranslate"><span class="pre">COMPONENTS</span></code> keyword. Refer to the documentation:</p>
+<li><p>Crie um <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> na raiz do programa, com
+requisito e projeto mínimo do CMake.</p></li>
+<li><p>Encontre o Python com <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_package.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_package</code></span></a>. Solicite pelo menos a versão
+3.6 com a palavra-chave <code class="docutils literal notranslate"><span class="pre">REQUIRED</span></code> e o interpretador e
+os cabeçalhos de desenvolvimento com a palavra-chave
+<code class="docutils literal notranslate"><span class="pre">COMPONENTS</span></code>. Consulte a documentação:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --help-module FindPython <span class="p">|</span> less
 </pre></div>
 </div>
 </li>
-<li><p>Enable testing and add the <code class="docutils literal notranslate"><span class="pre">account</span></code> folder.</p></li>
-<li><p>Complete the scaffold <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> in the <code class="docutils literal notranslate"><span class="pre">account</span></code> folder,
-following the <code class="docutils literal notranslate"><span class="pre">FIXME</span></code> prompts. We want to download the released tarball
-for version 2.6.2 of pybind11.</p></li>
-<li><p>Configure, build, and run the test.</p></li>
+<li><p>Habilite o teste e adicione a pasta <code class="docutils literal notranslate"><span class="pre">account</span></code>.</p></li>
+<li><p>Preencha o <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> base na pasta <code class="docutils literal notranslate"><span class="pre">account</span></code>,
+seguindo os prompts do <code class="docutils literal notranslate"><span class="pre">FIXME</span></code>. Queremos baixar o tarball
+lançado para a versão 2.6.2 do pybind11.</p></li>
+<li><p>Configure, construa e execute o teste.</p></li>
 </ol>
-<p>A working solution is in the <code class="docutils literal notranslate"><span class="pre">solution</span></code> subfolder.</p>
-<div class="admonition note">
+</div></blockquote>
+<p>Uma solução funcional está na subpasta <code class="docutils literal notranslate"><span class="pre">solution</span></code>.</p>
+<blockquote>
+<div><div class="admonition note">
 <p class="admonition-title">Note</p>
 <ul class="simple">
-<li><p>The <code class="docutils literal notranslate"><span class="pre">pybind11_add_module</span></code> function is a convenience wrapper to
-<a class="reference internal" href="https://cmake.org/cmake/help/latest/command/add_library.html"><span class="xref std std-term"><code class="docutils literal notranslate">add_library</code></span></a> to generate Python extension modules. It is offered by
-pybind11 and you can read more about it <a class="reference external" href="https://pybind11.readthedocs.io/en/stable/compiling.html#pybind11-add-module">here</a>.</p></li>
-<li><p>The special syntax used in the definition of the test command will set
-the location of the Python extension as an environment variable.</p></li>
+<li><p>A função <code class="docutils literal notranslate"><span class="pre">pybind11_add_module</span></code> é um wrapper de conveniência para <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/add_library.html"><span class="xref std std-term"><code class="docutils literal notranslate">add_library</code></span></a> para
+gerar módulos de extensão Python. É oferecido por pybind11 e você
+pode ler mais sobre isso <a class="reference external" href="https://pybind11.readthedocs.io/en/stable/compiling.html#pybind11-add-module">aqui</a>.</p></li>
+<li><p>A sintaxe especial usada na definição do comando test definirá o local da
+extensão Python como uma variável de ambiente.</p></li>
 </ul>
 </div>
+</div></blockquote>
 </div>
 </section>
-<section id="mixing-c-fortran-and-python-with-cffi">
-<h2>Mixing C/Fortran and Python with CFFI<a class="headerlink" href="#mixing-c-fortran-and-python-with-cffi" title="Permalink to this headline"></a></h2>
-<p><a class="reference external" href="https://cffi.readthedocs.io/en/latest/index.html">CFFI</a>, short for “C Foreign
-Function Interface”, is a Python module that helps with creating Python
-interfaces for C-interoperable projects.
-Using CFFI can be slightly more low-level than working with pybind11. However,
-it allows you to create Python interfaces for Fortran projects more
-straightforwardly than with Cython or SWIG.
-This requires a few steps:</p>
+<section id="misturando-c-fortran-e-python-com-cffi">
+<h2>Misturando C/Fortran e Python com CFFI<a class="headerlink" href="#misturando-c-fortran-e-python-com-cffi" title="Permalink to this headline"></a></h2>
+<p><a class="reference external" href="https://cffi.readthedocs.io/en/latest/index.html">CFFI</a>, abreviação de “C Foreign Function Interface”, é um módulo Python que
+ajuda na criação de interfaces Python para projetos C-interoperáveis.
+Usar CFFI pode ser um pouco mais simples do que trabalhar com pybind11.
+No entanto, ele permite que você crie interfaces Python para projetos
+Fortran de forma mais direta do que com Cython ou SWIG.
+Isso requer alguns passos:</p>
 <ol class="arabic simple">
-<li><p>writing a C header file defining the application programming
-interface (API) of your code.</p></li>
-<li><p>invoking CFFI to parse the API header file and produce the corresponding C
-wrapper code.</p></li>
-<li><p>compiling the generated wrapper code into a Python module.</p></li>
+<li><p>escrever um arquivo de cabeçalho C definindo a
+interface de programação de aplicativos (API) do seu código.</p></li>
+<li><p>invocando CFFI para analisar o arquivo de cabeçalho da API e
+produzir o código de wrapper C correspondente.</p></li>
+<li><p>compilando o código wrapper gerado em um módulo Python.</p></li>
 </ol>
-<p>While step 1 will depend on the code you want to provide Python bindings code
-for, steps 2 and 3 can be automated within a CMake build system.</p>
-<div class="admonition-exercise-28-banking-code-using-cffi exercise important admonition" id="exercise-1">
-<p class="admonition-title">Exercise 28: Banking code using CFFI</p>
-<p>Our goal is to compile Python wrappers to a small library simulating a bank
-account. The sample code already has an API header file: this exercise will
-show how to accomplish steps 2 and 3 above:</p>
+<p>Embora a etapa 1 dependa do código para o qual você deseja fornecer o
+código de vinculações do Python, as etapas 2 e 3 podem ser automatizadas
+em um sistema de compilação CMake.</p>
+<div class="admonition-exercicio-28-codigo-bancario-usando-cffi exercise important admonition" id="exercise-1">
+<p class="admonition-title">Exercício 28: Código bancário usando CFFI</p>
+<p>Nosso objetivo é compilar wrappers Python para uma pequena biblioteca simulando uma conta bancária.
+O código de exemplo já tem um arquivo de cabeçalho da API.
+Este exercício mostrará como realizar as etapas 2 e 3 acima:</p>
 <ul>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">cffi_builder.py</span></code> Python script parses the API header file and will
-generate the <code class="docutils literal notranslate"><span class="pre">_pyaccount.c</span></code> source file at <em>build time</em>. We achieve this
-in CMake using a custom command, paired with a custom target.</p>
+<li><dl class="simple">
+<dt>O script Python <code class="docutils literal notranslate"><span class="pre">cffi_builder.py</span></code> analisa o arquivo de cabeçalho da</dt><dd><p>API e irá gerar o arquivo fonte <code class="docutils literal notranslate"><span class="pre">_pyaccount.c</span></code> no
+<em>tempo de compilação</em>. Conseguimos isso no CMake usando um
+comando personalizado, emparelhado com um destino personalizado.</p>
+</dd>
+</dl>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">add_custom_command</span><span class="p">(</span>
 <span class="w">  </span><span class="s">OUTPUT</span>
 <span class="w">    </span><span class="o">${</span><span class="nv">PROJECT_BINARY_DIR</span><span class="o">}</span><span class="s">/generated/_pyaccount.c</span>
@@ -230,11 +242,15 @@ in CMake using a custom command, paired with a custom target.</p>
 <span class="w">  </span><span class="p">)</span>
 </pre></div>
 </div>
-<p>This ensures that the file in regenerated whenever the API header changes.</p>
 </li>
-<li><p>Once <code class="docutils literal notranslate"><span class="pre">_pyaccount.c</span></code> is available, we build it as a Python module, using
-the <code class="docutils literal notranslate"><span class="pre">Python_add_library</span></code> function, provided in the <code class="docutils literal notranslate"><span class="pre">FindPython</span></code> module
-of CMake.</p>
+</ul>
+<p>Isso garante que o arquivo seja regenerado sempre que o cabeçalho da API for alterado.</p>
+<ul>
+<li><dl class="simple">
+<dt>Uma vez que o <code class="docutils literal notranslate"><span class="pre">_pyaccount.c</span></code> esteja disponível, nós o construímos</dt><dd><p>como um módulo Python, usando a função <code class="docutils literal notranslate"><span class="pre">Python_add_library</span></code>,
+fornecida no módulo <code class="docutils literal notranslate"><span class="pre">FindPython</span></code> do CMake.</p>
+</dd>
+</dl>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">Python_add_library</span><span class="p">(</span><span class="s">_pyaccount</span>
 <span class="w">  </span><span class="s">MODULE</span>
 <span class="w">    </span><span class="s">account.f90</span>
@@ -248,8 +264,9 @@ of CMake.</p>
 </li>
 </ul>
 <div class="sphinx-tabs docutils container">
-<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">Fortran</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">C++</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><p>A scaffold for the project is in <code class="docutils literal notranslate"><span class="pre">content/code/day-2/28_fortran-cffi</span></code>.
-The source tree is as follows:</p>
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">Fortran</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">C++</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><blockquote>
+<div><p>Um projeto base está em <code class="docutils literal notranslate"><span class="pre">source/code/day-2/28_fortran-cffi</span></code>.
+A estrutura do código é a seguinte:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>28_fortran-cffi/
 ├── account
 │   ├── account.f90
@@ -261,25 +278,26 @@ The source tree is as follows:</p>
 └── CMakeLists.txt
 </pre></div>
 </div>
-<p>Follow the <code class="docutils literal notranslate"><span class="pre">FIXME</span></code> prompts in <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> to get the project
-to compile.</p>
+<p>Siga os prompts do <code class="docutils literal notranslate"><span class="pre">FIXME</span></code> em <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> para fazer o projeto compilar.</p>
 <ol class="arabic">
-<li><p>Declare a project using C and Fortran.</p></li>
-<li><p>Find the Python with <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_package.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_package</code></span></a>. Request at least version 3.6 with the
-<code class="docutils literal notranslate"><span class="pre">REQUIRED</span></code> keyword and the interpreter and development headers with the
-<code class="docutils literal notranslate"><span class="pre">COMPONENTS</span></code> keyword. Refer to the documentation:</p>
+<li><p>Declare um projeto usando C e Fortran.</p></li>
+<li><p>Encontre o Python com <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_package.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_package</code></span></a>.
+Solicite pelo menos a versão 3.6 com a palavra-chave
+<code class="docutils literal notranslate"><span class="pre">REQUIRED</span></code> e o interpretador e os cabeçalhos de
+desenvolvimento com a palavra-chave <code class="docutils literal notranslate"><span class="pre">COMPONENTS</span></code>.
+Consulte a documentação:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --help-module FindPython <span class="p">|</span> less
 </pre></div>
 </div>
 </li>
-<li><p>Add the <code class="docutils literal notranslate"><span class="pre">account</span></code> folder and enable testing.</p></li>
-<li><p>Complete the scaffold <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> in the <code class="docutils literal notranslate"><span class="pre">account</span></code> folder,
-following the <code class="docutils literal notranslate"><span class="pre">FIXME</span></code> prompts.</p></li>
-<li><p>Configure, build, and run the test.</p></li>
+<li><p>Adicione a pasta <code class="docutils literal notranslate"><span class="pre">account</span></code> e ative o teste.</p></li>
+<li><p>Preencha <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> na pasta <code class="docutils literal notranslate"><span class="pre">account</span></code>, seguindo os prompts do <code class="docutils literal notranslate"><span class="pre">FIXME</span></code>.</p></li>
+<li><p>Configure, construa e execute o teste.</p></li>
 </ol>
-<p>A working solution is in the <code class="docutils literal notranslate"><span class="pre">solution</span></code> subfolder.</p>
-</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><p>A scaffold for the project is in <code class="docutils literal notranslate"><span class="pre">content/code/day-2/28_cxx-cffi</span></code>.
-The source tree is as follows:</p>
+</div></blockquote>
+<p>Uma solução funcional está na subpasta <code class="docutils literal notranslate"><span class="pre">solution</span></code>.</p>
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><p>Um projeto base está em  <code class="docutils literal notranslate"><span class="pre">content/code/day-2/28_cxx-cffi</span></code>.
+A estrutura do código é a seguinte:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>28_fortran-cffi/
 ├── account
 │   ├── account.cpp
@@ -294,26 +312,27 @@ The source tree is as follows:</p>
 </pre></div>
 </div>
 <ol class="arabic">
-<li><p>Declare a project using C++.</p></li>
-<li><p>Find the Python with <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_package.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_package</code></span></a>. Request at least version 3.6 with the
-<code class="docutils literal notranslate"><span class="pre">REQUIRED</span></code> keyword and the interpreter and development headers with the
-<code class="docutils literal notranslate"><span class="pre">COMPONENTS</span></code> keyword. Refer to the documentation:</p>
+<li><p>Declare o projeto C++.</p></li>
+<li><p>FEncontre o Python com <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_package.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_package</code></span></a>.
+Solicite pelo menos a versão 3.6 com a palavra-chave
+<code class="docutils literal notranslate"><span class="pre">REQUIRED</span></code> e o interpretador e os cabeçalhos de
+desenvolvimento com a palavra-chave <code class="docutils literal notranslate"><span class="pre">COMPONENTS</span></code>.
+Consulte a documentação:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --help-module FindPython <span class="p">|</span> less
 </pre></div>
 </div>
 </li>
-<li><p>Add the <code class="docutils literal notranslate"><span class="pre">account</span></code> folder and enable testing.</p></li>
-<li><p>Complete the scaffold <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> in the <code class="docutils literal notranslate"><span class="pre">account</span></code> folder,
-following the <code class="docutils literal notranslate"><span class="pre">FIXME</span></code> prompts.</p></li>
-<li><p>Configure, build, and run the test.</p></li>
+<li><p>Adicione a pasta <code class="docutils literal notranslate"><span class="pre">account</span></code> e ative o teste.</p></li>
+<li><p>Preencha <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> na pasta <code class="docutils literal notranslate"><span class="pre">account</span></code>, seguindo os prompts do <code class="docutils literal notranslate"><span class="pre">FIXME</span></code>.</p></li>
+<li><p>Configure, construa e execute o teste.</p></li>
 </ol>
-<p>A working solution is in the <code class="docutils literal notranslate"><span class="pre">solution</span></code> subfolder.</p>
+<p>A estrutura do código é a seguinte:</p>
 </div></div>
 </div>
-<div class="admonition-keypoints keypoints admonition" id="keypoints-0">
-<p class="admonition-title">Keypoints</p>
+<div class="admonition-resumo keypoints admonition" id="keypoints-0">
+<p class="admonition-title">Resumo</p>
 <ul class="simple">
-<li><p>CMake can simplify the build system for complex, multi-language projects.</p></li>
+<li><p>O CMake pode simplificar o sistema de compilação para projetos complexos e multilíngues.</p></li>
 </ul>
 </div>
 </section>
@@ -322,7 +341,10 @@ following the <code class="docutils literal notranslate"><span class="pre">FIXME
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="fetch-content.html" class="btn btn-neutral float-left" title="A08 - Manipulação de dependência automatizada com FetchContent" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="quick-reference.html" class="btn btn-neutral float-right" title="Referência rápida" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

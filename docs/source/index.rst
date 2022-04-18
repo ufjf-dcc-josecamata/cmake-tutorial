@@ -170,7 +170,7 @@ Existem muitas fontes gratuitas on-line sobre o CMake:
 Você também pode consultar os seguintes livros:
 
 - **Professional CMake: A Practical Guide** por Craig Scott.
-- **CMake Cookbook** por Radovan Bast e Roberto Di Remigio que tem o  seguinte repositório  `GitHub <https://github.com/dev-cafe/cmake-cookbook>`_
+- **CMake Cookbook** por Radovan Bast e Roberto Di Remigio (:cite:p:`Bast2018-pq`) que tem o  seguinte repositório  `GitHub <https://github.com/dev-cafe/cmake-cookbook>`_
 
 
 Créditos

@@ -114,7 +114,7 @@ Hello, CMake!
 
 Há poucas coisas para notar aqui:
 
-1. Qualquer sistema de compilação CMake invocará os seguintes comandos em sueu ``Cmakelists.txt`` **raiz**
+1. Qualquer sistema de compilação CMake invocará os seguintes comandos no ``Cmakelists.txt`` **raiz**
    
    .. signature:: |cmake_minimum_required|
 

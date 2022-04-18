@@ -46,7 +46,7 @@ implantar suas bases de código. Neste tutorial você vai aprender:
    targets
    dependencies
    fetch-content
-   ..python-bindings
+   python-bindings
    ..tips-and-tricks
 
 
@@ -71,6 +71,7 @@ implantar suas bases de código. Neste tutorial você vai aprender:
    40 min ; :doc:`targets`
    40 min ; :doc:`dependencies`
    40 min ; :doc:`fetch-content`
+   30 min ; :doc:`python-bindings`
 
 
 

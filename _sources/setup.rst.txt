@@ -17,7 +17,7 @@ Para usuários Windows
 Subsystem for Linux (WSL), pois é uma ferramenta poderosa que provavelmente
 também será útil após a finalização desse tutorial. Dentro do WSL você precisará do Python3
 e o gerenciamento de ambiente conda. Um guia útil para fazer
-isso pode ser encontrado em `<https://github.com/kapsakcj/win10-linux-conda-how-to>`_. 
+isso pode ser encontrado em https://github.com/kapsakcj/win10-linux-conda-how-to>. 
 A instalação das dependências necessárias em um terminal WSL é
 documentado abaixo como se fosse um ambiente Linux.
 

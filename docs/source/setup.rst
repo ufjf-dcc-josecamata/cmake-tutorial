@@ -15,11 +15,11 @@ Para usuários Windows
 
 É fortemente recomendável usar (e instalar, se necessário) o Windows
 Subsystem for Linux (WSL), pois é uma ferramenta poderosa que provavelmente
-ser útil também após a finalização desse tutorial. Dentro do WSL você precisará do Python3
+também será útil após a finalização desse tutorial. Dentro do WSL você precisará do Python3
 e o gerenciamento de ambiente conda. Um guia útil para fazer
-isso é encontrado em `https://github.com/kapsakcj/win10-linux-conda-how-to`. 
+isso pode ser encontrado em `<https://github.com/kapsakcj/win10-linux-conda-how-to>`_. 
 A instalação das dependências necessárias em um terminal WSL é
-documentado abaixo.
+documentado abaixo como se fosse um ambiente Linux.
 
 Para usuários Linux e MacOs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^

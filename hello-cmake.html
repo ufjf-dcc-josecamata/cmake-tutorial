@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="pt-br" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>A01 - Dos fontes para os executáveis &mdash; cmake-tutorial  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/togglebutton.css" type="text/css" />
-      <link rel="stylesheet" href="_static/mystnb.css" type="text/css" />
+      <link rel="stylesheet" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" type="text/css" />
       <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="_static/togglebutton.css" type="text/css" />
       <link rel="stylesheet" href="_static/sphinx_lesson.css" type="text/css" />
       <link rel="stylesheet" href="_static/overrides.css" type="text/css" />
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
@@ -20,16 +20,18 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script src="_static/clipboard.min.js"></script>
         <script src="_static/copybutton.js"></script>
         <script src="_static/minipres.js"></script>
+        <script src="_static/tabs.js"></script>
         <script>let toggleHintShow = 'Click to show';</script>
         <script>let toggleHintHide = 'Click to hide';</script>
         <script>let toggleOpenOnPrint = 'true';</script>
         <script src="_static/togglebutton.js"></script>
-        <script src="_static/tabs.js"></script>
-        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -42,11 +44,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> cmake-tutorial
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            cmake-tutorial
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -93,8 +99,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>A01 - Dos fontes para os executáveis</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">A01 - Dos fontes para os executáveis</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/hello-cmake.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -105,7 +111,7 @@
            <div itemprop="articleBody">
              
   <section id="a01-dos-fontes-para-os-executaveis">
-<span id="hello-cmake"></span><h1>A01 - Dos fontes para os executáveis<a class="headerlink" href="#a01-dos-fontes-para-os-executaveis" title="Permalink to this headline"></a></h1>
+<span id="hello-cmake"></span><h1>A01 - Dos fontes para os executáveis<a class="headerlink" href="#a01-dos-fontes-para-os-executaveis" title="Permalink to this heading"></a></h1>
 <div class="admonition-questao questions admonition" id="questions-0">
 <p class="admonition-title">Questão</p>
 <p>-Como podemos usar o CMAKE para compilar arquivos fontes para gerar executáveis?</p>
@@ -120,7 +126,7 @@
 </ul>
 </div>
 <section id="o-que-e-cmake-e-por-que-voce-deveria-se-importar">
-<h2>O que é CMAKE e por que você deveria se importar?<a class="headerlink" href="#o-que-e-cmake-e-por-que-voce-deveria-se-importar" title="Permalink to this headline"></a></h2>
+<h2>O que é CMAKE e por que você deveria se importar?<a class="headerlink" href="#o-que-e-cmake-e-por-que-voce-deveria-se-importar" title="Permalink to this heading"></a></h2>
 <p>Sempre que você executa um software, qualquer que seja, desde aplicativos de calendário
 até programas de computação intensivos, haverá um sistema de construção envolvido na
 transformação do código-fonte em arquivos binários que podem ser
@@ -147,7 +153,7 @@ CMake abstrai o processo de gerar o <code class="docutils literal notranslate"><
 </ul>
 </section>
 <section id="id1">
-<h2>Hello, CMake!<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h2>
+<h2>Hello, CMake!<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
 <div class="admonition-compilando-hello-world-com-cmake typealong toggle-shown dropdown admonition" id="typealong-0">
 <p class="admonition-title">Compilando “Hello, world” com CMake</p>
 <p>Agora vamos compilar um único arquivo de origem para um executável. Escolha
@@ -155,39 +161,39 @@ sua língua favorita e comece a digitar!</p>
 <div class="sphinx-tabs docutils container">
 <div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">C++</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">Fortran</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><p>Você pode encontrar o arquivo com o código-fonte completo na pasta
 <code class="docutils literal notranslate"><span class="pre">source/code/day-1/00_hello-cxx</span></code>.</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdlib&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdlib&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Hello world&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Hello world&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">EXIT_SUCCESS</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>Uma solução está na subpasta <code class="docutils literal notranslate"><span class="pre">solution</span></code>.</p>
 </div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><blockquote>
 <div><p>Você pode encontrar o arquivo com o código-fonte completo na pasta <code class="docutils literal notranslate"><span class="pre">source/code/day-1/00_hello-f</span></code>.</p>
 </div></blockquote>
-<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="k">pure function </span><span class="n">say_hello</span><span class="p">()</span><span class="w"> </span><span class="k">result</span><span class="p">(</span><span class="n">message</span><span class="p">)</span><span class="w"></span>
+<div class="highlight-fortran notranslate"><div class="highlight"><pre><span></span><span class="k">pure function </span><span class="n">say_hello</span><span class="p">()</span><span class="w"> </span><span class="k">result</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
 
 <span class="w">  </span><span class="k">implicit none</span>
 
-<span class="k">  </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">message</span><span class="w"></span>
+<span class="k">  </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">message</span>
 
-<span class="w">  </span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Hello world&#39;</span><span class="w"></span>
+<span class="w">  </span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Hello world&#39;</span>
 
 <span class="k">end function</span>
 
-<span class="k">program </span><span class="n">hello_world</span><span class="w"></span>
+<span class="k">program </span><span class="n">hello_world</span>
 
 <span class="w">  </span><span class="k">implicit none</span>
 
-<span class="k">  </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">say_hello</span><span class="w"></span>
+<span class="k">  </span><span class="kt">character</span><span class="p">(</span><span class="nb">len</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">say_hello</span>
 
-<span class="w">  </span><span class="k">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">say_hello</span><span class="p">()</span><span class="w"></span>
+<span class="w">  </span><span class="k">print</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">say_hello</span><span class="p">()</span>
 
-<span class="k">end program</span><span class="w"></span>
+<span class="k">end program</span>
 </pre></div>
 </div>
 <p>Uma solução está na subpasta <code class="docutils literal notranslate"><span class="pre">solution</span></code>.</p>
@@ -213,12 +219,12 @@ compilar e vincular nosso arquivo-fonte a um executável:</p>
 </div>
 </li>
 <li><p>Estamos prontos para chamar CMake e obter o nosso sistema de construção:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake -S. -Bbuild
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cmake<span class="w"> </span>-S.<span class="w"> </span>-Bbuild
 </pre></div>
 </div>
 </li>
 <li><p>E finalmente construímos nosso executável:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --build build
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cmake<span class="w"> </span>--build<span class="w"> </span>build
 </pre></div>
 </div>
 </li>
@@ -289,7 +295,7 @@ Assim, é uma boa ideia colocá-los sob controle de versão.</p>
 <blockquote>
 <div><p>Vamos nos familiarizar com o cmake e especialmente com a sua interface de linha de comando.</p>
 <p>Podemos obter ajuda a qualquer momento com:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --help
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cmake<span class="w"> </span>--help
 </pre></div>
 </div>
 <p>Isso produzirá uma série de opções para a tela.
@@ -328,33 +334,33 @@ compilação sejam armazenados ao lado de arquivos-fontes. Isso é <strong>não<
 sempre manter os artefatos de construção o os fontes separados. Felizmente, o opção <code class="docutils literal notranslate"><span class="pre">-B</span></code>
 ajuda com isso. Ele deve ser usado para indicar onde armazenar os scripts de construção,
 incluindo o sistema de compilação gerado. Esta é a invocação mínima de <code class="docutils literal notranslate"><span class="pre">cmake</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake -S. -Bbuild
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cmake<span class="w"> </span>-S.<span class="w"> </span>-Bbuild
 </pre></div>
 </div>
 </div></blockquote>
 <p>Para mudar para outro gerador, usaremos o botão <code class="docutils literal notranslate"><span class="pre">-G</span></code>:</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake -S. -Bbuild -GNinja
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cmake<span class="w"> </span>-S.<span class="w"> </span>-Bbuild<span class="w"> </span>-GNinja
 </pre></div>
 </div>
 <p>Opções a serem usadas na geração do sistema de construção são passadas com <code class="docutils literal notranslate"><span class="pre">-D</span></code>.
 Por exemplo, para alterar os compiladores:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake -S. -Bbuild -GNinja -DCMAKE_CXX_COMPILER<span class="o">=</span>clang++
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cmake<span class="w"> </span>-S.<span class="w"> </span>-Bbuild<span class="w"> </span>-GNinja<span class="w"> </span>-DCMAKE_CXX_COMPILER<span class="o">=</span>clang++
 </pre></div>
 </div>
 <p>Finalmente, você pode acessar o manual completo do CMake com:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --help-full
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cmake<span class="w"> </span>--help-full
 </pre></div>
 </div>
 <p>Você também pode perguntar sobre um módulo específico, comando ou variável:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --help-variable CMAKE_GENERATOR
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cmake<span class="w"> </span>--help-variable<span class="w"> </span>CMAKE_GENERATOR
 </pre></div>
 </div>
 </div></blockquote>
 </div>
 </section>
 <section id="um-conjunto-de-ferramentas-completo">
-<h2>Um conjunto de ferramentas completo<a class="headerlink" href="#um-conjunto-de-ferramentas-completo" title="Permalink to this headline"></a></h2>
+<h2>Um conjunto de ferramentas completo<a class="headerlink" href="#um-conjunto-de-ferramentas-completo" title="Permalink to this heading"></a></h2>
 <p>Cmake oferece uma um ferramental completo para gerenciar o ciclo de desenvolvimento:
 de fontes para scripts/projetos de construão, testes e implantação.
 Neste tutorial, vamos discutir:</p>
@@ -375,7 +381,7 @@ termos do <a class="reference external" href="https://creativecommons.org/licens
 </figure>
 </section>
 <section id="produzindo-bibliotecas">
-<h2>Produzindo bibliotecas<a class="headerlink" href="#produzindo-bibliotecas" title="Permalink to this headline"></a></h2>
+<h2>Produzindo bibliotecas<a class="headerlink" href="#produzindo-bibliotecas" title="Permalink to this heading"></a></h2>
 <p>CMake pode ser usado para produzir bibliotecas, bem como executáveis.
 O comando que deve ser usado nesse caso é <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/add_library.html"><span class="xref std std-term"><code class="docutils literal notranslate">add_library</code></span></a>:</p>
 <div class="admonition-add-library signature toggle-shown dropdown admonition" id="signature-3">

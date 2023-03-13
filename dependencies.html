@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="pt-br" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>A07 - Encontrando e usando dependências &mdash; cmake-tutorial  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/togglebutton.css" type="text/css" />
-      <link rel="stylesheet" href="_static/mystnb.css" type="text/css" />
+      <link rel="stylesheet" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" type="text/css" />
       <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="_static/togglebutton.css" type="text/css" />
       <link rel="stylesheet" href="_static/sphinx_lesson.css" type="text/css" />
       <link rel="stylesheet" href="_static/overrides.css" type="text/css" />
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
@@ -20,16 +20,18 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script src="_static/clipboard.min.js"></script>
         <script src="_static/copybutton.js"></script>
         <script src="_static/minipres.js"></script>
+        <script src="_static/tabs.js"></script>
         <script>let toggleHintShow = 'Click to show';</script>
         <script>let toggleHintHide = 'Click to hide';</script>
         <script>let toggleOpenOnPrint = 'true';</script>
         <script src="_static/togglebutton.js"></script>
-        <script src="_static/tabs.js"></script>
-        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -42,11 +44,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> cmake-tutorial
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            cmake-tutorial
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -94,8 +100,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>A07 - Encontrando e usando dependências</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">A07 - Encontrando e usando dependências</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/dependencies.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -106,7 +112,7 @@
            <div itemprop="articleBody">
              
   <section id="a07-encontrando-e-usando-dependencias">
-<span id="dependencies"></span><h1>A07 - Encontrando e usando dependências<a class="headerlink" href="#a07-encontrando-e-usando-dependencias" title="Permalink to this headline"></a></h1>
+<span id="dependencies"></span><h1>A07 - Encontrando e usando dependências<a class="headerlink" href="#a07-encontrando-e-usando-dependencias" title="Permalink to this heading"></a></h1>
 <div class="admonition-questao questions admonition" id="questions-0">
 <p class="admonition-title">Questão</p>
 <ul class="simple">
@@ -129,7 +135,7 @@ essas pré-condições são atendidas e se seu projeto pode ser construído
 corretamente. Neste episódio, mostraremos alguns exemplos de como
 detectar e usar dependências em seu sistema de compilação CMake.</p>
 <section id="encontrando-dependencias">
-<h2>Encontrando dependências<a class="headerlink" href="#encontrando-dependencias" title="Permalink to this headline"></a></h2>
+<h2>Encontrando dependências<a class="headerlink" href="#encontrando-dependencias" title="Permalink to this heading"></a></h2>
 <p>O CMake oferece uma família de comandos para encontrar artefatos instalados em seu sistema:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_file.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_file</code></span></a> para recuperar o caminho completo para um arquivo.</p></li>
@@ -178,7 +184,7 @@ que usarão <code class="docutils literal notranslate"><span class="pre">your-ta
 <p>Esses dois pontos simplificam <strong>enormemente</strong> a
 detecção de dependência e uso consistente em um projeto de várias pastas.</p>
 <section id="usando-find-package">
-<h3>Usando <code class="docutils literal notranslate"><span class="pre">find_package</span></code><a class="headerlink" href="#usando-find-package" title="Permalink to this headline"></a></h3>
+<h3>Usando <code class="docutils literal notranslate"><span class="pre">find_package</span></code><a class="headerlink" href="#usando-find-package" title="Permalink to this heading"></a></h3>
 <p>Ao tentar a detecção de dependência com <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_package.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_package</code></span></a>, você deve certificar-se de que:</p>
 <ul class="simple">
 <li><p>Um modulo <code class="docutils literal notranslate"><span class="pre">Find&lt;PackageName&gt;.cmake</span></code> exista,</p></li>
@@ -192,50 +198,50 @@ detecção de dependência e uso consistente em um projeto de várias pastas.</p
 </div></blockquote>
 <div class="admonition-usando-openmp typealong toggle-shown dropdown admonition" id="typealong-0">
 <p class="admonition-title">Usando OpenMP.</p>
-<p>Queremos compilar o seguinte código de exemplo do OpenMP: <a class="footnote-reference brackets" href="#omp" id="id1">1</a></p>
+<p>Queremos compilar o seguinte código de exemplo do OpenMP: <a class="footnote-reference brackets" href="#omp" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// example adapted from</span>
 <span class="c1">// http://www.openmp.org/wp-content/uploads/openmp-examples-4.5.0.pdf page 85</span>
 
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdlib&gt;</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdlib&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">long_running_task</span><span class="p">(){</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">long_running_task</span><span class="p">(){</span>
 <span class="w">  </span><span class="c1">// do something</span>
 <span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;long_running_task&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"> </span>
-<span class="p">};</span><span class="w"></span>
+<span class="p">};</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">loop_body</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="p">){</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">loop_body</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="p">){</span>
 <span class="w">  </span><span class="c1">// do something</span>
 <span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;i = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; j = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"> </span>
-<span class="p">};</span><span class="w"></span>
+<span class="p">};</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">parallel_work</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">;</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">parallel_work</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">;</span>
 <span class="cp">#pragma omp taskgroup</span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span>
 <span class="cp">#pragma omp task</span>
 <span class="w">    </span><span class="n">long_running_task</span><span class="p">();</span><span class="w"> </span><span class="c1">// can execute concurrently</span>
 
 <span class="cp">#pragma omp taskloop private(j) grainsize(500) nogroup</span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// can execute concurrently</span>
-<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="n">loop_body</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">);</span><span class="w"></span>
-<span class="w">      </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">loop_body</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">);</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">parallel_work</span><span class="p">();</span><span class="w"></span>
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">EXIT_SUCCESS</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">parallel_work</span><span class="p">();</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>Observe o uso da construção <code class="docutils literal notranslate"><span class="pre">taskloop</span></code>, que foi introduzida no OpenMP 4.5:
 precisamos ter certeza de que nosso compilador C++ é compatível com <em>pelo menos</em>
 essa versão do padrão.</p>
 <p>Da documentação do módulo <code class="docutils literal notranslate"><span class="pre">FindOpenMP.cmake</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --help-module FindOpenMP <span class="p">|</span> less
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cmake<span class="w"> </span>--help-module<span class="w"> </span>FindOpenMP<span class="w"> </span><span class="p">|</span><span class="w"> </span>less
 </pre></div>
 </div>
 <p>descobrimos que o módulo fornece os componentes <code class="docutils literal notranslate"><span class="pre">C</span></code>, <code class="docutils literal notranslate"><span class="pre">CXX</span></code> e <code class="docutils literal notranslate"><span class="pre">Fortran</span></code>
@@ -246,7 +252,7 @@ se a detecção for bem sucedida. Assim, fazemos o seguinte:</p>
 <span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">task-loop</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">OpenMP::OpenMP_CXX</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Podemos configurar e construir detalhadamente. <a class="footnote-reference brackets" href="#verbose" id="id2">2</a>
+<p>Podemos configurar e construir detalhadamente. <a class="footnote-reference brackets" href="#verbose" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>
 Observe que os sinalizadores do compilador, diretórios de inclusão e
 bibliotecas de links são resolvidos corretamente pelo CMake.</p>
 <p>Você pode encontrar o exemplo completo de trabalho em <code class="docutils literal notranslate"><span class="pre">source/code/day-2/22_taskloop/solution</span></code>.</p>
@@ -283,7 +289,7 @@ importados que ele define.</p></li>
 </div>
 </section>
 <section id="alternativas-scripts-config-e-pkg-config">
-<h3>Alternativas: scripts <code class="docutils literal notranslate"><span class="pre">Config</span></code> e <code class="docutils literal notranslate"><span class="pre">pkg-config</span></code><a class="headerlink" href="#alternativas-scripts-config-e-pkg-config" title="Permalink to this headline"></a></h3>
+<h3>Alternativas: scripts <code class="docutils literal notranslate"><span class="pre">Config</span></code> e <code class="docutils literal notranslate"><span class="pre">pkg-config</span></code><a class="headerlink" href="#alternativas-scripts-config-e-pkg-config" title="Permalink to this heading"></a></h3>
 <p>O que fazer quando não há um módulo <code class="docutils literal notranslate"><span class="pre">Find&lt;PackageName&gt;.cmake</span></code> embutido para um pacote do qual você depende?
 Os desenvolvedores de pacotes podem já estar preparados para ajudá-lo:</p>
 <ul>
@@ -291,7 +297,7 @@ Os desenvolvedores de pacotes podem já estar preparados para ajudá-lo:</p>
 como o destino importado deve ser usada pelo seu pacote. Neste caso, você precisa
 apontar o CMake para a pasta que contém o arquivo <code class="docutils literal notranslate"><span class="pre">Config</span></code> usando a variável
 especial <code class="docutils literal notranslate"><span class="pre">&lt;PackageName&gt;_DIR</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake -S. -Bbuild -D&lt;PackageName&gt;_DIR<span class="o">=</span>/folder/containing/&lt;PackageName&gt;Config.cmake
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cmake<span class="w"> </span>-S.<span class="w"> </span>-Bbuild<span class="w"> </span>-D&lt;PackageName&gt;_DIR<span class="o">=</span>/folder/containing/&lt;PackageName&gt;Config.cmake
 </pre></div>
 </div>
 </li>
@@ -324,22 +330,24 @@ através do CMake:</p>
 </ul>
 </div>
 <p class="rubric">Footnotes</p>
-<dl class="footnote brackets">
-<dt class="label" id="omp"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
-<dd><p>Exemplo adaptado da página 85 em <a class="reference external" href="http://www.openmp.org/wp-content/uploads/openmp-examples-4.5.0.pdf">OpenMP 4.5 examples</a>.</p>
-</dd>
-<dt class="label" id="verbose"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
-<dd><p>A maneira de acionar uma compilação detalhada depende da ferramenta de compilação nativa que você está usando.
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="omp" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>Exemplo adaptado da página 85 em <a class="reference external" href="http://www.openmp.org/wp-content/uploads/openmp-examples-4.5.0.pdf">OpenMP 4.5 examples</a>.</p>
+</aside>
+<aside class="footnote brackets" id="verbose" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
+<p>A maneira de acionar uma compilação detalhada depende da ferramenta de compilação nativa que você está usando.
 Para Makefiles Unix:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --build build -- <span class="nv">VERBOSE</span><span class="o">=</span><span class="m">1</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cmake<span class="w"> </span>--build<span class="w"> </span>build<span class="w"> </span>--<span class="w"> </span><span class="nv">VERBOSE</span><span class="o">=</span><span class="m">1</span>
 </pre></div>
 </div>
 <p>Para Ninja:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --build build -- -v
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cmake<span class="w"> </span>--build<span class="w"> </span>build<span class="w"> </span>--<span class="w"> </span>-v
 </pre></div>
 </div>
-</dd>
-</dl>
+</aside>
+</aside>
 </section>
 </section>
 </section>

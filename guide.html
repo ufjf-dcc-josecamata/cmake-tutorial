@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="pt-br" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Instructor’s guide &mdash; cmake-tutorial  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/togglebutton.css" type="text/css" />
-      <link rel="stylesheet" href="_static/mystnb.css" type="text/css" />
+      <link rel="stylesheet" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" type="text/css" />
       <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="_static/togglebutton.css" type="text/css" />
       <link rel="stylesheet" href="_static/sphinx_lesson.css" type="text/css" />
       <link rel="stylesheet" href="_static/overrides.css" type="text/css" />
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
@@ -20,7 +20,9 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script src="_static/clipboard.min.js"></script>
         <script src="_static/copybutton.js"></script>
         <script src="_static/minipres.js"></script>
@@ -28,7 +30,7 @@
         <script>let toggleHintHide = 'Click to hide';</script>
         <script>let toggleOpenOnPrint = 'true';</script>
         <script src="_static/togglebutton.js"></script>
-        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" /> 
@@ -39,11 +41,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> cmake-tutorial
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            cmake-tutorial
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -84,8 +90,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Instructor’s guide</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Instructor’s guide</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/guide.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -96,9 +102,9 @@
            <div itemprop="articleBody">
              
   <section id="instructor-s-guide">
-<h1>Instructor’s guide<a class="headerlink" href="#instructor-s-guide" title="Permalink to this headline"></a></h1>
+<h1>Instructor’s guide<a class="headerlink" href="#instructor-s-guide" title="Permalink to this heading"></a></h1>
 <section id="learning-outcomes">
-<h2>Learning outcomes<a class="headerlink" href="#learning-outcomes" title="Permalink to this headline"></a></h2>
+<h2>Learning outcomes<a class="headerlink" href="#learning-outcomes" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p>Write a CMake build system for C, C++, and Fortran projects producing
 libraries and/or executables.</p></li>
@@ -110,7 +116,7 @@ Python+Fortran, Fortran+C/C++)</p></li>
 </ul>
 </section>
 <section id="second-iteration">
-<h2>Second iteration<a class="headerlink" href="#second-iteration" title="Permalink to this headline"></a></h2>
+<h2>Second iteration<a class="headerlink" href="#second-iteration" title="Permalink to this heading"></a></h2>
 <p>We decided to:</p>
 <ul class="simple">
 <li><p>Move the <a class="reference internal" href="cxx-fortran.html#cxx-fortran"><span class="std std-ref">Mixing C++ and Fortran</span></a> episode to an “Additional material” section.</p></li>
@@ -126,7 +132,7 @@ It was adapted from the CodeRefinery fork of this lesson: <a class="reference ex
 <li><p>We had to skip the <a class="reference internal" href="environment.html#environment"><span class="std std-ref">A04 - Detectando seu ambiente</span></a> episode due to lack of time.
 This will be moved to “Additional topics” in the next iterations.</p></li>
 </ul>
-<table class="colwidths-auto docutils align-center">
+<table class="docutils align-center">
 <tbody>
 <tr class="row-odd"><td><p>9:00 -  9:10</p></td>
 <td><p>Welcome and introduction to the training course</p></td>
@@ -167,7 +173,7 @@ This will be moved to “Additional topics” in the next iterations.</p></li>
 </tbody>
 </table>
 <p><strong>Day 2 - Tuesday 30 November 2021</strong></p>
-<table class="colwidths-auto docutils align-center">
+<table class="docutils align-center">
 <tbody>
 <tr class="row-odd"><td><p>9:00 -  9:10</p></td>
 <td><p>What did we cover yesterday?</p></td>
@@ -206,9 +212,9 @@ This will be moved to “Additional topics” in the next iterations.</p></li>
 </table>
 </section>
 <section id="first-iteration">
-<h2>First iteration<a class="headerlink" href="#first-iteration" title="Permalink to this headline"></a></h2>
+<h2>First iteration<a class="headerlink" href="#first-iteration" title="Permalink to this heading"></a></h2>
 <p><strong>Day 1 - Tuesday 9 February 2021</strong></p>
-<table class="colwidths-auto docutils align-center">
+<table class="docutils align-center">
 <tbody>
 <tr class="row-odd"><td><p>9:00 -  9:10</p></td>
 <td><p>Welcome and introduction to the training course</p></td>
@@ -254,7 +260,7 @@ This will be moved to “Additional topics” in the next iterations.</p></li>
 rooms.
 The <a class="reference internal" href="fetch-content.html#fetch-content"><span class="std std-ref">A08 - Manipulação de dependência automatizada com FetchContent</span></a> episode can be skipped in case contents from Day 1
 spill over to Day 2.</p>
-<table class="colwidths-auto docutils align-center">
+<table class="docutils align-center">
 <tbody>
 <tr class="row-odd"><td><p>9:00 -  9:10</p></td>
 <td><p>What did we cover yesterday?</p></td>

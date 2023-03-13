@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="pt-br" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>A04 - Detectando seu ambiente &mdash; cmake-tutorial  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/togglebutton.css" type="text/css" />
-      <link rel="stylesheet" href="_static/mystnb.css" type="text/css" />
+      <link rel="stylesheet" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" type="text/css" />
       <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="_static/togglebutton.css" type="text/css" />
       <link rel="stylesheet" href="_static/sphinx_lesson.css" type="text/css" />
       <link rel="stylesheet" href="_static/overrides.css" type="text/css" />
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
@@ -20,7 +20,9 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script src="_static/clipboard.min.js"></script>
         <script src="_static/copybutton.js"></script>
         <script src="_static/minipres.js"></script>
@@ -28,7 +30,7 @@
         <script>let toggleHintHide = 'Click to hide';</script>
         <script>let toggleOpenOnPrint = 'true';</script>
         <script src="_static/togglebutton.js"></script>
-        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -41,11 +43,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> cmake-tutorial
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            cmake-tutorial
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -90,8 +96,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>A04 - Detectando seu ambiente</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">A04 - Detectando seu ambiente</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/environment.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -102,7 +108,7 @@
            <div itemprop="articleBody">
              
   <section id="a04-detectando-seu-ambiente">
-<span id="environment"></span><h1>A04 - Detectando seu ambiente<a class="headerlink" href="#a04-detectando-seu-ambiente" title="Permalink to this headline"></a></h1>
+<span id="environment"></span><h1>A04 - Detectando seu ambiente<a class="headerlink" href="#a04-detectando-seu-ambiente" title="Permalink to this heading"></a></h1>
 <div class="admonition-questao questions admonition" id="questions-0">
 <p class="admonition-title">Questão</p>
 <ul class="simple">
@@ -122,7 +128,7 @@ infinidade de propriedades dos ambientes em que pode ser usado.
 Gerador padrão, compilador padrão e <em>flags</em> de compilador
 são os mais notáveis exemplos dessa configuração inicial.
 Execute o seguinte:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --system-information <span class="p">|</span> less
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cmake<span class="w"> </span>--system-information<span class="w"> </span><span class="p">|</span><span class="w"> </span>less
 </pre></div>
 </div>
 <p>Se você estiver curioso sobre que tipo de configuração é fornecida para
@@ -139,7 +145,7 @@ CMake descobre e isso é independente da linguagem de programação.</p>
 <code class="docutils literal notranslate"><span class="pre">source/code/day-1/12_OS/solution</span></code>.</p>
 </div>
 <section id="descobrindo-o-processador">
-<h2>Descobrindo o processador<a class="headerlink" href="#descobrindo-o-processador" title="Permalink to this headline"></a></h2>
+<h2>Descobrindo o processador<a class="headerlink" href="#descobrindo-o-processador" title="Permalink to this heading"></a></h2>
 <p>Uma personalização comum é aplicar <em>flags</em> de compilador
 específicos do processador. Podemos obter essas informações no
 sistema host com o comando built-in <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/cmake_host_system_information.html"><span class="xref std std-term"><code class="docutils literal notranslate">cmake_host_system_information</code></span></a>.</p>
@@ -166,7 +172,7 @@ sobre o sistema host e isso é independente da linguagem de programação.</p>
 <ol class="arabic">
 <li><p>Abra a página de ajuda para <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/cmake_host_system_information.html"><span class="xref std std-term"><code class="docutils literal notranslate">cmake_host_system_information</code></span></a>.
 Tanto no navegador quanto na linha de comando:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --help-command cmake_host_system_information
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cmake<span class="w"> </span>--help-command<span class="w"> </span>cmake_host_system_information
 </pre></div>
 </div>
 </li>
@@ -177,20 +183,20 @@ Tanto no navegador quanto na linha de comando:</p>
 </div>
 </section>
 <section id="codigo-fonte-dependente-da-plataforma-e-do-compilador">
-<h2>Código-fonte dependente da plataforma e do compilador<a class="headerlink" href="#codigo-fonte-dependente-da-plataforma-e-do-compilador" title="Permalink to this headline"></a></h2>
+<h2>Código-fonte dependente da plataforma e do compilador<a class="headerlink" href="#codigo-fonte-dependente-da-plataforma-e-do-compilador" title="Permalink to this heading"></a></h2>
 <div class="admonition-compilacao-condicional-com-definicoes-de-pre-processador typealong toggle-shown dropdown admonition" id="typealong-2">
 <p class="admonition-title">Compilação condicional com definições de pré-processador</p>
 <p>Às vezes, precisamos escrever um código que execute diferentes operações
 com base em constantes de tempo de compilação:</p>
 <blockquote>
 <div><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifdef IS_WINDOWS</span>
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;Hello from Windows!&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;Hello from Windows!&quot;</span><span class="p">);</span>
 <span class="cp">#elif IS_LINUX</span>
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;Hello from Linux!&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;Hello from Linux!&quot;</span><span class="p">);</span>
 <span class="cp">#elif IS_MACOS</span>
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;Hello from macOS!&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;Hello from macOS!&quot;</span><span class="p">);</span>
 <span class="cp">#else</span>
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;Hello from an unknown system!&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;Hello from an unknown system!&quot;</span><span class="p">);</span>
 <span class="cp">#endif</span>
 </pre></div>
 </div>
@@ -254,7 +260,7 @@ executável comm <a class="reference internal" href="https://cmake.org/cmake/hel
 <li><p>Experimente construir. Isso deve falhar, porque ainda não há arquivo <code class="docutils literal notranslate"><span class="pre">config.h</span></code>
 em nenhum lugar!</p></li>
 <li><p>Abra a página de ajuda para <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/configure_file.html"><span class="xref std std-term"><code class="docutils literal notranslate">configure_file</code></span></a>. No navegador ou na linha de comando:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --help-command configure_file
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cmake<span class="w"> </span>--help-command<span class="w"> </span>configure_file
 </pre></div>
 </div>
 </li>

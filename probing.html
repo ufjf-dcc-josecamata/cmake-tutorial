@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="pt-br" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>A05 - Compilação, vinculação e execução &mdash; cmake-tutorial  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/togglebutton.css" type="text/css" />
-      <link rel="stylesheet" href="_static/mystnb.css" type="text/css" />
+      <link rel="stylesheet" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" type="text/css" />
       <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="_static/togglebutton.css" type="text/css" />
       <link rel="stylesheet" href="_static/sphinx_lesson.css" type="text/css" />
       <link rel="stylesheet" href="_static/overrides.css" type="text/css" />
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
@@ -20,7 +20,9 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script src="_static/clipboard.min.js"></script>
         <script src="_static/copybutton.js"></script>
         <script src="_static/minipres.js"></script>
@@ -28,7 +30,7 @@
         <script>let toggleHintHide = 'Click to hide';</script>
         <script>let toggleOpenOnPrint = 'true';</script>
         <script src="_static/togglebutton.js"></script>
-        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -41,11 +43,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> cmake-tutorial
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            cmake-tutorial
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -91,8 +97,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>A05 - Compilação, vinculação e execução</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">A05 - Compilação, vinculação e execução</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/probing.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -103,7 +109,7 @@
            <div itemprop="articleBody">
              
   <section id="a05-compilacao-vinculacao-e-execucao">
-<span id="probing"></span><h1>A05 - Compilação, vinculação e execução<a class="headerlink" href="#a05-compilacao-vinculacao-e-execucao" title="Permalink to this headline"></a></h1>
+<span id="probing"></span><h1>A05 - Compilação, vinculação e execução<a class="headerlink" href="#a05-compilacao-vinculacao-e-execucao" title="Permalink to this heading"></a></h1>
 <div class="admonition-questao questions admonition" id="questions-0">
 <p class="admonition-title">Questão</p>
 <ul class="simple">
@@ -122,7 +128,7 @@
 do projeto. Este é mais um mecanismo de personalização e discutiremos algumas das
 opções neste tutorial.</p>
 <section id="executando-comandos-personalizados">
-<h2>Executando comandos personalizados<a class="headerlink" href="#executando-comandos-personalizados" title="Permalink to this headline"></a></h2>
+<h2>Executando comandos personalizados<a class="headerlink" href="#executando-comandos-personalizados" title="Permalink to this heading"></a></h2>
 <p>O método mais simples é explicitamente executar uma (ou mais)
 processo(s) filhos ao invocar o <code class="docutils literal notranslate"><span class="pre">cmake</span></code>.  Isso é feito com o
 comando <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/execute_process.html"><span class="xref std std-term"><code class="docutils literal notranslate">execute_process</code></span></a>.</p>
@@ -158,7 +164,7 @@ só será executado na execução do <code class="docutils literal notranslate">
 <p>Neste exercício, usaremos <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/execute_process.html"><span class="xref std std-term"><code class="docutils literal notranslate">execute_process</code></span></a> para verificar se o módulo Python <a class="reference external" href="https://cffi.readthedocs.io/en/latest/index.html">cffi</a>
 está instalado em seu ambiente. Na linha de comando, você faria:</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ python -c <span class="s2">&quot;import cffi; print(cffi.__version__)&quot;</span>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import cffi; print(cffi.__version__)&quot;</span>
 </pre></div>
 </div>
 <p>Seu objetivo é replicar o mesmo no CMake. O código base está em
@@ -173,13 +179,13 @@ executável <code class="docutils literal notranslate"><span class="pre">python<
 detecção de dependências, como Python. Eles são convencionalmente
 chamados de <code class="docutils literal notranslate"><span class="pre">Find&lt;dependency&gt;.cmake</span></code> e você pode inspecionar
 sua documentação com:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --help-module FindPython <span class="p">|</span> more
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cmake<span class="w"> </span>--help-module<span class="w"> </span>FindPython<span class="w"> </span><span class="p">|</span><span class="w"> </span>more
 </pre></div>
 </div>
 <p>Revisitaremos os usos de <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_package.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_package</code></span></a> mais tarde em <a class="reference internal" href="dependencies.html#dependencies"><span class="std std-ref">A07 - Encontrando e usando dependências</span></a>.</p>
 </section>
 <section id="comandos-personalizados-para-seus-alvos-targets">
-<h2>Comandos personalizados para seus alvos (<em>targets</em>)<a class="headerlink" href="#comandos-personalizados-para-seus-alvos-targets" title="Permalink to this headline"></a></h2>
+<h2>Comandos personalizados para seus alvos (<em>targets</em>)<a class="headerlink" href="#comandos-personalizados-para-seus-alvos-targets" title="Permalink to this heading"></a></h2>
 <p>Como mencionado, o principal problema de <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/execute_process.html"><span class="xref std std-term"><code class="docutils literal notranslate">execute_process</code></span></a> é que vai rodar
 o processo somente quando o comando <code class="docutils literal notranslate"><span class="pre">cmake</span></code> é invocado pela primeira vez.
 Portanto, <em>não</em> é uma alternativa viável se pretendermos realizar algumas
@@ -225,7 +231,7 @@ em mente o nome que você deu ao alvo.</p></li>
 </div>
 </section>
 <section id="testar-a-compilacao-vinculacao-e-execucao">
-<h2>Testar a compilação, vinculação e execução<a class="headerlink" href="#testar-a-compilacao-vinculacao-e-execucao" title="Permalink to this headline"></a></h2>
+<h2>Testar a compilação, vinculação e execução<a class="headerlink" href="#testar-a-compilacao-vinculacao-e-execucao" title="Permalink to this heading"></a></h2>
 <p>Também queremos poder executar verificações em nossos compiladores e
 vinculadores. Ou verificar se uma determinada biblioteca pode ser usada
 corretamente antes de tentar construir nossos próprios artefatos.
@@ -261,7 +267,7 @@ de usá-los em sua compilação.</p>
 com <a class="reference internal" href="https://cmake.org/cmake/help/latest/module/CheckCXXCompilerFlag.html"><span class="xref std std-term"><code class="docutils literal notranslate">check_cxx_compiler_flag</code></span></a>. As flags a serem verificadas
 são <code class="docutils literal notranslate"><span class="pre">-fsanitize=address</span> <span class="pre">-fno-omit-frame-pointer</span></code>.
 Encontre a assinatura do comando com:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --help-module CMakeCXXCompilerFlag
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cmake<span class="w"> </span>--help-module<span class="w"> </span>CMakeCXXCompilerFlag
 </pre></div>
 </div>
 </li>
@@ -280,20 +286,20 @@ compilar um arquivo de objeto, mas também vincular um executável e executá-lo
 <li><p>Crie um destino executável a partir do arquivo fonte <code class="docutils literal notranslate"><span class="pre">use-uuid.cpp</span></code>.</p></li>
 <li><p>Adicione uma verificação de que a vinculação à biblioteca produz executáveis
 funcionais. Use o seguinte código C como teste:</p>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;uuid/uuid.h&gt;</span><span class="cp"></span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;uuid/uuid.h&gt;</span>
 
-<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">uuid_t</span><span class="w"> </span><span class="n">uuid</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">uuid_generate</span><span class="p">(</span><span class="n">uuid</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">uuid_t</span><span class="w"> </span><span class="n">uuid</span><span class="p">;</span>
+<span class="w">  </span><span class="n">uuid_generate</span><span class="p">(</span><span class="n">uuid</span><span class="p">);</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <dl class="simple">
 <dt><a class="reference internal" href="https://cmake.org/cmake/help/latest/module/CheckCSourceRuns.html"><span class="xref std std-term"><code class="docutils literal notranslate">check_c_source_runs</code></span></a> requer que o código-fonte de teste seja passado como</dt><dd><p>uma <em>string</em>. Encontre a assinatura do comando com:</p>
 </dd>
 </dl>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --help-module CheckCSourceRuns
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cmake<span class="w"> </span>--help-module<span class="w"> </span>CheckCSourceRuns
 </pre></div>
 </div>
 </li>

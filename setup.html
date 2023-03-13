@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="pt-br" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Configurando seu sistema &mdash; cmake-tutorial  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/togglebutton.css" type="text/css" />
-      <link rel="stylesheet" href="_static/mystnb.css" type="text/css" />
+      <link rel="stylesheet" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" type="text/css" />
       <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="_static/togglebutton.css" type="text/css" />
       <link rel="stylesheet" href="_static/sphinx_lesson.css" type="text/css" />
       <link rel="stylesheet" href="_static/overrides.css" type="text/css" />
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
@@ -20,7 +20,9 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script src="_static/clipboard.min.js"></script>
         <script src="_static/copybutton.js"></script>
         <script src="_static/minipres.js"></script>
@@ -28,7 +30,7 @@
         <script>let toggleHintHide = 'Click to hide';</script>
         <script>let toggleOpenOnPrint = 'true';</script>
         <script src="_static/togglebutton.js"></script>
-        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -41,11 +43,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> cmake-tutorial
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            cmake-tutorial
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -92,8 +98,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Configurando seu sistema</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Configurando seu sistema</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/setup.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -104,7 +110,7 @@
            <div itemprop="articleBody">
              
   <section id="configurando-seu-sistema">
-<h1>Configurando seu sistema<a class="headerlink" href="#configurando-seu-sistema" title="Permalink to this headline"></a></h1>
+<h1>Configurando seu sistema<a class="headerlink" href="#configurando-seu-sistema" title="Permalink to this heading"></a></h1>
 <p>Para acompanhar este tutorial, você precisará ter acesso a compiladores,
 Python e CMake.  Veremos algumas instruções de como instalar os pré-requisitos
 em seu próprio computador. Veremos também como usar o <a class="reference external" href="https://mybinder.org">Binder</a> para rodar na nuvem.</p>
@@ -112,17 +118,17 @@ em seu próprio computador. Veremos também como usar o <a class="reference exte
 do <a class="reference external" href="https://docs.conda.io/en/latest/">gerenciador de pacotes e ambientes Conda</a>, uma vez que
 fornece uma maneira conveniente para instalar pacotes binários em um ambiente de software isolado.</p>
 <section id="para-usuarios-windows">
-<h2>Para usuários Windows<a class="headerlink" href="#para-usuarios-windows" title="Permalink to this headline"></a></h2>
+<h2>Para usuários Windows<a class="headerlink" href="#para-usuarios-windows" title="Permalink to this heading"></a></h2>
 <p>É fortemente recomendável usar (e instalar, se necessário) o Windows
 Subsystem for Linux (WSL), pois é uma ferramenta poderosa que provavelmente
-ser útil também após a finalização desse tutorial. Dentro do WSL você precisará do Python3
+também será útil após a finalização desse tutorial. Dentro do WSL você precisará do Python3
 e o gerenciamento de ambiente conda. Um guia útil para fazer
-isso é encontrado em <cite>https://github.com/kapsakcj/win10-linux-conda-how-to</cite>.
+isso pode ser encontrado em <a class="reference external" href="https://github.com/kapsakcj/win10-linux-conda-how-to">https://github.com/kapsakcj/win10-linux-conda-how-to</a>.
 A instalação das dependências necessárias em um terminal WSL é
-documentado abaixo.</p>
+documentado abaixo como se fosse um ambiente Linux.</p>
 </section>
 <section id="para-usuarios-linux-e-macos">
-<h2>Para usuários Linux e MacOs<a class="headerlink" href="#para-usuarios-linux-e-macos" title="Permalink to this headline"></a></h2>
+<h2>Para usuários Linux e MacOs<a class="headerlink" href="#para-usuarios-linux-e-macos" title="Permalink to this heading"></a></h2>
 <p>Usuários MacOS e Linux podem simplesmente abrir um terminal e instalar o
 <a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">Miniconda</a>:</p>
 <ul class="simple">
@@ -131,7 +137,7 @@ documentado abaixo.</p>
 </ul>
 </section>
 <section id="criando-um-ambiente-e-instalando-pacotes">
-<h2>Criando um ambiente e instalando pacotes<a class="headerlink" href="#criando-um-ambiente-e-instalando-pacotes" title="Permalink to this headline"></a></h2>
+<h2>Criando um ambiente e instalando pacotes<a class="headerlink" href="#criando-um-ambiente-e-instalando-pacotes" title="Permalink to this heading"></a></h2>
 <p>Já com o <code class="docutils literal notranslate"><span class="pre">conda</span></code> instalado (e o WSL se você estiver no Windows), você poderá usar
 o arquivo <a class="reference download internal" download="" href="_downloads/1e955aa7952605b36c4491740042f7a7/environment.yml"><code class="xref download docutils literal notranslate"><span class="pre">environment.yml</span></code></a> para instalar
 as dependências.  Primeiro salve-o em seu disco rígido clicando no link e, em um terminal,
@@ -146,7 +152,7 @@ navegue até onde você salvou o arquivo e digite:</p>
 <p>Agora você terá o CMake, compiladores, Python e alguns outros pacotes instalados!</p>
 </section>
 <section id="usando-binder">
-<h2>Usando Binder<a class="headerlink" href="#usando-binder" title="Permalink to this headline"></a></h2>
+<h2>Usando Binder<a class="headerlink" href="#usando-binder" title="Permalink to this heading"></a></h2>
 <p><a class="reference external" href="https://mybinder.org/">MyBinder</a> oferece um ambiente de computação em nuvem personalizável e gratuito.
 Você pode fazer os exercícios do tutorial CMake na nuvem clicando no botão
 “launch binder” na parte superior do arquivo README exibido em <a class="reference external" href="https://github.com/ufjf-dcc-josecamata/cmake-tutorial">https://github.com/ufjf-dcc-josecamata/cmake-tutorial</a>.</p>

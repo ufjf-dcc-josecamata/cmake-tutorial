@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="pt-br" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Usando CMake: tips and tricks &mdash; cmake-tutorial  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/togglebutton.css" type="text/css" />
-      <link rel="stylesheet" href="_static/mystnb.css" type="text/css" />
+      <link rel="stylesheet" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" type="text/css" />
       <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="_static/togglebutton.css" type="text/css" />
       <link rel="stylesheet" href="_static/sphinx_lesson.css" type="text/css" />
       <link rel="stylesheet" href="_static/overrides.css" type="text/css" />
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
@@ -20,7 +20,9 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script src="_static/clipboard.min.js"></script>
         <script src="_static/copybutton.js"></script>
         <script src="_static/minipres.js"></script>
@@ -28,7 +30,7 @@
         <script>let toggleHintHide = 'Click to hide';</script>
         <script>let toggleOpenOnPrint = 'true';</script>
         <script src="_static/togglebutton.js"></script>
-        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" /> 
@@ -39,11 +41,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> cmake-tutorial
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            cmake-tutorial
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -84,8 +90,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Usando CMake: tips and tricks</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Usando CMake: tips and tricks</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/tips-and-tricks.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -96,7 +102,7 @@
            <div itemprop="articleBody">
              
   <section id="usando-cmake-tips-and-tricks">
-<span id="tips-and-tricks"></span><h1>Usando CMake: tips and tricks<a class="headerlink" href="#usando-cmake-tips-and-tricks" title="Permalink to this headline"></a></h1>
+<span id="tips-and-tricks"></span><h1>Usando CMake: tips and tricks<a class="headerlink" href="#usando-cmake-tips-and-tricks" title="Permalink to this heading"></a></h1>
 <div class="admonition-objectives objectives admonition" id="objectives-0">
 <p class="admonition-title">Objectives</p>
 <ul class="simple">
@@ -110,20 +116,20 @@ possibilidades, mais casos de exceções, mais opções para o usuário e
 mais desenvolvedores que estão contribuindo e que podem não supervisionar
 toda a estrutura do CMake. Neste episódio vamos citar
 algumas ferramentas para trazer alguma estrutura e controle de fluxo
-para projetos maiores. <a class="footnote-reference brackets" href="#adapt" id="id1">1</a></p>
+para projetos maiores. <a class="footnote-reference brackets" href="#adapt" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p>
 <section id="listing-sources-or-globbing-them">
-<h2>Listing sources or globbing them<a class="headerlink" href="#listing-sources-or-globbing-them" title="Permalink to this headline"></a></h2>
+<h2>Listing sources or globbing them<a class="headerlink" href="#listing-sources-or-globbing-them" title="Permalink to this heading"></a></h2>
 <p>In all our examples we have listed all sources when defining targets.</p>
 <p>In CMake, you can glob patters (e.g. all files that end with <code class="docutils literal notranslate"><span class="pre">*.cpp</span></code>) without
 listing them explicitly. This is tempting, but we advice <strong>against</strong> doing this.
 The reason is that CMake cannot <em>guarantee</em> correct tracking dependency changes
-when you add files after you have configured. <a class="footnote-reference brackets" href="#glob" id="id2">2</a></p>
+when you add files after you have configured. <a class="footnote-reference brackets" href="#glob" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></p>
 <p>Listing files explicitly also allows to <code class="docutils literal notranslate"><span class="pre">grep</span></code> for them in the CMake code to
 see where a modification is likely needed. This can help colleagues in our
 projects who are not familiar with CMake to find out where to change things.</p>
 </section>
 <section id="options-and-flow-control">
-<h2>Options and flow control<a class="headerlink" href="#options-and-flow-control" title="Permalink to this headline"></a></h2>
+<h2>Options and flow control<a class="headerlink" href="#options-and-flow-control" title="Permalink to this heading"></a></h2>
 <p>You may want to give the user the possibility to decide whether they want to
 enable an option or not.</p>
 <div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="c"># by default this one will be ON</span>
@@ -137,12 +143,12 @@ enable an option or not.</p>
 </pre></div>
 </div>
 <p>Now the user can decide:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>cmake -S. -Bbuild -DENABLE_MPI<span class="o">=</span>OFF
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>cmake<span class="w"> </span>-S.<span class="w"> </span>-Bbuild<span class="w"> </span>-DENABLE_MPI<span class="o">=</span>OFF
 </pre></div>
 </div>
 </section>
 <section id="organizing-files-into-modules">
-<h2>Organizing files into modules<a class="headerlink" href="#organizing-files-into-modules" title="Permalink to this headline"></a></h2>
+<h2>Organizing files into modules<a class="headerlink" href="#organizing-files-into-modules" title="Permalink to this heading"></a></h2>
 <p>Modules are collections of functions and macros and are either CMake- or user-defined.
 CMake comes with a rich ecosystem of modules and you will probably write a few
 of your own to encapsulate frequently used functions or macros in your CMake
@@ -160,7 +166,7 @@ and then include it in another CMake code:</p>
 concerns.</p>
 </section>
 <section id="variables-vs-targets">
-<h2>Variables vs. targets<a class="headerlink" href="#variables-vs-targets" title="Permalink to this headline"></a></h2>
+<h2>Variables vs. targets<a class="headerlink" href="#variables-vs-targets" title="Permalink to this heading"></a></h2>
 <p>In <a class="reference internal" href="targets.html#targets"><span class="std std-ref">A06 -Sistemas de compilação baseados em alvos com CMake</span></a> we have motivated why targets are preferable over variables.</p>
 <p>When you portion your project into modules, then variable declaration impose an
 order and the risk is high that somebody will not know about the implicit order
@@ -170,7 +176,7 @@ sub-optimal solution and a better, more state-less, declarative, solution may
 exist.</p>
 </section>
 <section id="functions-and-macros">
-<h2>Functions and macros<a class="headerlink" href="#functions-and-macros" title="Permalink to this headline"></a></h2>
+<h2>Functions and macros<a class="headerlink" href="#functions-and-macros" title="Permalink to this heading"></a></h2>
 <p><strong>Functions</strong> and <strong>macros</strong> are built on top of the basic built-in commands
 and are either CMake- or user-defined.  These prove useful to avoid repetition
 in your CMake scripts.  The difference between a function and a macro is their
@@ -184,7 +190,7 @@ modified and new variables in the parent scope can be set.</p></li>
 <p>Prefer functions over macros to minimize side-effects.</p>
 </section>
 <section id="where-to-list-sources-and-tests">
-<h2>Where to list sources and tests?<a class="headerlink" href="#where-to-list-sources-and-tests" title="Permalink to this headline"></a></h2>
+<h2>Where to list sources and tests?<a class="headerlink" href="#where-to-list-sources-and-tests" title="Permalink to this heading"></a></h2>
 <p>Some projects collect all sources in one file, all tests in another
 file, and carry them across in variables:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>project/
@@ -223,7 +229,7 @@ simplify maintenance for those who want to add or rename source files: they can
 do it in one place, close to where they are coding.</p>
 </section>
 <section id="order-and-side-effects">
-<h2>Order and side effects<a class="headerlink" href="#order-and-side-effects" title="Permalink to this headline"></a></h2>
+<h2>Order and side effects<a class="headerlink" href="#order-and-side-effects" title="Permalink to this heading"></a></h2>
 <p>When portioning your project into modules, design them in a way so that order
 does not matter (much).</p>
 <p>This is easier with functions than with macros and easier with targets than with
@@ -232,19 +238,21 @@ variables.</p>
 of concerns.</p>
 </section>
 <section id="where-to-keep-generated-files">
-<h2>Where to keep generated files<a class="headerlink" href="#where-to-keep-generated-files" title="Permalink to this headline"></a></h2>
+<h2>Where to keep generated files<a class="headerlink" href="#where-to-keep-generated-files" title="Permalink to this heading"></a></h2>
 <p>CMake allows us to generate files at configure- or build-time.  When generating
 files, we recommend to <strong>always</strong> generate into the build folder, never outside.</p>
 <p>The reason is that you always want to maintain the possibility to configure
 different builds with the same source without having to copy the entire project
 to a different place.</p>
 <p class="rubric">Footnotes</p>
-<dl class="footnote brackets">
-<dt class="label" id="adapt"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
-<dd><p>This episode is adapted, with permission, from the <a class="reference external" href="https://coderefinery.github.io/cmake-workshop/growing-projects">CodeRefinery CMake lesson</a>.</p>
-</dd>
-<dt class="label" id="glob"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
-<dd><p>A glob would be done using the <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/file.html"><span class="xref std std-term"><code class="docutils literal notranslate">file</code></span></a> command. We quote the explanation in
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="adapt" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>This episode is adapted, with permission, from the <a class="reference external" href="https://coderefinery.github.io/cmake-workshop/growing-projects">CodeRefinery CMake lesson</a>.</p>
+</aside>
+<aside class="footnote brackets" id="glob" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
+<p>A glob would be done using the <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/file.html"><span class="xref std std-term"><code class="docutils literal notranslate">file</code></span></a> command. We quote the explanation in
 the official documentation as to why it is generally not safe to use the
 <code class="docutils literal notranslate"><span class="pre">GLOB</span></code> subcommand:</p>
 <blockquote>
@@ -256,8 +264,8 @@ support it, projects using it will be stuck. Even if
 <code class="docutils literal notranslate"><span class="pre">CONFIGURE_DEPENDS</span></code> works reliably, there is still a cost to perform
 the check on every rebuild.</p>
 </div></blockquote>
-</dd>
-</dl>
+</aside>
+</aside>
 </section>
 </section>
 

@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="pt-br" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>A06 -Sistemas de compilação baseados em alvos com CMake &mdash; cmake-tutorial  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/togglebutton.css" type="text/css" />
-      <link rel="stylesheet" href="_static/mystnb.css" type="text/css" />
+      <link rel="stylesheet" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" type="text/css" />
       <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="_static/togglebutton.css" type="text/css" />
       <link rel="stylesheet" href="_static/sphinx_lesson.css" type="text/css" />
       <link rel="stylesheet" href="_static/overrides.css" type="text/css" />
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
@@ -20,16 +20,18 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script src="_static/clipboard.min.js"></script>
         <script src="_static/copybutton.js"></script>
         <script src="_static/minipres.js"></script>
+        <script src="_static/tabs.js"></script>
         <script>let toggleHintShow = 'Click to show';</script>
         <script>let toggleHintHide = 'Click to hide';</script>
         <script>let toggleOpenOnPrint = 'true';</script>
         <script src="_static/togglebutton.js"></script>
-        <script src="_static/tabs.js"></script>
-        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -42,11 +44,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> cmake-tutorial
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            cmake-tutorial
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -95,8 +101,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>A06 -Sistemas de compilação baseados em alvos com CMake</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">A06 -Sistemas de compilação baseados em alvos com CMake</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/targets.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -107,7 +113,7 @@
            <div itemprop="articleBody">
              
   <section id="a06-sistemas-de-compilacao-baseados-em-alvos-com-cmake">
-<span id="targets"></span><h1>A06 -Sistemas de compilação baseados em alvos com CMake<a class="headerlink" href="#a06-sistemas-de-compilacao-baseados-em-alvos-com-cmake" title="Permalink to this headline"></a></h1>
+<span id="targets"></span><h1>A06 -Sistemas de compilação baseados em alvos com CMake<a class="headerlink" href="#a06-sistemas-de-compilacao-baseados-em-alvos-com-cmake" title="Permalink to this heading"></a></h1>
 <div class="admonition-questoes questions admonition" id="questions-0">
 <p class="admonition-title">Questões</p>
 <ul class="simple">
@@ -131,16 +137,16 @@ com projetos que compreendem centenas de arquivos fontes espalhados em uma estru
 complexa. O uso do CMake ajuda a manter a complexidade do sistema de compilação
 sob controle.</p>
 <section id="e-tudo-sobre-alvos-e-propriedades">
-<h2>É tudo sobre alvos e propriedades<a class="headerlink" href="#e-tudo-sobre-alvos-e-propriedades" title="Permalink to this headline"></a></h2>
+<h2>É tudo sobre alvos e propriedades<a class="headerlink" href="#e-tudo-sobre-alvos-e-propriedades" title="Permalink to this heading"></a></h2>
 <p>Com o advento do CMake 3.0, também conhecido como <strong>Modern CMake</strong>, houve uma mudança
 significativa na forma como a linguagem específica de domínio (DSL) do
 CMake é estruturada. Em vez de depender de <strong>variáveis</strong> para transmitir
 informações em um projeto, devemos passar a usar <strong>alvos</strong> e <strong>propriedades</strong>.</p>
 <section id="alvos-targets">
-<h3>Alvos (Targets)<a class="headerlink" href="#alvos-targets" title="Permalink to this headline"></a></h3>
+<h3>Alvos (Targets)<a class="headerlink" href="#alvos-targets" title="Permalink to this heading"></a></h3>
 <p>Um alvo é declarado por <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/add_executable.html"><span class="xref std std-term"><code class="docutils literal notranslate">add_executable</code></span></a> ou <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/add_library.html"><span class="xref std std-term"><code class="docutils literal notranslate">add_library</code></span></a>: assim,
 em termos gerais, um destino mapeia para um artefato de construção
-no projeto. <a class="footnote-reference brackets" href="#custom-targets" id="id1">1</a>
+no projeto. <a class="footnote-reference brackets" href="#custom-targets" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>
 Qualquer destino tem uma coleção de <strong>propriedades</strong>, que definem <em>como</em> o
 artefato de compilação deve ser produzido <strong>e</strong> <em>como</em> ele deve ser usado
 por outros destinos dependentes no projeto.</p>
@@ -241,12 +247,12 @@ cabeçalho (para C/C++) e de módulo (para Fortran).</p>
 <p>Use-o para especificar quais bibliotecas devem ser vinculadas ao alvo atual.</p>
 </div>
 <p>Existem comandos adicionais na família <code class="docutils literal notranslate"><span class="pre">target_*</span></code>. Para ver quais são eles, faça:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --help-command-link <span class="p">|</span> grep <span class="s2">&quot;^target_&quot;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cmake<span class="w"> </span>--help-command-link<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;^target_&quot;</span>
 </pre></div>
 </div>
 </section>
 <section id="propriedades">
-<h3>Propriedades<a class="headerlink" href="#propriedades" title="Permalink to this headline"></a></h3>
+<h3>Propriedades<a class="headerlink" href="#propriedades" title="Permalink to this heading"></a></h3>
 <p>Até agora vimos que você pode definir propriedades em alvos,
 mas também em testes (veja <a class="reference internal" href="hello-ctest.html#hello-ctest"><span class="std std-ref">A03 - Criando e executando testes com o CTest</span></a>).
 O CMake permite definir propriedades em vários níveis diferentes
@@ -263,7 +269,7 @@ de <em>qualquer</em> folha <code class="docutils literal notranslate"><span clas
 <li><p><strong>Arquivos instalados</strong>.</p></li>
 </ul>
 <p>Para obter uma lista completa de propriedades conhecidas pelo CMake:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --help-properties <span class="p">|</span> less
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cmake<span class="w"> </span>--help-properties<span class="w"> </span><span class="p">|</span><span class="w"> </span>less
 </pre></div>
 </div>
 <p>Você pode obter o valor atual de qualquer propriedade com:</p>
@@ -304,7 +310,7 @@ de <em>qualquer</em> folha <code class="docutils literal notranslate"><span clas
 </section>
 </section>
 <section id="multiplas-pastas">
-<span id="multiple-folders"></span><h2>Múltiplas pastas<a class="headerlink" href="#multiplas-pastas" title="Permalink to this headline"></a></h2>
+<span id="multiple-folders"></span><h2>Múltiplas pastas<a class="headerlink" href="#multiplas-pastas" title="Permalink to this heading"></a></h2>
 <p>Cada pasta em um projeto de várias pastas conterá
 um <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>: uma árvore de origem com
 uma <strong>raiz</strong> e muitas <strong>folhas</strong>.</p>
@@ -357,7 +363,7 @@ que espelha a árvore de origem.</p></li>
 <li><p>O executável aceitará 3 argumentos: o comprimento,
 o número de passos e a regra do autômato.
 Você pode executá-lo com:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ automata <span class="m">40</span> <span class="m">5</span> <span class="m">30</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>automata<span class="w"> </span><span class="m">40</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">30</span>
 </pre></div>
 </div>
 <p>Esta é a saída:</p>
@@ -453,9 +459,9 @@ As variáveis relevantes são:</p>
 </div>
 <p>Você pode visualizar as dependências entre os alvos em seu projeto com o Graphviz:</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> build
-$ cmake --graphviz<span class="o">=</span>project.dot ..
-$ dot -T svg project.dot -o project.svg
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>build
+$<span class="w"> </span>cmake<span class="w"> </span>--graphviz<span class="o">=</span>project.dot<span class="w"> </span>..
+$<span class="w"> </span>dot<span class="w"> </span>-T<span class="w"> </span>svg<span class="w"> </span>project.dot<span class="w"> </span>-o<span class="w"> </span>project.svg
 </pre></div>
 </div>
 <figure class="align-center" id="id4">
@@ -480,12 +486,13 @@ de várias pastas deve ter seu próprio script CMake.</p></li>
 </ul>
 </div>
 <p class="rubric">Footnotes</p>
-<dl class="footnote brackets">
-<dt class="label" id="custom-targets"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
-<dd><p>Você pode incluir alvos customizados no sistema de construção com <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/add_custom_target.html"><span class="xref std std-term"><code class="docutils literal notranslate">add_custom_target</code></span></a>.
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="custom-targets" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>Você pode incluir alvos customizados no sistema de construção com <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/add_custom_target.html"><span class="xref std std-term"><code class="docutils literal notranslate">add_custom_target</code></span></a>.
 Alvos personalizados não são necessariamente artefatos construídos.</p>
-</dd>
-</dl>
+</aside>
+</aside>
 </section>
 </section>
 

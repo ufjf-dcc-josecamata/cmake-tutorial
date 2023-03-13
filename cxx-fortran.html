@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="pt-br" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mixing C++ and Fortran &mdash; cmake-tutorial  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/togglebutton.css" type="text/css" />
-      <link rel="stylesheet" href="_static/mystnb.css" type="text/css" />
+      <link rel="stylesheet" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" type="text/css" />
       <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="_static/togglebutton.css" type="text/css" />
       <link rel="stylesheet" href="_static/sphinx_lesson.css" type="text/css" />
       <link rel="stylesheet" href="_static/overrides.css" type="text/css" />
       <link rel="stylesheet" href="_static/tabs.css" type="text/css" />
@@ -20,7 +20,9 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script src="_static/clipboard.min.js"></script>
         <script src="_static/copybutton.js"></script>
         <script src="_static/minipres.js"></script>
@@ -28,7 +30,7 @@
         <script>let toggleHintHide = 'Click to hide';</script>
         <script>let toggleOpenOnPrint = 'true';</script>
         <script src="_static/togglebutton.js"></script>
-        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" /> 
@@ -39,11 +41,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> cmake-tutorial
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            cmake-tutorial
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -84,8 +90,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Mixing C++ and Fortran</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Mixing C++ and Fortran</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/cxx-fortran.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -96,7 +102,7 @@
            <div itemprop="articleBody">
              
   <section id="mixing-c-and-fortran">
-<span id="cxx-fortran"></span><h1>Mixing C++ and Fortran<a class="headerlink" href="#mixing-c-and-fortran" title="Permalink to this headline"></a></h1>
+<span id="cxx-fortran"></span><h1>Mixing C++ and Fortran<a class="headerlink" href="#mixing-c-and-fortran" title="Permalink to this heading"></a></h1>
 <div class="admonition-questions questions admonition" id="questions-0">
 <p class="admonition-title">Questions</p>
 <ul class="simple">
@@ -147,7 +153,7 @@ That is where the <a class="reference internal" href="https://cmake.org/cmake/he
 </pre></div>
 </div>
 <section id="fortran-using-c-c">
-<h2>Fortran using C/C++<a class="headerlink" href="#fortran-using-c-c" title="Permalink to this headline"></a></h2>
+<h2>Fortran using C/C++<a class="headerlink" href="#fortran-using-c-c" title="Permalink to this heading"></a></h2>
 <p>If you are using Fortran2003 (and beyond), it is fairly straightforward to
 employ C/C++ libraries. The <code class="docutils literal notranslate"><span class="pre">iso_c_binding</span></code> built-in module was indeed
 mandated by the standards’ committee starting from the 2003 edition, and
@@ -155,7 +161,7 @@ provides a standardized interface between C, the <em>de facto lingua franca</em>
 programming, and Fortran.
 We will not delve into the details of <code class="docutils literal notranslate"><span class="pre">iso_c_binding</span></code>,
 suffice it so say that interoperability between basic datatypes, pointers, and
-function call conventions is nowadays well-established. <a class="footnote-reference brackets" href="#iso-c-binding" id="id1">1</a></p>
+function call conventions is nowadays well-established. <a class="footnote-reference brackets" href="#iso-c-binding" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p>
 <div class="admonition-exercise-24-a-fortran-executable-using-a-c-c-library exercise important admonition" id="exercise-0">
 <p class="admonition-title">Exercise 24: A Fortran executable using a C/C++ library</p>
 <p>In this exercise, you will build a Fortran executable linking to libraries
@@ -163,29 +169,29 @@ written in C++ and the system library <code class="docutils literal notranslate"
 <p>The final executable, <code class="docutils literal notranslate"><span class="pre">bt-randomgen-example</span></code>, will print a few random
 integers, produced by the C++ library, and a backtrace, obtained from the C
 library. This is a sample output:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ bt-randomgen-example
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>bt-randomgen-example
 
- Get a random number    <span class="m">20</span>
- Get a random number    <span class="m">13</span>
- Get a random number    <span class="m">30</span>
- Get a random number    <span class="m">24</span>
- Get a random number    <span class="m">40</span>
- Get a random number    <span class="m">31</span>
- Get a random number    <span class="m">33</span>
- Get a random number    <span class="m">28</span>
- Get a random number    <span class="m">33</span>
- Get a random number    <span class="m">13</span>
- Get a random number    <span class="m">11</span>
- Get a random number    <span class="m">40</span>
- Get a random number     <span class="m">7</span>
- Get a random number    <span class="m">28</span>
- Get a random number     <span class="m">5</span>
- Get a random number    <span class="m">27</span>
- Get a random number     <span class="m">4</span>
- Get a random number    <span class="m">39</span>
- Get a random number    <span class="m">38</span>
- Get a random number    <span class="m">39</span>
-Printing backtrace
+<span class="w"> </span>Get<span class="w"> </span>a<span class="w"> </span>random<span class="w"> </span>number<span class="w">    </span><span class="m">20</span>
+<span class="w"> </span>Get<span class="w"> </span>a<span class="w"> </span>random<span class="w"> </span>number<span class="w">    </span><span class="m">13</span>
+<span class="w"> </span>Get<span class="w"> </span>a<span class="w"> </span>random<span class="w"> </span>number<span class="w">    </span><span class="m">30</span>
+<span class="w"> </span>Get<span class="w"> </span>a<span class="w"> </span>random<span class="w"> </span>number<span class="w">    </span><span class="m">24</span>
+<span class="w"> </span>Get<span class="w"> </span>a<span class="w"> </span>random<span class="w"> </span>number<span class="w">    </span><span class="m">40</span>
+<span class="w"> </span>Get<span class="w"> </span>a<span class="w"> </span>random<span class="w"> </span>number<span class="w">    </span><span class="m">31</span>
+<span class="w"> </span>Get<span class="w"> </span>a<span class="w"> </span>random<span class="w"> </span>number<span class="w">    </span><span class="m">33</span>
+<span class="w"> </span>Get<span class="w"> </span>a<span class="w"> </span>random<span class="w"> </span>number<span class="w">    </span><span class="m">28</span>
+<span class="w"> </span>Get<span class="w"> </span>a<span class="w"> </span>random<span class="w"> </span>number<span class="w">    </span><span class="m">33</span>
+<span class="w"> </span>Get<span class="w"> </span>a<span class="w"> </span>random<span class="w"> </span>number<span class="w">    </span><span class="m">13</span>
+<span class="w"> </span>Get<span class="w"> </span>a<span class="w"> </span>random<span class="w"> </span>number<span class="w">    </span><span class="m">11</span>
+<span class="w"> </span>Get<span class="w"> </span>a<span class="w"> </span>random<span class="w"> </span>number<span class="w">    </span><span class="m">40</span>
+<span class="w"> </span>Get<span class="w"> </span>a<span class="w"> </span>random<span class="w"> </span>number<span class="w">     </span><span class="m">7</span>
+<span class="w"> </span>Get<span class="w"> </span>a<span class="w"> </span>random<span class="w"> </span>number<span class="w">    </span><span class="m">28</span>
+<span class="w"> </span>Get<span class="w"> </span>a<span class="w"> </span>random<span class="w"> </span>number<span class="w">     </span><span class="m">5</span>
+<span class="w"> </span>Get<span class="w"> </span>a<span class="w"> </span>random<span class="w"> </span>number<span class="w">    </span><span class="m">27</span>
+<span class="w"> </span>Get<span class="w"> </span>a<span class="w"> </span>random<span class="w"> </span>number<span class="w">     </span><span class="m">4</span>
+<span class="w"> </span>Get<span class="w"> </span>a<span class="w"> </span>random<span class="w"> </span>number<span class="w">    </span><span class="m">39</span>
+<span class="w"> </span>Get<span class="w"> </span>a<span class="w"> </span>random<span class="w"> </span>number<span class="w">    </span><span class="m">38</span>
+<span class="w"> </span>Get<span class="w"> </span>a<span class="w"> </span>random<span class="w"> </span>number<span class="w">    </span><span class="m">39</span>
+Printing<span class="w"> </span>backtrace
 ./build/src/bt-randomgen-example<span class="o">[</span>0x401316<span class="o">]</span>
 ./build/src/bt-randomgen-example<span class="o">[</span>0x401369<span class="o">]</span>
 /nix/store/a3syww9igm49zdzq3ibzw9m8ccvsgxla-glibc-2.32/lib/libc.so.6<span class="o">(</span>__libc_start_main+0xed<span class="o">)[</span>0x7f87aa2b1dbd<span class="o">]</span>
@@ -223,7 +229,7 @@ corresponding sources with <code class="docutils literal notranslate"><span clas
 </div>
 </section>
 <section id="c-c-using-fortran">
-<h2>C/C++ using Fortran<a class="headerlink" href="#c-c-using-fortran" title="Permalink to this headline"></a></h2>
+<h2>C/C++ using Fortran<a class="headerlink" href="#c-c-using-fortran" title="Permalink to this heading"></a></h2>
 <p>Whenever a mix of C/C++ and Fortran is necessary, one needs to be aware of some
 fundamental differences between the languages:</p>
 <ul class="simple">
@@ -282,12 +288,12 @@ BLAS/LAPACK library to be written in Fortran.  This means that the symbols
 for <code class="docutils literal notranslate"><span class="pre">DSCAL</span></code> and <code class="docutils literal notranslate"><span class="pre">DGESV</span></code> are mangled in a compiler-dependent way.
 The <code class="docutils literal notranslate"><span class="pre">linear-algebra</span></code> executable will accept the dimension of the square
 matrix and vector as command-line input, for example:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ linear-algebra <span class="m">1000</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>linear-algebra<span class="w"> </span><span class="m">1000</span>
 
-C_DSCAL <span class="k">done</span>
-C_DGESV <span class="k">done</span>
-info is <span class="m">0</span>
-check is <span class="m">4</span>.80085e-12
+C_DSCAL<span class="w"> </span><span class="k">done</span>
+C_DGESV<span class="w"> </span><span class="k">done</span>
+info<span class="w"> </span>is<span class="w"> </span><span class="m">0</span>
+check<span class="w"> </span>is<span class="w"> </span><span class="m">4</span>.80085e-12
 </pre></div>
 </div>
 <p>The scaffold project is in <code class="docutils literal notranslate"><span class="pre">content/code/day-2/25_cxx-fortran</span></code>.
@@ -326,12 +332,13 @@ autogenerated by CMake.</p></li>
 </ul>
 </div>
 <p class="rubric">Footnotes</p>
-<dl class="footnote brackets">
-<dt class="label" id="iso-c-binding"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
-<dd><p>You can find out more about <code class="docutils literal notranslate"><span class="pre">iso_c_binding</span></code> and Fortran/C interoperability
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="iso-c-binding" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>You can find out more about <code class="docutils literal notranslate"><span class="pre">iso_c_binding</span></code> and Fortran/C interoperability
 in the <a class="reference external" href="https://gcc.gnu.org/onlinedocs/gfortran/Interoperability-with-C.html">GNU Fortran manual</a>.</p>
-</dd>
-</dl>
+</aside>
+</aside>
 </section>
 </section>
 
